@@ -1,0 +1,116 @@
+/* for dropdown menus in nav */
+.dropdown-content.nested {
+  overflow-y: visible;
+}
+
+.dropdown-content .dropdown-content {
+  margin-left: 100%;
+}
+/* blinker icons in search mens */
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.blink {
+  text-decoration: blink;
+  animation-name: blinker;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+/* search bar stlyings */
+nav form {
+  position: relative;
+  height: 100%;
+  background: inherit;
+}
+.search-close-icon {
+  display: none !important;
+  position: absolute;
+  top: 0;
+  left: 100% !important;
+  padding-left: 0px;
+  color: rgba(0, 0, 0, 0.54);
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+input.search-field {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.54);
+  border-radius: 2px;
+  border: 0;
+  border-radius: 5px;
+  height: 50px;
+  padding: 8px 8px 8px 60px;
+  width: 350px;
+  background: #f7f7f7;
+  transition: background 0.2s;
+}
+input.search-field:hover {
+  background: #ebebeb;
+}
+
+input.search-field:focus {
+  outline: none;
+  color: #212121;
+}
+input.search-field:focus:hover {
+  background: #f7f7f7;
+}
+.search-icon {
+  position: absolute;
+  top: 0;
+  padding-left: 20px;
+  color: rgba(0, 0, 0, 0.54);
+}
+.search-content {
+  color: #303c42;
+  width: 90%;
+  margin: auto;
+  height: auto;
+  padding: 8px 10px;
+}
+
+.search-popup {
+  overflow: hidden;
+  left: 0px;
+  min-height: 50px;
+  max-height: 700px;
+  width: 350px;
+  top: -450px;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+nav ul.popup-list li {
+  float: none;
+}
+nav ul.popup-list li a {
+  line-height: 30px;
+  padding: 0;
+  font-size: 1.2em;
+  color: #212121 !important;
+}
+nav ul.popup-list li a:hover {
+  background-color: #f7f7f7;
+}
+
+.top-margin {
+  margin-top: 8px;
+}
+
+.search-popup-populated {
+  top: 50px;
+}
