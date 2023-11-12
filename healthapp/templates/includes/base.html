@@ -1,0 +1,71 @@
+{% include "includes/header.html" %}
+
+<title>{% block title %}{% endblock %}</title>
+
+</header>
+
+<body>
+    <div class="row">
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="/" class="brand-logo left">DigiHealth</a>
+                    <a href="#" data-target="mobile-side-nav" class="sidenav-trigger right"><i
+                            class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Wellness
+                                Centers <i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a href="#">Hospitals</a></li>
+                        <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
+                                    class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                        <li><a href="#">News</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="/logout">Logout</a></li>
+                        {% endif %}
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <ul id="center-dropdown-options-desktop" class="dropdown-content">
+        <li><a href="/centers/district/all">
+                By District</a></li>
+        <li><a class="waves-effect" href="/centers/">A-Z</a></li>
+    </ul>
+
+    <ul id="clinic-dropdown-dekstop" class="dropdown-content">
+        <li><a href="/active_clinics">Active</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="#!">Active In My Area</a></li>
+        {% endif %}
+        <li class="divider"></li>
+        <li><a href="/upcoming">Upcoming</a></li>
+    </ul>
+
+
+    <!-- mobile side nav -->
+
+    <ul id="mobile-side-nav" class="sidenav">
+        <li><a href="/">Home</a></li>
+        <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Wellness
+                Centers <i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a href="#">Hospitals</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
+                    class="material-icons right">arrow_drop_down</i></a>
+        </li>
+        <li><a href="#">News</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+{% include "includes/footer.html" %}
