@@ -56,7 +56,12 @@ def index(request):
         context = {}
         return render(request, "homepage.html", context)
 
+class UserSignupView(CreateView):
+    template_name ='register.html'
+    form_class = UserProfileMultiForm
+    success_url = reverse_lazy('home')
 
+   
 # # def UserSignUp(request):
 # #     uform = UserRegisterForm()
 # #     pform = UserProfileForm()

@@ -1,0 +1,57 @@
+{% extends 'includes/base.html' %}
+{% block title %}Register Account{% endblock %}
+
+{% block content %}
+
+<!-- <div class="container">
+    <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="register">
+
+    </form>
+</div> -->
+<div class="form-wrapper">
+    <img class="responsive-img" style="width: 250px;" src="https://i.imgur.com/ax0NCsK.gif" />
+    <div class="section"></div>
+
+    <h5 class="indigo-text">Register Account</h5>
+    <div class="section"></div>
+
+    <div class="z-depth-1 grey lighten-4 row form-background">
+
+        <form class="col s12" method="POST" autocomplete="off">
+            {% csrf_token %}
+            <div class='row'>
+                <div class='col s12'>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='input-field col s12'>
+                    {{form.as_p}}
+                </div>
+            </div>
+
+
+            <label style='float: right;'>
+                <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+            </label>
+    </div>
+
+    <br />
+
+    <div class='row'>
+        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+    </div>
+
+    {% if form.errors %}
+    {% for error in form.errors.as_data.values %}
+    {% for data in error.0 %}
+    {{ data }}
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+    </form>
+</div>
+{% endblock %}

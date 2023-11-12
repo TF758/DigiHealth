@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'materializecssform',
     'django_filters',
     'easy_maps',
+    'betterforms',
 ]
 
 MIDDLEWARE = [

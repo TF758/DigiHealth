@@ -54,3 +54,52 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'
+
+
+class Address(models.Model):
+    DISTRICTS = [
+        ("ALR", "Anse La Raye"),
+        ("CAN", "Canaries"),
+        ("CAS", "Castries"),
+        ("CHO", "Choiseul"),
+        ("DEN", "Dennery"),
+        ("GI", "Gros Islet"),
+        ("LAB", "Laborie"),
+        ("MIC", "Micoud"),
+        ("SOU", "Soufirere"),
+        ("VF", "Vieux Fort"),
+    ]
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
+
+    address1 = models.CharField(
+        "Address line 1",
+        max_length=1024, null=True
+    )
+
+    address2 = models.CharField(
+        "Address line 2",
+        max_length=1024, null=True
+    )
+
+    district = models.CharField(max_length=150, null=True, choices=DISTRICTS)
+
+    class Meta:
+        verbose_name = 'Address'
+        verbose_name_plural = 'Addresses'
+
+    def __str__(self):
+        return str(self.user.first_name +" " + self.user.last_name+" " + self.district)
+
+class UserProfile(models.Model):
+    GENDERS = [
+        ("M", "Male"),
+        ("F", "Female"),
+    ]
+
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
+    address = models.ForeignKey(Address, null=True, on_delete=models.DO_NOTHING)
+    gender = models.CharField(max_length=150, null=True, choices=GENDERS)
+    
+    def __str__(self):
+        return  str(self.user.first_name +" " + self.user.last_name)
+
