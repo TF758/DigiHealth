@@ -50,3 +50,6 @@ function scrollSmoothTo(elementId) {
     behavior: "smooth",
   });
 }
+setInterval(function () {
+  $(".carousel").carousel("next");
+}, 8000); // every 8 seconds

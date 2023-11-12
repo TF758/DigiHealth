@@ -21,8 +21,12 @@
                                     class="material-icons right">arrow_drop_down</i></a>
                         </li>
                         <li><a href="#">News</a></li>
+                        <li><a href="/">Register</a></li>
+                        <li><a href="/">Profile</a></li>
                         {% if user.is_authenticated %}
                         <li><a href="/logout">Logout</a></li>
+                        {% else %}
+                        <li><a href="/login">Logout</a></li>
                         {% endif %}
                     </ul>
 
@@ -59,9 +63,14 @@
                     class="material-icons right">arrow_drop_down</i></a>
         </li>
         <li><a href="#">News</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/">Profile</a></li>
         {% if user.is_authenticated %}
         <li><a href="/logout">Logout</a></li>
+        {% else %}
+        <li><a href="/login">Login</a></li>
         {% endif %}
+
     </ul>
 
     <ul id="center-dropdown-options-mobile" class="dropdown-content">

@@ -2,13 +2,27 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
+<div class="right-align row  hide-on-med-and-down">
+    <a tabindex="0" href="/register" class="btn  tonal icon-right waves-effect">
+        <i class="material-icons">person_add</i>Register
+    </a>
+    {% if user.is_authenticated %}
+    <a tabindex="0" class="btn tonal icon-right waves-effect disabled">
+        <i class="material-icons">exit_to_app</i>Login
+    </a>
+    {% else %}
+    <a tabindex="0" href="/login" class="btn tonal icon-right waves-effectW">
+        <i class="material-icons">exit_to_app</i>Login
+    </a>
+    {% endif %}
+</div>
 
 <div class="row ">
-    <div class="col s12 m9 l9 ">
+    <div class="col s12 m12 l9 ">
         <div class="carousel carousel-slider center ">
             <div class="carousel-item red white-text" href="#one!">
-                <!-- <img
-                    src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210818182611/Blogathon-2021-Write-From-Home-Contest-By-GeeksforGeeks.png"> -->
+                <img
+                    src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210818182611/Blogathon-2021-Write-From-Home-Contest-By-GeeksforGeeks.png">
             </div>
             <div class="carousel-item amber white-text" href="#two!">
                 <h2>Second Panel</h2>
