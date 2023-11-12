@@ -1,4 +1,6 @@
 //  these scripts are used for various function inside materilize css
+
+console.log("test");
 $(document).ready(function () {
   $(".carousel").carousel({
     fullWidth: true,

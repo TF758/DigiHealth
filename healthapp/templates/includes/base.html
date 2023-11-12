@@ -52,10 +52,10 @@
 
     <ul id="mobile-side-nav" class="sidenav">
         <li><a href="/">Home</a></li>
-        <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Wellness
+        <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-mobile">Wellness
                 Centers <i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a href="#">Hospitals</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
+        <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-mobile">Clinics<i
                     class="material-icons right">arrow_drop_down</i></a>
         </li>
         <li><a href="#">News</a></li>
@@ -63,6 +63,22 @@
         <li><a href="/logout">Logout</a></li>
         {% endif %}
     </ul>
+
+    <ul id="center-dropdown-options-mobile" class="dropdown-content">
+        <li><a href="/centers/district/all">
+                By District</a></li>
+        <li><a class="waves-effect" href="/centers/">A-Z</a></li>
+    </ul>
+
+    <ul id="clinic-dropdown-mobile" class="dropdown-content">
+        <li><a href="/active_clinics">Active</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="#!">Active In My Area</a></li>
+        {% endif %}
+        <li class="divider"></li>
+        <li><a href="/upcoming">Upcoming</a></li>
+    </ul>
+
     <div class="container">
         {% block content %}
         {% endblock %}

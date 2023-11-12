@@ -6,7 +6,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views import View
-# from .forms import *
+from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date, timedelta
 # from .forms import *
@@ -20,6 +20,15 @@ from django.shortcuts import render
 
 # # Create your views here.
 
+class UserLogin(LoginView):
+    form_class = LoginForm
+    template_name = 'login.html'
+    success_url = reverse_lazy("/")
+
+class Logout(View):
+    def get(self, request):
+        logout(request)
+        return redirect('/')
 
 # class CreateNewArticle(LoginRequiredMixin, CreateView):
 #     template_name = 'new_article.html'
