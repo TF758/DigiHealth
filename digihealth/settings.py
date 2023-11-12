@@ -56,6 +56,7 @@ MIDDLEWARE = [
 ]
 
 AUTH_USER_MODEL = 'healthapp.CustomUser'
+AUTHENTICATION_BACKENDS = ['healthapp.backends.EmailBackend']
 
 ROOT_URLCONF = 'digihealth.urls'
 
@@ -134,7 +135,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = '/home'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
 LOGOUT_REDIRECT_URL = ''
 
