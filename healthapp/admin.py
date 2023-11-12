@@ -17,7 +17,15 @@ class AddressAdmin(admin.ModelAdmin):
     pass
 
 
-class DoctorAdmin(admin.ModelAdmin):
+class ClinicEventAdmin(admin.ModelAdmin):
+    pass
+
+
+class ClinicTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+class WellnessCenterAdmin(admin.ModelAdmin):
     pass
 
 
@@ -39,8 +47,8 @@ class ClinicTypeAdmin(admin.ModelAdmin):
 admin.site.register(CustomUser, UserAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Address, AddressAdmin)
-# admin.site.register(Doctor, DoctorAdmin)
+admin.site.register(ClinicEvent, ClinicEventAdmin)
+admin.site.register(ClinicType, ClinicTypeAdmin)
+admin.site.register(Center, WellnessCenterAdmin)
 # admin.site.register(RadiologyRequest, RadiologyRequestAdmin)
 # admin.site.register(Article, ArticleAdmin)
-# admin.site.register(ClinicEvent, ClinicEventAdmin)
-# admin.site.register(ClinicType, ClinicEventAdmin)
