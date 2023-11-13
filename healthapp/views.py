@@ -10,7 +10,7 @@ from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date, timedelta
 # from .forms import *
-# from .filters import EventFilter
+from .filters import CenterFilter, EventFilter
 from django.contrib.auth import logout
 from django.utils.dateparse import parse_date
 from django.template.loader import render_to_string
@@ -56,89 +56,80 @@ def index(request):
         context = {}
         return render(request, "homepage.html", context)
 
+
+def auth_index(request):
+    if request.method == 'GET':
+        context = {}
+        return render(request, "manage.html", context)
 class UserSignupView(CreateView):
     template_name ='register.html'
     form_class = UserProfileMultiForm
     success_url = reverse_lazy('home')
 
    
-# # def UserSignUp(request):
-# #     uform = UserRegisterForm()
-# #     pform = UserProfileForm()
-# #     if request.method == 'GET':
-# #         return render(request, 'register.html', context={'uform': uform, 'pform': pform})
-# #     else:
-# #         uform = UserRegisterForm(request.POST)
-# #         pform = UserProfileForm(request.POST)
-# #         if uform.is_valid() and pform.is_valid():
-# #             uinstance = uform.save(commit=False)
-# #             uform.save()
-# #             UserProfile.objects.create(user=uinstance, name=pform.cleaned_data.get(
-# #                 'name'), dob=pform.cleaned_data.get('dob'))
-# #             return HttpResponse("User created with Profile")
-# #         else:
-# #             return render(request, 'register.html', context={'uform': uform, 'pform': pform})
+class CreateNewCenter(LoginRequiredMixin, CreateView):
+    template_name = 'auth/add-center.html'
+    form_class = AddCenterForm
+    model = Center
+    success_url = reverse_lazy("/")
 
 
-# class UserLogin(LoginView):
-#     template_name = 'login.html'
-#     success_url = reverse_lazy("home")
+class ManageCenters(LoginRequiredMixin, View):
+    def get(self, request):
+        centers = Center.objects.all()
+        center_filter = CenterFilter(request.GET, queryset=centers)
+        centers = center_filter.qs
+
+        context = {'center_list': centers, 'center_filter': center_filter}
+        return render(request, 'auth/manage-centers.html', context)
+
+class DeleteCenter(LoginRequiredMixin, DeleteView):
+    model = Center
+    success_url = reverse_lazy("manage-center")
+    template_name = "auth/manage-centers.html"
 
 
-# class Logout(View):
-#     def get(self, request):
-#         logout(request)
-#         return redirect('/')
+class UpdateCenter(LoginRequiredMixin, UpdateView):
+    model = Center
+    fields = "__all__"
+    success_url = reverse_lazy("manage-center")
+    template_name = 'auth/add-center.html'
 
 
-# def homepage(request):
-#     if request.method == 'GET':
-#         context = {}
-#         return render(request, "home.html", context)
+class ManageClinics(LoginRequiredMixin, View):
+    def get(self, request):
+        events = ClinicEvent.objects.all()
+        event_filter = EventFilter(request.GET, queryset=events)
+        events = event_filter.qs
+
+        context = {'clinic_list': events, 'event_filter': event_filter}
+        return render(request, 'auth/manage-clinics.html', context)
 
 
-# class RadiologyRequestView(LoginRequiredMixin, CreateView):
-#     template_name = 'rad_request.html'
-#     form_class = RadiologyRequestForm
-#     model = RadiologyRequest
-#     success_url = reverse_lazy("home")
+class CreateNewClinicEvent(LoginRequiredMixin, CreateView):
+    template_name = 'auth/add-clinic.html'
+    form_class = NewClinicalEventForm
+    model = ClinicEvent
+    success_url = reverse_lazy("manage-clinics")
 
 
-# class ManageClinics(LoginRequiredMixin, View):
-#     def get(self, request):
-#         events = ClinicEvent.objects.all()
-#         event_filter = EventFilter(request.GET, queryset=events)
-#         events = event_filter.qs
-
-#         context = {'clinic_list': events, 'event_filter': event_filter}
-#         return render(request, 'clinicalEvents/manageEvents.html', context)
+class DeleteClinic(LoginRequiredMixin, DeleteView):
+    model = ClinicEvent
+    success_url = reverse_lazy("manage-clinics")
 
 
-# class CreateNewClinicEvent(LoginRequiredMixin, CreateView):
-#     template_name = 'clinicalEvents/new_clinical_event.html'
-#     form_class = NewClinicalEventForm
-#     model = ClinicEvent
-#     success_url = reverse_lazy("manage_clinics")
 
-
-# class DeleteEvent(LoginRequiredMixin, DeleteView):
-#     model = ClinicEvent
-#     success_url = reverse_lazy("manage_clinics")
-#     template_name = "clinicalEvents/manageEvents.html"
-
-
-# class UpdateEvent(LoginRequiredMixin, UpdateView):
-#     model = ClinicEvent
-#     fields = [
-#         "clinic_type",
-#         "facility",
-#         "clinic_status",
-#         "start_time",
-#         "end_time",
-#         "is_active",]
-#     success_url = reverse_lazy("manage_clinics")
-#     template_name = 'clinicalEvents/new_clinical_event.html'
-
+class UpdateClinic(LoginRequiredMixin, UpdateView):
+    model = ClinicEvent
+    fields = [
+        "clinic_type",
+        "facility",
+        "clinic_status",
+        "start_time",
+        "end_time",
+        "is_active",]
+    success_url = reverse_lazy("manage-clinics")
+    template_name = 'auth/add-clinic.html'
 
 # class UpcomingClinics(View):
 #     def get(self, request):

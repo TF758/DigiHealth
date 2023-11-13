@@ -1,0 +1,66 @@
+{% extends 'includes/base.html' %}
+{% block title %}Center Manager{% endblock %}
+
+{% block content %}
+{% load materializecss %}
+
+
+<h2>Centers</h2>
+
+<a class="waves-effect waves-light btn modal-trigger" href="/auth/add-center">Add Center</a>
+
+
+<div class="container">
+    <div class="right-align">
+        <a class="btn" href="{% url 'manage-center' %}">Clear filters</a>
+    </div>
+    <form action="" method="get">
+        <div class="row">
+            <div class="col s12 m6 l6">
+                {{center_filter.form.name.label}}
+                {{center_filter.form.name}}
+            </div>
+            <div class="col s12 m6 l6">
+                {{center_filter.form.district.label}}
+                {{center_filter.form.district}}
+            </div>
+        </div>
+        <div class="center-align">
+            <input type="submit" class="btn" value="Filter">
+        </div>
+    </form>
+</div>
+
+
+<table class="responsive-table">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Abbreviation</th>
+        <th>district</th>
+        <th>Location</th>
+        <th>Contact</th>
+        <th>Action</th>
+
+    </thead>
+    {% for center in center_list reversed %}
+    <tr>
+        <td>{{center.id}}</td>
+        <td>{{center.name}}</td>
+        <td>{{center.center_abbreviation}}</td>
+        <td>{{center.get_district_display}}</td>
+        <td>{{center.clinic_status}}</td>
+        <td>{{center.contact}}</td>
+        <td class="">
+            <form method="POST" action="{% url 'delete-center' center.id %}">
+                {% csrf_token %}
+                <button class="btn  red darken-2" type="submit" value="DELETE"
+                    onclick="return confirm('Are you sure do you want to delete {{center}}')">
+                    Delete</button>
+            </form>
+            <a class="btn light-blue lighten-3" href="{% url 'update-center' center.id %}">Edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

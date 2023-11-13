@@ -1,0 +1,14 @@
+{% extends 'includes/base.html' %}
+{% block title %}Create Clinic{% endblock %}
+{% load materializecss %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form|materializecss }}
+    <div class="center-align">
+        <input type="submit" class="btn" value="Create" />
+    </div>
+</form>
+{% endblock %}

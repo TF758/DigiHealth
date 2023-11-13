@@ -1,0 +1,84 @@
+{% extends 'includes/base.html' %}
+{% block title %}Manage Events{% endblock %}
+
+{% block content %}
+{% load materializecss %}
+
+
+<h2>Manage Clinics</h2>
+
+<a class="waves-effect waves-light btn modal-trigger" href="/auth/add-clinic">Create New Event</a>
+
+
+<div class="container">
+    <div class="right-align">
+        <a class="btn" href="{% url 'manage-clinics' %}">Clear filters</a>
+    </div>
+    <form action="" method="get">
+        <div class="row">
+            <div class="col s12 m4 l4">
+                {{event_filter.form.start_date.label}}
+                {{event_filter.form.start_date}}
+            </div>
+            <div class="col s12 m4 l4">
+                {{event_filter.form.clinic_type.label}}
+                {{event_filter.form.clinic_type}}
+
+            </div>
+            <div class="col s12 m4 l4">
+                {{event_filter.form.facility.label}}
+                {{event_filter.form.facility}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6 l6">
+                {{event_filter.form.clinic_status.label}}
+                {{event_filter.form.clinic_status}}
+            </div>
+            <div class="col s12 m6 l6">
+                {{event_filter.form.is_active.label}}
+                {{event_filter.form.is_active}}
+            </div>
+        </div>
+        <div class="center-align">
+            <input type="submit" class="btn" value="Filter">
+        </div>
+    </form>
+</div>
+
+
+<table class="responsive-table">
+    <thead>
+        <th>Id</th>
+        <th>Start Date</th>
+        <th>Type of Clinic</th>
+        <th>Location</th>
+        <th>Care Level</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Status</th>
+        <th>Action</th>
+    </thead>
+    {% for clinic in clinic_list reversed %}
+    <tr>
+        <td>{{clinic.id}}</td>
+        <td>{{clinic.start_date}}</td>
+        <td>{{clinic.clinic_type}}</td>
+        <td>{{clinic.facility}}</td>
+        <td>{{clinic.clinic_status}}</td>
+        <td>{{clinic.start_time}}</td>
+        <td>{{clinic.end_time}}</td>
+        <td>{{clinic.is_active}}</td>
+        <td class="">
+            <form method="POST" action="{% url 'delete-clinic' clinic.id %}">
+                {% csrf_token %}
+                <button class="btn  red darken-2" type="submit" value="DELETE"
+                    onclick="return confirm('Are you sure do you want to delete {{clinic}}')">
+                    Delete</button>
+            </form>
+            <a class="btn light-blue lighten-3" href="{% url 'update-clinic' clinic.id %}">Edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
