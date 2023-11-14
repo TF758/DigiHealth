@@ -71,7 +71,7 @@ class CreateNewCenter(LoginRequiredMixin, CreateView):
     template_name = 'auth/add-center.html'
     form_class = AddCenterForm
     model = Center
-    success_url = reverse_lazy("/")
+    success_url = reverse_lazy("manage-centers")
 
 
 class ManageCenters(LoginRequiredMixin, View):
@@ -79,20 +79,19 @@ class ManageCenters(LoginRequiredMixin, View):
         centers = Center.objects.all()
         center_filter = CenterFilter(request.GET, queryset=centers)
         centers = center_filter.qs
-
         context = {'center_list': centers, 'center_filter': center_filter}
         return render(request, 'auth/manage-centers.html', context)
 
 class DeleteCenter(LoginRequiredMixin, DeleteView):
     model = Center
-    success_url = reverse_lazy("manage-center")
+    success_url = reverse_lazy("manage-centers")
     template_name = "auth/manage-centers.html"
 
 
 class UpdateCenter(LoginRequiredMixin, UpdateView):
     model = Center
     fields = "__all__"
-    success_url = reverse_lazy("manage-center")
+    success_url = reverse_lazy("manage-centers")
     template_name = 'auth/add-center.html'
 
 

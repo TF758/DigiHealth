@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<form action="" method="post">
+<form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ form|materializecss }}
     <div class="center-align">

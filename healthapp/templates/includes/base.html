@@ -20,8 +20,9 @@
                         <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
                                     class="material-icons right">arrow_drop_down</i></a>
                         </li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="/">Register</a></li>
+                        <li><a href="#" class="dropdown-trigger" data-target="auth-dropdown-options-desktop">Manage<i
+                                    class="material-icons right">arrow_drop_down</i></a>
+                        </li>
                         <li><a href="/">Profile</a></li>
                         {% if user.is_authenticated %}
                         <li><a href="/logout">Logout</a></li>
@@ -49,6 +50,15 @@
         {% endif %}
         <li class="divider"></li>
         <li><a href="/upcoming">Upcoming</a></li>
+    </ul>
+
+    <ul id="auth-dropdown-options-desktop" class="dropdown-content">
+        <li><a href="/auth/manage-clinics">
+                Manage Clinics</a></li>
+        <li><a href="/auth/manage-centers">
+                Manage Centers</a></li>
+        <li><a href="#">
+                Manage Articles</a></li>
     </ul>
 
 

@@ -12,7 +12,7 @@
 
 <div class="container">
     <div class="right-align">
-        <a class="btn" href="{% url 'manage-center' %}">Clear filters</a>
+        <a class="btn" href="{% url 'manage-centers' %}">Clear filters</a>
     </div>
     <form action="" method="get">
         <div class="row">
@@ -38,7 +38,6 @@
         <th>Name</th>
         <th>Abbreviation</th>
         <th>district</th>
-        <th>Location</th>
         <th>Contact</th>
         <th>Action</th>
 
@@ -49,7 +48,6 @@
         <td>{{center.name}}</td>
         <td>{{center.center_abbreviation}}</td>
         <td>{{center.get_district_display}}</td>
-        <td>{{center.clinic_status}}</td>
         <td>{{center.contact}}</td>
         <td class="">
             <form method="POST" action="{% url 'delete-center' center.id %}">
