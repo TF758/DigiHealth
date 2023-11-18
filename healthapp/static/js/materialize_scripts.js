@@ -38,6 +38,7 @@ $(document).ready(function () {
     coverTrigger: false,
     // hover: true,
   });
+  $(".collapsible").collapsible();
 });
 
 function scrollSmoothTo(elementId) {
@@ -53,3 +54,9 @@ function scrollSmoothTo(elementId) {
 setInterval(function () {
   $(".carousel").carousel("next");
 }, 8000); // every 8 seconds
+
+$(".button-collapse").sideNav();
+
+$(".collapsible").collapsible();
+
+$("select").material_select();

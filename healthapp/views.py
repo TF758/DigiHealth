@@ -250,9 +250,9 @@ class CentersByDistrict(ListView):
         return Center.objects.filter(district=self.kwargs['district'])
 
 
-# class CenterDetails(DetailView):
-#     model = HealthCenter
-#     slug_url_kwarg = 'name'
-#     slug_field = 'name'
-#     context_object_name = 'center_details'
-#     template_name = 'center_details.html'
+class CenterDetails(DetailView):
+    model = Center
+    slug_url_kwarg = 'center_abbreviation'
+    slug_field = 'center_abbreviation'
+    context_object_name = 'center_details'
+    template_name = 'centers/center_details.html'
