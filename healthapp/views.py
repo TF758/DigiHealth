@@ -159,28 +159,28 @@ class UpdateClinic(LoginRequiredMixin, UpdateView):
 #         return render(request, 'clinics/upcomingclinics.html', context)
 
 
-# class DistrictCentersDirectory(View):
-#     def get(self, request):
-#         gi_centers = ClinicEvent.objects.filter(
-#             facility__district='GI')
-#         cas_centers = ClinicEvent.objects.filter(
-#             facility__district='CAS')
-#         alr_centers = ClinicEvent.objects.filter(
-#             facility__district='ALR')
-#         can_centers = ClinicEvent.objects.filter(
-#             facility__district='CAN')
-#         cho_centers = ClinicEvent.objects.filter(
-#             facility__district='CHO')
-#         lab_centers = ClinicEvent.objects.filter(
-#             facility__district='LAB')
-#         mic_centers = ClinicEvent.objects.filter(
-#             facility__district='MIC')
-#         souf_centers = ClinicEvent.objects.filter(
-#             facility__district='SOU')
+class DistrictCentersDirectory(View):
+    def get(self, request):
+        gi_centers = ClinicEvent.objects.filter(
+            facility__district='GI')
+        cas_centers = ClinicEvent.objects.filter(
+            facility__district='CAS')
+        alr_centers = ClinicEvent.objects.filter(
+            facility__district='ALR')
+        can_centers = ClinicEvent.objects.filter(
+            facility__district='CAN')
+        cho_centers = ClinicEvent.objects.filter(
+            facility__district='CHO')
+        lab_centers = ClinicEvent.objects.filter(
+            facility__district='LAB')
+        mic_centers = ClinicEvent.objects.filter(
+            facility__district='MIC')
+        souf_centers = ClinicEvent.objects.filter(
+            facility__district='SOU')
 
-#         context = {'gi_centers': gi_centers, 'cas_centers': cas_centers, 'alr_centers': alr_centers, 'can_centers': can_centers, 'cho_centers': cho_centers, 'lab_centers': lab_centers, 'mic_centers': mic_centers
-#                    }
-#         return render(request, 'district_centers_list.html', context)
+        context = {'gi_centers': gi_centers, 'cas_centers': cas_centers, 'alr_centers': alr_centers, 'can_centers': can_centers, 'cho_centers': cho_centers, 'lab_centers': lab_centers, 'mic_centers': mic_centers
+                   }
+        return render(request, 'centers/district_centers.html', context)
 
 
 # class GetCentersByLetter(View):
@@ -241,13 +241,13 @@ class UpdateClinic(LoginRequiredMixin, UpdateView):
 #             return HttpResponse(' invalid')
 
 
-# class ClinicsByDistrict(ListView):
-#     model = HealthCenter
-#     template_name = 'centers_by_district.html'
-#     context_object_name = 'centers'
+class CentersByDistrict(ListView):
+    model = Center
+    template_name = 'centers/centers_by_district.html'
+    context_object_name = 'centers'
 
-#     def get_queryset(self):
-#         return HealthCenter.objects.filter(district=self.kwargs['district'])
+    def get_queryset(self):
+        return Center.objects.filter(district=self.kwargs['district'])
 
 
 # class CenterDetails(DetailView):

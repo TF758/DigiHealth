@@ -22,5 +22,9 @@ urlpatterns = [
     path("auth/manage-clinics", ManageClinics.as_view(), name='manage-clinics'),
     path("auth/clinic/delete/<int:pk>", DeleteClinic.as_view(), name='delete-clinic'),
     path("auth/clinic/edit/<int:pk>", UpdateClinic.as_view(), name='update-clinic'),
+    path('centers/district/all',
+         DistrictCentersDirectory.as_view(), name='centers_all_districts'),
+     path('centers/district/<str:district>/',
+         CentersByDistrict.as_view(), name='district_wellness_center'),
 
 ]

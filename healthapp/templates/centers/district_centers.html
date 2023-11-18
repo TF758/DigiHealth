@@ -1,0 +1,75 @@
+{% extends 'includes/base.html' %}
+{% block title %}District Wellness Centers{% endblock %}
+
+{% block content %}
+<a href="#" data-target="slide-out" class="sidenav-trigger btn side-nav-trigger-btn">Navigate</a>
+<ul id="slide-out" class="sidenav mobile-submenu">
+
+    <li><a class="waves-effect" onclick="scrollSmoothTo('giNavHeader')">Gros-Islet</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('casNavHeader')">Castries</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('alrNavHeader')">Anse La Raye</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('denNavHeader')">Dennery</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('canNavHeader')">Canaries</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('micNavHeader')">Micoud</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('souNavHeader')">Sourfriere</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('choNavHeader')">Choiseul</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('labNavHeader')">Labourie</a></li>
+    <li><a class="waves-effect" onclick="scrollSmoothTo('vfNavHeader')">Vieux Fort</a></li>
+</ul>
+
+<div class="container">
+
+
+    <div class="row">
+        <a href="{% url 'district_wellness_center' district='GI' %}" id="giNavHeader">
+            <H1>Gros-Islet</H1>
+        </a>
+        {% for clinic in gi_centers %}
+        {% if clinic.facility.district == 'GI' %}
+        <div class="col s12 m6 l4">
+            <div class="card-panel light-blue">{{clinic.clinic_type}}
+                <p>{{clinic.start_date}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <h2 class="center-align"> No active clinics</h2>
+        {% endfor %}
+    </div>
+
+
+    <div class="row">
+        <a href="{% url 'district_wellness_center' district='CAS' %}" id="casNavHeader">
+            <H1>Castries</H1>
+        </a>
+        {% for clinic in gi_centers %}
+        {% if clinic.facility.district == 'GI' %}
+        <div class="col s12 m6 l4">
+            <div class="card-panel light-blue">{{clinic.clinic_type}}
+                <p>{{clinic.start_date}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <h2 class="center-align"> No active clinics</h2>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <a href="{% url 'district_wellness_center' district='ALR' %}" id="alrNavHeader">
+            <H1>Anse La Raye</H1>
+        </a>
+        {% for clinic in gi_centers %}
+        {% if clinic.facility.district == 'GI' %}
+        <div class="col s12 m6 l4">
+            <div class="card-panel light-blue">{{clinic.clinic_type}}
+                <p>{{clinic.start_date}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <h2 class="center-align"> No active clinics</h2>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

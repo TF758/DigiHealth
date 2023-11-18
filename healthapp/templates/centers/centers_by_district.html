@@ -1,0 +1,13 @@
+{% extends 'includes/base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% for center in centers|slice:":1" %}
+<h2>{{center.get_district_display}}</h2>
+{%endfor %}
+
+{% for center in centers %}
+<h2>{{center.name}}</h2>
+{%endfor %}
+
+{% endblock %}
