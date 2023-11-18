@@ -119,8 +119,8 @@ class Center (models.Model):
     ]
     name = models.CharField(max_length=150, null=True)
     center_abbreviation = models.CharField(max_length=20, null=True)
-    district = models.CharField(max_length=150, null=True, choices=DISTRICTS)
-    contact = models.CharField(max_length=150)
+    district = models.CharField(max_length=150, null=False, choices=DISTRICTS)
+    contact = models.CharField(max_length=150, null=True, blank=True)
     center_image = models.ImageField(upload_to='center_images')
 
     def __str__(self):
@@ -159,3 +159,12 @@ class ClinicEvent(models.Model):
     def __str__(self):
         return str(self.event_name)
     
+
+    # class News_Article(models.Model):
+    #     title  = pass
+    #     date = pass
+    #     body = pass
+    #     is_global = pass
+    #     center_id = models.ForeignKey(
+    #     Center, null=True, on_delete=models.DO_NOTHING)
+    #     article_image = models.ImageField(upload_to='article_images')

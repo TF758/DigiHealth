@@ -13,6 +13,7 @@ urlpatterns = [
     path('login/', UserLogin.as_view(), name="login"),
     path('logout/', Logout.as_view(), name="logout"),
     path("register/", UserSignupView.as_view(), name='register'),
+    path("auth/", AdminDashBoard.as_view(), name='new-center'),
     path("auth/add-center", CreateNewCenter.as_view(), name='new-center'),
     path("auth/manage-centers", ManageCenters.as_view(), name='manage-centers'),
     path("auth/center/delete/<int:pk>", DeleteCenter.as_view(), name='delete-center'),

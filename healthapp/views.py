@@ -20,6 +20,11 @@ from django.shortcuts import render
 
 # # Create your views here.
 
+class AdminDashBoard(View):
+    def get(self, request):
+        context = {}
+        return render(request, "auth/dashboard.html", context)
+    
 class UserLogin(LoginView):
     form_class = LoginForm
     template_name = 'login.html'
