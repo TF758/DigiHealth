@@ -16,7 +16,7 @@ from django.utils.dateparse import parse_date
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.shortcuts import render
-# from .serializers import *
+from .serializers import *
 
 # # Create your views here.
 
@@ -183,32 +183,23 @@ class DistrictCentersDirectory(View):
         return render(request, 'centers/district_centers.html', context)
 
 
-# class GetCentersByLetter(View):
-#     def get(self, request, *args, **kwargs):
-#         letter = self.kwargs['letter']
-#         filtered_list = HealthCenter.objects.filter(name__startswith=letter)
 
-#         context = {'filtered_list': filtered_list
-#                    }
-#         return render(request, 'district_centers_list.html', context)
+class GetCentersByLetter(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        return render(request, "centers/center_list.html", context)
 
-
-# class GetCentersByLetter(View):
-#     def get(self, request, *args, **kwargs):
-#         context = {}
-#         return render(request, "centers_by_alphabet.html", context)
-
-#     def post(self, request, *args, **kwargs):
-#         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-#         if is_ajax:
-#             query = request.POST['query']
-#             centers_filtered = HealthCenter.objects.filter(
-#                 name__icontains=query).order_by('name')
-#             info = HealthCenterSerializer(centers_filtered, many=True)
-#             center_data = info.data
-#             # print(center_data)
-#             return JsonResponse({'centers': list(center_data)})
-#         return HttpResponse("TEST")
+    def post(self, request, *args, **kwargs):
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        if is_ajax:
+            query = request.POST['query']
+            centers_filtered = Center.objects.filter(
+                name__icontains=query).order_by('name')
+            info = HealthCenterSerializer(centers_filtered, many=True)
+            center_data = info.data
+            # print(center_data)
+            return JsonResponse({'centers': list(center_data)})
+        return HttpResponse("TEST")
 
 
 # class WellnessCenterPage(View):
