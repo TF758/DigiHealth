@@ -2,6 +2,74 @@
 {% block title %}{{center_details.name}}{% endblock %}
 
 {% block content %}
-<h2>Details about center page:{{center_details.name}}</h2>
+<h2>{{center_details.name}}</h2>
+
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        {% if center_details.address %}
+        <p>Google Map Location for: {{center_details.name}} </p>
+        {% load easy_maps_tags %}
+        {% easy_map address 600 500 17 using "easy_maps/map.html" %}
+        {% endif %}
+    </div>
+</div>
+
+
+<ul id="slide-out" class="sidenav">
+
+    <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Open Map</a></li>
+    <li><a href="#!">Second Link</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+</ul>
+<a href="#" data-target="slide-out" style="position:fixed;right:20;bottom:20"
+    class="sidenav-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
+<div class="row">
+    <!-- <div class="red col s3 hide-on-med-and-down">
+        <h2>Side Nav</h2>
+        <ul>
+            <li><a class="waves-effect waves-light  modal-trigger" href="#modal1">Modal</a></li>
+            <li><a href="#" class="waves-effect">Empty Link</a></li>
+            <li><a href="#" class="waves-effect">Empty Link</a></li>
+            <li><a href="#" class="waves-effect">Empty Link</a></li>
+            <li><a href="#" class="waves-effect">Empty Link</a></li>
+        </ul>
+    </div> -->
+    <div class="mid-section col s12 m12 l6">
+        <div class="hero-banner blue">
+            <p>Image and Text</p>
+            {% if center_details.center_image is not None %}
+            <img src="{{center_details.center_image.url}}" style="width:100%; height:auto;">
+            {% endif %}
+        </div>
+    </div>
+    <div class="clinic-section green col s12 m12 l6">
+        <div class="col s12 m12 l6 blue">
+            <h4>Active Clinics</h4>
+        </div>
+        <div class="col s12 m12 l6 yellow">
+            <h4>Upcoming Clinics</h4>
+        </div>
+    </div>
+</div>
+<div class="news row">
+    <h2>Clinic News section</h2>
+    <ul>
+        {% for article in center_news %}
+        <li><a href="#">
+                <h4>{{article.title}}</h4>
+            </a>
+            <p>{{article.date|date:"M d, Y"}}</p>
+        </li>
+        {% empty %}
+        <p>No articles, yet</p>
+        {% endfor %}
+    </ul>
+</div>
+
 
 {% endblock %}

@@ -34,7 +34,7 @@
             url: endpoint,
             data: {
                 csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
-                query: $("#user-input").val(),
+                query: $("#user-input").val().trim(),
             },
             success: function (data) {
                 // console.log("SUCCESS");

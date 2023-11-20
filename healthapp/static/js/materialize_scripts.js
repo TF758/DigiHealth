@@ -55,7 +55,7 @@ setInterval(function () {
   $(".carousel").carousel("next");
 }, 8000); // every 8 seconds
 
-$(".button-collapse").sideNav();
+// $(".button-collapse").sidenav();
 
 $(".collapsible").collapsible();
 
