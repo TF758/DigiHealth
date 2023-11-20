@@ -241,9 +241,11 @@ class CentersByDistrict(ListView):
         return Center.objects.filter(district=self.kwargs['district'])
 
 
-class CenterDetails(DetailView):
-    model = Center
-    slug_url_kwarg = 'center_abbreviation'
-    slug_field = 'center_abbreviation'
-    context_object_name = 'center_details'
-    template_name = 'centers/center_details.html'
+class CenterDetails(View):
+    def get(self, request, *args, **kwargs):
+        center_abbreviation = self.kwargs['center_abbreviation']
+        center_data = Center.objects.get(center_abbreviation=center_abbreviation)
+        articles = Article.objects.filter(center_id__center_abbreviation=center_abbreviation)
+        context = {'center_details': center_data,
+                   'center_news': articles, 'address':  center_data.address}
+        return render(request, 'centers/center_details.html', context)
