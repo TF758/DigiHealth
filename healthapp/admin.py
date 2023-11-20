@@ -29,7 +29,7 @@ class WellnessCenterAdmin(admin.ModelAdmin):
     pass
 
 
-class RadiologyRequestAdmin(admin.ModelAdmin):
+class OpeningHoursAdmin(admin.ModelAdmin):
     pass
 
 
@@ -50,5 +50,5 @@ admin.site.register(Address, AddressAdmin)
 admin.site.register(ClinicEvent, ClinicEventAdmin)
 admin.site.register(ClinicType, ClinicTypeAdmin)
 admin.site.register(Center, WellnessCenterAdmin)
-# admin.site.register(RadiologyRequest, RadiologyRequestAdmin)
+admin.site.register(OpeningHours, OpeningHoursAdmin)
 admin.site.register( Article, ArticleAdmin)

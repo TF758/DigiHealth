@@ -246,6 +246,7 @@ class CenterDetails(View):
         center_abbreviation = self.kwargs['center_abbreviation']
         center_data = Center.objects.get(center_abbreviation=center_abbreviation)
         articles = Article.objects.filter(center_id__center_abbreviation=center_abbreviation)
+        operating_hours =  OpeningHours.objects.filter(center__center_abbreviation=center_abbreviation)
         context = {'center_details': center_data,
-                   'center_news': articles, 'address':  center_data.address}
+                   'center_news': articles, 'address':  center_data.address, 'operating_hours':operating_hours}
         return render(request, 'centers/center_details.html', context)

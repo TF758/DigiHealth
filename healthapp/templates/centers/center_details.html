@@ -69,6 +69,37 @@
         <p>No articles, yet</p>
         {% endfor %}
     </ul>
+    {% for hours in operating_hours %}
+    <li>
+        {{ hours.get_weekday_display }}
+        {{ hours.from_hour }}
+        - {{ hours.to_hour }}
+    </li>
+    {% empty %}
+    <p>No List hours, yet</p>
+    {% endfor %}
+
+</div>
+<div class="row">
+    <h2 class="title">Opening Hours</h2>
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hours in operating_hours %}
+            <tr>
+                <td> {{ hours.get_weekday_display }}</td>
+                <td> {{ hours.from_hour }}</td>
+                <td> {{ hours.to_hour }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 

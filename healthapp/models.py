@@ -172,3 +172,33 @@ class Article(models.Model):
 
         def __str__(self):
             return str(str(self.date) + " " + str(self.title))
+        
+
+class OpeningHours(models.Model):
+    WEEKDAYS = [
+    (1, ("Monday")),
+    (2, ("Tuesday")),
+    (3, ("Wednesday")),
+    (4, ("Thursday")),
+    (5, ("Friday")),
+    (6, ("Saturday")),
+    (7, ("Sunday")),
+    (8, ("Holidays")),
+    ]
+    center = models.ForeignKey(
+        Center, on_delete=models.DO_NOTHING
+    )
+    weekday = models.IntegerField(
+        choices=WEEKDAYS,
+        unique=True
+    )
+    from_hour = models.TimeField()
+    to_hour = models.TimeField()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['center', 'weekday'], name='center operating days')
+        ]
+
+    def __str__(self):
+            return str(str(self.center) + " " + str(self.weekday))
