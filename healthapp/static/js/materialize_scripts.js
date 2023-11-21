@@ -39,6 +39,14 @@ $(document).ready(function () {
     // hover: true,
   });
   $(".collapsible").collapsible();
+
+  $(".button-collapse").sidenav();
+
+  $(".collapsible").collapsible();
+
+  $("select").formSelect();
+
+  $(".parallax").parallax();
 });
 
 function scrollSmoothTo(elementId) {
@@ -54,9 +62,3 @@ function scrollSmoothTo(elementId) {
 setInterval(function () {
   $(".carousel").carousel("next");
 }, 8000); // every 8 seconds
-
-// $(".button-collapse").sidenav();
-
-$(".collapsible").collapsible();
-
-$("select").material_select();

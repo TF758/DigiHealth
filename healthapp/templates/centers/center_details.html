@@ -2,9 +2,6 @@
 {% block title %}{{center_details.name}}{% endblock %}
 
 {% block content %}
-<h2>{{center_details.name}}</h2>
-
-
 <div id="modal1" class="modal">
     <div class="modal-content">
         {% if center_details.address %}
@@ -16,20 +13,50 @@
 </div>
 
 
-<ul id="slide-out" class="sidenav">
+<div class="parallax-container">
+    <div class="parallax"><img
+            src="https://i0.wp.com/stluciastar.com/wp-content/uploads/2017/11/Polyclinic.jpg?resize=550%2C367&ssl=1"" style="
+            width:100%; height:auto;">
+    </div>
+</div>
 
-    <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Open Map</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-</ul>
-<a href="#" data-target="slide-out" style="position:fixed;right:20;bottom:20"
-    class="sidenav-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
-<div class="row">
-    <!-- <div class="red col s3 hide-on-med-and-down">
+<div class=" section white">
+    <div class="row">
+        <h2 class="header">{{center_details.name}}</h2>
+        <p class="grey-text text-darken-3 lighten-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic ut rem
+            cumque necessitatibus maxime ipsum ducimus quo. Similique fuga voluptas, dolor molestiae debitis maxime
+            iusto mollitia eaque, ad repellendus possimus.
+            Possimus in voluptas ratione non aliquid sunt facilis dolorem, quia vitae quae earum ipsam modi ab
+            accusantium amet animi tempora temporibus exercitationem sapiente ullam nobis ea. Nam sint laborum veniam?
+            Excepturi, ut itaque? Iure est voluptas minus animi dolore a tenetur sapiente dolores aliquid rem
+            repudiandae natus facilis quaerat quibusdam beatae eum, velit vitae dignissimos? Ipsum unde in veritatis
+            suscipit?
+            Alias cumque, provident delectus, dolorem aliquid earum tempore sunt fuga maxime corporis nisi incidunt
+            corrupti tenetur sequi vel beatae aut praesentium. Harum illo natus praesentium pariatur minus facere eaque?
+            Dolor.
+            Veniam illum, ad numquam quae consequatur porro eligendi, vel error dolorum nemo sequi est? Alias ullam
+            laboriosam officiis nam velit molestias, iste quidem perspiciatis, sequi tenetur, aliquam inventore
+            molestiae accusamus?
+            Unde, corporis error, sunt dolore inventore blanditiis, nostrum dignissimos impedit obcaecati eligendi
+            nulla. Cupiditate veritatis corporis dolor a quia, nobis ad velit debitis non! Dolorem minus nemo voluptatum
+            eveniet suscipit.
+            Vero ab natus sit aut quia voluptatibus qui, unde sed, dolore nulla alias quae nisi quo aliquam provident
+            sunt autem nam veniam consectetur distinctio nemo, ea reprehenderit vel pariatur! Recusandae!
+            At provident itaque eos, consequuntur, molestias aspernatur quo dolore nobis fugiat ullam mollitia libero
+            inventore ea harum nihil a, voluptas corrupti! Inventore aperiam eum molestiae omnis distinctio. Quidem,
+            ipsa ratione!
+            Impedit tenetur sunt voluptatem atque molestiae sequi praesentium suscipit eaque fugiat culpa eos quidem
+            ullam explicabo recusandae vero veniam veritatis ratione, qui velit delectus repudiandae, est officiis
+            eligendi corporis! Necessitatibus!
+            Expedita quo iure quos iste inventore explicabo voluptate architecto! Sunt obcaecati similique est
+            praesentium doloribus mollitia, sint temporibus incidunt doloremque vero itaque perferendis? Maiores
+            reprehenderit ullam in accusamus voluptatibus facilis?</p><a class="waves-effect waves-light modal-trigger"
+            href="#modal1">Open Map</a>
+    </div>
+</div>
+</div>
+
+<!-- <div class="red col s3 hide-on-med-and-down">
         <h2>Side Nav</h2>
         <ul>
             <li><a class="waves-effect waves-light  modal-trigger" href="#modal1">Modal</a></li>
@@ -39,68 +66,58 @@
             <li><a href="#" class="waves-effect">Empty Link</a></li>
         </ul>
     </div> -->
-    <div class="mid-section col s12 m12 l6">
-        <div class="hero-banner blue">
-            <p>Image and Text</p>
-            {% if center_details.center_image is not None %}
-            <img src="{{center_details.center_image.url}}" style="width:100%; height:auto;">
-            {% endif %}
-        </div>
-    </div>
-    <div class="clinic-section green col s12 m12 l6">
-        <div class="col s12 m12 l6 blue">
+<div class="clinic-section row">
+    <div class="col s12 m12 l6">
+        <div class="col s12 m12 l6  blue">
             <h4>Active Clinics</h4>
         </div>
         <div class="col s12 m12 l6 yellow">
             <h4>Upcoming Clinics</h4>
         </div>
     </div>
-</div>
-<div class="news row">
-    <h2>Clinic News section</h2>
-    <ul>
-        {% for article in center_news %}
-        <li><a href="#">
-                <h4>{{article.title}}</h4>
-            </a>
-            <p>{{article.date|date:"M d, Y"}}</p>
-        </li>
-        {% empty %}
-        <p>No articles, yet</p>
-        {% endfor %}
-    </ul>
-    {% for hours in operating_hours %}
-    <li>
-        {{ hours.get_weekday_display }}
-        {{ hours.from_hour }}
-        - {{ hours.to_hour }}
-    </li>
-    {% empty %}
-    <p>No List hours, yet</p>
-    {% endfor %}
-
-</div>
-<div class="row">
-    <h2 class="title">Opening Hours</h2>
-    <table class="responsive-table">
-        <thead>
-            <tr>
-                <th>Day</th>
-                <th>From</th>
-                <th>To</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for hours in operating_hours %}
-            <tr>
-                <td> {{ hours.get_weekday_display }}</td>
-                <td> {{ hours.from_hour }}</td>
-                <td> {{ hours.to_hour }}</td>
-            </tr>
+    <div class="col s12 m12 l6">
+        <h2>Clinic News section</h2>
+        <ul>
+            {% for article in center_news %}
+            <li><a href="#">
+                    <h4>{{article.title}}</h4>
+                </a>
+                <p>{{article.date|date:"M d, Y"}}</p>
+            </li>
+            {% empty %}
+            <p>No articles, yet</p>
             {% endfor %}
-        </tbody>
-    </table>
+        </ul>
+    </div>
+
 </div>
 
+<div class="news row">
+    <div class="col">
+        <h2 class="title">Operating Hours</h2>
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Open</th>
+                    <th>Close</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hours in operating_hours %}
+                <tr>
+                    <td> {{ hours.get_weekday_display }}</td>
+                    <td> {{ hours.from_hour }}</td>
+                    <td> {{ hours.to_hour }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    day_today = new Date().getDay();
+    console.log(day_today)
+</script>
 
 {% endblock %}
