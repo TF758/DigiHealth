@@ -2,48 +2,81 @@
 {% block title %}Register Account{% endblock %}
 
 {% block content %}
-
-<div class="form-wrapper">
-    <img class="responsive-img" style="width: 250px;" src="https://i.imgur.com/ax0NCsK.gif" />
-    <div class="section"></div>
-
-    <h5 class="indigo-text">Register Account</h5>
-    <div class="section"></div>
-
-    <div class="z-depth-1 grey lighten-4 row form-background">
-
-        <form class="col s12" method="POST" autocomplete="off">
-            {% csrf_token %}
-            <div class='row'>
-                <div class='col s12'>
-                </div>
+<div class="row">
+    <div class="col s12 m8 l4 offset-m2 offset-l4">
+        <div class="card">
+            <div class="card-action teal lighten-1 white-text">
+                <h3>Register Account</h3>
             </div>
+            <form method="POST" autocomplete="off">
+                {% csrf_token %}
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col s12 m12 l6">
+                            <h4>Personal Information</h4>
+                        </div>
+                        <div class="col s12 m12 l6">
+                            <div class="form-field">
+                                {{form.user.first_name.label}}
+                                {{form.user.first_name}}
+                            </div>
+                            <div class="form-field">
+                                {{form.user.last_name.label}}
+                                {{form.user.last_name}}
+                            </div>
+                            <div class="form-field">
+                                {{form.user.email.label}}
+                                {{form.user.email}}
+                            </div>
+                            <div class="form-field">
+                                {{form.user.password1.label}}
+                                {{form.user.password1}}
+                            </div>
+                            <div class="form-field">
+                                {{form.user.password2.label}}
+                                {{form.user.password2}}
+                            </div>
+                        </div>
 
-            <div class='row'>
-                <div class='input-field col s12'>
-                    {{form.as_p}}
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12 m12 l6">
+                            <h4>Other Information</h4>
+                        </div>
+                        <div class="col s12 m12 l6">
+                            <div class="form-field">
+                                {{form.profile.gender.label}}
+                                {{form.profile.gender}}
+                            </div>
+
+                            <div class="form-field">
+                                {{form.address.address1.label}}
+                                {{form.address.address1}}
+                            </div>
+                            <div class="form-field">
+                                {{form.address.address2.label}}
+                                {{form.address.address2}}
+                            </div>
+                            <div class="form-field">
+                                {{form.address.district.label}}
+                                {{form.address.district}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <button type='submit' class='col s12 btn btn-large waves-effect teal'>Register</button>
+                    </div>
                 </div>
-            </div>
 
-
-            <label style='float: right;'>
-                <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
-            </label>
+                {% if form.errors %}
+                {% for error in form.errors.as_data.values %}
+                {% for data in error.0 %}
+                {{ data }}
+                {% endfor %}
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
     </div>
-
-    <br />
-
-    <div class='row'>
-        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
-    </div>
-
-    {% if form.errors %}
-    {% for error in form.errors.as_data.values %}
-    {% for data in error.0 %}
-    {{ data }}
-    {% endfor %}
-    {% endfor %}
-    {% endif %}
-    </form>
-</div>
-{% endblock %}
+    {% endblock %}
