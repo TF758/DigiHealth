@@ -6,7 +6,7 @@ from . import views
 
 
 urlpatterns = [
-    path("", AdminDashBoard.as_view(), name='new-center'),
+    path("", AdminDashBoard.as_view(), name='admin'),
     path("add-center", CreateNewCenter.as_view(), name='new-center'),
     path("manage-centers", ManageCenters.as_view(), name='manage-centers'),
     path("center/delete/<int:pk>", DeleteCenter.as_view(), name='delete-center'),
