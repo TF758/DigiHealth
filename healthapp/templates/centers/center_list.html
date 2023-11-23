@@ -5,106 +5,77 @@
 
 
 <div id="container">
-    <nav class="nav-extended white">
-        <div>
-            <form action="" class="browser-default right" id="center-query-form">
-                {% csrf_token %}
-                <i class="material-icons search-icon Small" id="search-icon">search</i>
-                <input id="user-input" type="text" class="browser-default search-field form-control"
-                    placeholder=" Search Health center" autocomplete="off" aria-label="Search box">
-                <div class="search-popup" id="search-popup">
-                    <div class="search-content">
-                        <ul class="popup-list search-results" id="search-results">
-                        </ul>
+    <div class="row">
+        <nav class="nav-extended white">
+            <div>
+                <form action="" class="browser-default right" id="center-query-form">
+                    {% csrf_token %}
+                    <i class="material-icons search-icon Small" id="search-icon">search</i>
+                    <input id="user-input" type="text" class="browser-default search-field form-control"
+                        placeholder=" Search Health center" autocomplete="off" aria-label="Search box">
+                    <div class="search-popup" id="search-popup">
+                        <div class="search-content">
+                            <ul class="popup-list search-results" id="search-results">
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
 
-    </nav>
+        </nav>
+    </div>
+    <div class="row center">
+        <ul class="pagination justify-content-center teal">
+            <li class="page-item"><a class="page-link white-text" href='?q=a'>A</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=b">B</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=c">C</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=d">D</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=e">E</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=f">F</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=g">G</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=h">H</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=i">I</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=j">J</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=k">K</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=l">L</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=m">M</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=n">N</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=o">O</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=p">P</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=q">Q</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=r">R</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=s">S</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=t">T</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=u">U</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=v">V</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=w">W</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=x">X</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=y">Y</a></li>
+            <li class="page-item"><a class="page-link white-text" href="?q=z">Z</a></li>
+        </ul>
+    </div>
+
 </div>
 
-<h2>lIST cLINICS</h2>
 
-<script>
-    const endpoint = "/centers/";
-    function ajax_query() {
-        $.ajax({
-            type: "POST",
-            url: endpoint,
-            data: {
-                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
-                query: $("#user-input").val().trim(),
-            },
-            success: function (data) {
-                // console.log("SUCCESS");
-                // console.log(data.centers.length)
-                if (data.centers.length == 0) {
-                    anchor = document.createElement('a')
-                    link = "#"
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <ul class="collection">
+                {% for center in centers %}
+                <li class="collection-item avatar">
+                    <img src="{{center.center_image.url}}" alt="" class="circle">
+                    <span class="title">{{center.name}}</span>
+                    <p>{{center.get_district_display}}<br>
+                        Second Line
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+                {% endfor %}
+            </ul>
 
-                    anchor.href = link;
-                    anchor.text = "No Results Found";
-                    liList = document.createElement('li')
-                    liList.appendChild(anchor);
-                    $("#search-results").append(liList);
-                }
-                else {
-                    $.each(data, function () {
+        </div>
+    </div>
+</div>
 
-                        $.each(data.centers, function (k, v) {
-                            // create link
-                            anchor = document.createElement('a')
-                            link = v.center_abbreviation + "/"
-
-                            anchor.href = link;
-                            anchor.text = v.name;
-                            liList = document.createElement('li')
-                            liList.appendChild(anchor);
-                            $("#search-results").append(liList);
-                        });
-                    });
-                }
-            }
-
-            ,
-            failure: function (data) {
-                console.log("FAIL");
-                console.log(data);
-            },
-        });
-    }
-    $(document).ready(function () {
-        $("#user-input").on(
-            "keyup keypress",
-            $.debounce(500, function () {
-                if ($("#user-input").val() != 0) {
-                    console.log("working debauncing");
-                    ajax_query();
-                } else {
-                    return false;
-                }
-            })
-        );
-
-        $("#user-input").keyup(function (e) {
-            if ($.trim($(this).val()).length) {
-                $("#search-icon").addClass("blink");
-                $("#search-popup").addClass("search-popup-populated")
-            } else {
-                $("#search-icon").removeClass("blink");
-                $("#search-popup").removeClass("search-popup-populated")
-            }
-            $("#search-results").empty()
-        });
-        $("#user-input").keydown(function () {
-            $("#search-results").empty()
-        });
-
-        $("#center-query-form").submit(function (e) {
-            e.preventDefault();
-        });
-
-    });
-</script>
 {% endblock %}

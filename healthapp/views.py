@@ -18,6 +18,8 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from .serializers import *
 from django.http import Http404
 from django import template
+from django.utils.dateparse import parse_date
+from django.core.paginator import Paginator
 
 class UserAccessMixin(PermissionRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
@@ -141,6 +143,31 @@ class CentersByDistrict(ListView):
 
     def get_queryset(self):
         return Center.objects.filter(district=self.kwargs['district'])
+    
+class GetCentersByLetter(View):
+    def get(self, request, *args, **kwargs):
+        centers = Center.objects.all()
+        if 'q' in request.GET:
+            search_text = request.GET['q']
+            search_objects = Center.objects.filter(name__istartswith=search_text).order_by('name')    
+        else:
+            search_objects = Center.objects.all().order_by('name')
+        page_num = request.GET.get("page",1)
+        center_paginator = Paginator(search_objects, 3)
+        context = {'centers':center_paginator.page(page_num)}
+        return render(request, "centers/center_list.html", context)
+
+    def post(self, request, *args, **kwargs):
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        if is_ajax:
+            query = request.POST['query']
+            centers_filtered = Center.objects.filter(
+                name__icontains=query).order_by('name')
+            info = HealthCenterSerializer(centers_filtered, many=True)
+            center_data = info.data
+            # print(center_data)
+            return JsonResponse({'centers': list(center_data)})
+        return HttpResponse("TEST")
 
 
 class CenterDetails(View):
@@ -155,6 +182,7 @@ class CenterDetails(View):
     
 class DistrictCentersDirectory(View):
     def get(self, request):
+        centers_data = ClinicEvent.objects.all()
         gi_centers = ClinicEvent.objects.filter(
             facility__district='GI')
         cas_centers = ClinicEvent.objects.filter(
@@ -172,7 +200,7 @@ class DistrictCentersDirectory(View):
         souf_centers = ClinicEvent.objects.filter(
             facility__district='SOU')
 
-        context = {'gi_centers': gi_centers, 'cas_centers': cas_centers, 'alr_centers': alr_centers, 'can_centers': can_centers, 'cho_centers': cho_centers, 'lab_centers': lab_centers, 'mic_centers': mic_centers
+        context = {'centers':centers_data,'gi_centers': gi_centers, 'cas_centers': cas_centers, 'alr_centers': alr_centers, 'can_centers': can_centers, 'cho_centers': cho_centers, 'lab_centers': lab_centers, 'mic_centers': mic_centers
                    }
         return render(request, 'centers/district_centers.html', context)
 
@@ -213,76 +241,45 @@ class UpdateClinic(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("manage-clinics")
     template_name = 'auth/add-clinic.html'
 
-# class UpcomingClinics(View):
-#     def get(self, request):
-#         upcoming_clinics = []
-#         next_dates = []
 
-#         tomorrow = date.today() + timedelta(days=1)
-#         for i in range(1, 5):
-#             day = date.today() + timedelta(days=1+i)
-#             string_date = str(day)
-#             date_dict = {day: string_date}
-#             next_dates.append(date_dict)
-
-#         gi_clinics = ClinicEvent.objects.filter(start_date=(
-#             tomorrow), facility__district='GI', is_active=False)
-#         cas_clinics = ClinicEvent.objects.filter(start_date=(
-#             tomorrow), facility__district='CAS', is_active=False)
-
-#         print(upcoming_clinics)
-
-#         context = {'gi_clinics': gi_clinics, 'cas_clinics': cas_clinics,
-#                    'next_dates': next_dates}
-#         return render(request, 'clinics/upcomingclinics.html', context)
+def futureClinics(request, futuredate):
+    if request.method == 'GET':
+        next_dates = []
+        for i in range(1, 5):
+            day = date.today() + timedelta(days=1+i)
+            next_dates.append(day)
+        date_val = parse_date(futuredate)
+        if date_val in next_dates:
+            gi_clinics = ClinicEvent.objects.filter(start_date=(
+                date_val), facility__district='GI', is_active=False)
+            cas_clinics = ClinicEvent.objects.filter(start_date=(
+                date_val), facility__district='CAS', is_active=False)
+            context = {'gi_clinics': gi_clinics, 'cas_clinics': cas_clinics,
+                       'date': date_val}
+            return render(request, 'clinics/future.html', context)
+        else:
+            return HttpResponse(' invalid')
 
 
-class GetCentersByLetter(View):
-    def get(self, request, *args, **kwargs):
-        context = {}
-        return render(request, "centers/center_list.html", context)
+class UpcomingClinics(View):
+    def get(self, request):
+        upcoming_clinics = []
+        next_dates = []
 
-    def post(self, request, *args, **kwargs):
-        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-        if is_ajax:
-            query = request.POST['query']
-            centers_filtered = Center.objects.filter(
-                name__icontains=query).order_by('name')
-            info = HealthCenterSerializer(centers_filtered, many=True)
-            center_data = info.data
-            # print(center_data)
-            return JsonResponse({'centers': list(center_data)})
-        return HttpResponse("TEST")
+        tomorrow = date.today() + timedelta(days=1)
+        for i in range(1, 5):
+            day = date.today() + timedelta(days=1+i)
+            string_date = str(day)
+            date_dict = {day: string_date}
+            next_dates.append(date_dict)
 
+        gi_clinics = ClinicEvent.objects.filter(start_date=(
+            tomorrow), facility__district='GI', is_active=False)
+        cas_clinics = ClinicEvent.objects.filter(start_date=(
+            tomorrow), facility__district='CAS', is_active=False)
 
-# class WellnessCenterPage(View):
-#     def get(self, request, *args, **kwargs):
-#         id = self.kwargs['pk']
-#         center_data = HealthCenter.objects.get(id=id)
-#         articles = Article.objects.filter(healthcenter=id)
-#         context = {'center_details': center_data,
-#                    'center_news': articles, 'address':  center_data.address}
-#         print(center_data.address)
-#         return render(request, 'clinics/clinic_page.html', context)
+        print(upcoming_clinics)
 
-
-# def futureClinics(request, futuredate):
-#     if request.method == 'GET':
-#         next_dates = []
-#         for i in range(1, 5):
-#             day = date.today() + timedelta(days=1+i)
-#             next_dates.append(day)
-#         date_val = parse_date(futuredate)
-#         if date_val in next_dates:
-#             gi_clinics = ClinicEvent.objects.filter(start_date=(
-#                 date_val), facility__district='GI', is_active=False)
-#             cas_clinics = ClinicEvent.objects.filter(start_date=(
-#                 date_val), facility__district='CAS', is_active=False)
-#             context = {'gi_clinics': gi_clinics, 'cas_clinics': cas_clinics,
-#                        'date': date_val}
-#             return render(request, 'clinics/future_clinics.html', context)
-#         else:
-#             return HttpResponse(' invalid')
-
-def handler403 (request, *args, **kwargs):
-     return render(request, '404.html')
+        context = {'gi_clinics': gi_clinics, 'cas_clinics': cas_clinics,
+                   'next_dates': next_dates, 'upcoming_date':tomorrow}
+        return render(request, 'clinics/upcoming.html', context)

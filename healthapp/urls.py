@@ -20,5 +20,9 @@ urlpatterns = [
          DistrictCentersDirectory.as_view(), name='centers_all_districts'),
      path('centers/district/<str:district>/',
          CentersByDistrict.as_view(), name='district_wellness_center'),
+    path('future_clinics/<str:futuredate>/',
+         views.futureClinics, name='future_clinics'),
+    path('upcoming/',
+         UpcomingClinics.as_view(), name='upcoming_clinics'),
 
 ]
