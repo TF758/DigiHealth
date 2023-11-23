@@ -6,7 +6,7 @@ from .models import *
 
 
 class UserAdmin(admin.ModelAdmin):
-    pass
+    filter_horizontal=['groups']
 
 
 class UserProfileAdmin(admin.ModelAdmin):

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import CreateView, FormView, ListView, DeleteView, UpdateView, DetailView
-from django.views.decorators.csrf import requires_csrf_token
+from django.contrib.auth.views import redirect_to_login
 from django.views.generic.list import ListView
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
@@ -12,11 +12,24 @@ from datetime import date, timedelta
 # from .forms import *
 from .filters import CenterFilter, EventFilter
 from django.contrib.auth import logout
-from django.utils.dateparse import parse_date
-from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .serializers import *
+from django.http import Http404
+from django import template
+
+class UserAccessMixin(PermissionRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if (not self.request.user.is_authenticated):
+            return redirect_to_login(self.request.get_full_path(), self.get_login_url(), self.get_redirect_field_name())
+        
+        if not self.has_permission():
+            raise Http404 
+        return super(UserAccessMixin, self).dispatch(
+                request, *args, **kwargs)
+   
+   
 
 # # Create your views here.
 
@@ -75,14 +88,23 @@ class UserSignupView(CreateView):
 
 # CENTER MANAGEMENT
    
-class CreateNewCenter(LoginRequiredMixin, CreateView):
-    template_name = 'auth/add-center.html'
-    form_class = AddCenterForm
+class CreateNewCenter(UserAccessMixin,CreateView):
+    permission_denied_message=""
+    permission_required = ("healthapp.add_center")
+    redirect_field_name = 'next'
+    login_url = '/login/'
+    
     model = Center
     success_url = reverse_lazy("manage-centers")
+    template_name = 'auth/add-center.html'
+    form_class = AddCenterForm
 
+class ManageCenters(UserAccessMixin, View):
+    permission_denied_message=""
+    permission_required = ("healthapp.add_center",)
+    redirect_field_name = 'next'
+    login_url = '/login/'
 
-class ManageCenters(LoginRequiredMixin, View):
     def get(self, request):
         centers = Center.objects.all()
         center_filter = CenterFilter(request.GET, queryset=centers)
@@ -90,13 +112,23 @@ class ManageCenters(LoginRequiredMixin, View):
         context = {'center_list': centers, 'center_filter': center_filter}
         return render(request, 'auth/manage-centers.html', context)
 
-class DeleteCenter(LoginRequiredMixin, DeleteView):
+class DeleteCenter(UserAccessMixin, DeleteView):
+    permission_denied_message=""
+    permission_required = ("healthapp.delete_center")
+    redirect_field_name = 'next'
+    login_url = '/login/'
+
     model = Center
     success_url = reverse_lazy("manage-centers")
     template_name = "auth/manage-centers.html"
 
 
-class UpdateCenter(LoginRequiredMixin, UpdateView):
+class UpdateCenter(UserAccessMixin, UpdateView):
+    permission_denied_message=""
+    permission_required = ("healthapp.edit_center")
+    redirect_field_name = 'next'
+    login_url = '/login/'
+
     model = Center
     fields = "__all__"
     success_url = reverse_lazy("manage-centers")
@@ -252,3 +284,5 @@ class GetCentersByLetter(View):
 #         else:
 #             return HttpResponse(' invalid')
 
+def handler403 (request, *args, **kwargs):
+     return render(request, '404.html')
