@@ -183,15 +183,13 @@ class DistrictCentersDirectory(View):
     def get(self, request):
         if 'q' in request.GET:
             search_text = request.GET['q']
-            search_objects = Center.objects.filter(district_exact=search_text).order_by('name')    
+            search_objects = Center.objects.filter(district=search_text).order_by('name')    
         else:
             search_objects = Center.objects.all().order_by('district')
         page_num = request.GET.get("page",1)
         center_paginator = Paginator(search_objects, 10)
         context = {'centers':center_paginator.page(page_num)}
 
-        # context = {'centers':centers_data,'gi_centers': gi_centers, 'cas_centers': cas_centers, 'alr_centers': alr_centers, 'can_centers': can_centers, 'cho_centers': cho_centers, 'lab_centers': lab_centers, 'mic_centers': mic_centers
-        #            }
         return render(request, 'centers/district_centers.html', context)
 
 

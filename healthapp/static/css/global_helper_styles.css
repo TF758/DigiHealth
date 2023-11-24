@@ -1,3 +1,12 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+
 /* for dropdown menus in nav */
 .dropdown-content.nested {
   overflow-y: visible;
@@ -141,6 +150,8 @@ nav ul.popup-list li a:hover {
   display: inline;
   height: 100%;
 }
+
+/* for center by letter */
 .collection .collection-item.avatar:not(.circle-clipper) > .circle,
 .collection .collection-item.avatar :not(.circle-clipper) > .circle {
   position: absolute;

@@ -2,27 +2,43 @@
 {% block title %}District Wellness Centers{% endblock %}
 
 {% block content %}
-<a href="#" data-target="slide-out" class="sidenav-trigger btn side-nav-trigger-btn">Navigate</a>
-<ul id="slide-out" class="sidenav mobile-submenu">
-
-    <li><a class="waves-effect" onclick="scrollSmoothTo('giNavHeader')">Gros-Islet</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('casNavHeader')">Castries</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('alrNavHeader')">Anse La Raye</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('denNavHeader')">Dennery</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('canNavHeader')">Canaries</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('micNavHeader')">Micoud</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('souNavHeader')">Sourfriere</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('choNavHeader')">Choiseul</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('labNavHeader')">Labourie</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('vfNavHeader')">Vieux Fort</a></li>
-</ul>
+<div class="row center">
+    <ul class="pagination justify-content-center ">
+        <li class="page-item"><a id="query_GI" class="page-link white-text btn" href='?q=GI'>Gros-Islet</a></li>
+        <li class="page-item"><a id="query_CAS" class="page-link white-text btn" href="?q=CAS">Castries</a></li>
+        <li class="page-item"><a id="query_ALR" class="page-link white-text btn" href="?q=ALR">Anse La Raye</a></li>
+    </ul>
+</div>
 
 <div class="container">
     <div class="row">
-        {% for center in centers %}
-        <p>test</p>
-        {% empty %}
-        <h2>Nothing</h2>
-        {% endfor %}
+        <div class="col s12 m8 l6 offset-m2 offset-l3">
+            <ul class="collection">
+                {% for center in centers %}
+                <li class="collection-item avatar">
+                    <a href="/centers/{{center.center_abbreviation}}">
+                        <img src="{{center.center_image.url}}" alt="" class="circle">
+                    </a>
+                    <span class="title">{{center.name}}</span>
+                    <p>{{center.get_district_display}}<br>
+                        <a href="tel:+{{center.contact}}">{{center.contact}}</a>
+                    </p>
+                    <a href="/centers/{{center.center_abbreviation}}" target="_blank" class="secondary-content"><i
+                            class="material-icons">exit_to_app</i></a>
+                </li>
+                {% empty %}
+                <h2>No Medical facilities.</h2>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-    {% endblock %}
+</div>
+
+<script>
+    var query_paramter = getUrlVars()["q"];
+    active_link = $("body").find('#' + "query_" + query_paramter);
+    if (active_link) {
+        active_link.addClass("red")
+    }
+</script>
+{% endblock %}
