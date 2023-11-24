@@ -18,58 +18,11 @@
 </ul>
 
 <div class="container">
-
-
     <div class="row">
-        <a href="{% url 'district_wellness_center' district='GI' %}" id="giNavHeader">
-            <H1>Gros-Islet</H1>
-        </a>
-        {% for clinic in gi_centers %}
-        {% if clinic.facility.district == 'GI' %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% endif %}
+        {% for center in centers %}
+        <p>test</p>
         {% empty %}
-        <h2 class="center-align"> No active clinics</h2>
+        <h2>Nothing</h2>
         {% endfor %}
     </div>
-
-
-    <div class="row">
-        <a href="{% url 'district_wellness_center' district='CAS' %}" id="casNavHeader">
-            <H1>Castries</H1>
-        </a>
-        {% for clinic in gi_centers %}
-        {% if clinic.facility.district == 'GI' %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% endif %}
-        {% empty %}
-        <h2 class="center-align"> No active clinics</h2>
-        {% endfor %}
-    </div>
-    <div class="row">
-        <a href="{% url 'district_wellness_center' district='ALR' %}" id="alrNavHeader">
-            <H1>Anse La Raye</H1>
-        </a>
-        {% for clinic in gi_centers %}
-        {% if clinic.facility.district == 'GI' %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% endif %}
-        {% empty %}
-        <h2 class="center-align"> No active clinics</h2>
-        {% endfor %}
-    </div>
-</div>
-
-{% endblock %}
+    {% endblock %}
