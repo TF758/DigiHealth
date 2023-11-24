@@ -6,39 +6,34 @@
 </header>
 
 <body>
-    <div class="row">
-        <div class="navbar-fixed">
-            <nav>
-                <div class="nav-wrapper">
-                    <a href="/" class="brand-logo left">DigiHealth</a>
-                    <a href="#" data-target="mobile-side-nav" class="sidenav-trigger right"><i
-                            class="material-icons">menu</i></a>
-                    <ul class="right hide-on-med-and-down">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Wellness
-                                Centers <i class="material-icons right">arrow_drop_down</i></a></li>
-                        <li><a href="#">Hospitals</a></li>
-                        <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
-                                    class="material-icons right">arrow_drop_down</i></a>
-                        </li>
-                        {% if request.user|has_group:"auth-user" %}
-                        <li><a href="/auth">Manage</a>
-                        </li>
-                        {% endif %}
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo left">DigiHealth</a>
+            <a href="#" data-target="mobile-side-nav" class="sidenav-trigger right"><i
+                    class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/">Home</a></li>
+                <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Wellness
+                        Centers <i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a href="#">Hospitals</a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
+                            class="material-icons right">arrow_drop_down</i></a>
+                </li>
+                {% if request.user|has_group:"auth-user" %}
+                <li><a href="/auth">Manage</a>
+                </li>
+                {% endif %}
 
-                        <li><a href="/">Profile</a></li>
-                        {% if user.is_authenticated %}
-                        <li><a href="/logout">Logout</a></li>
-                        {% else %}
-                        <li><a href="/login">Login</a></li>
-                        {% endif %}
-                    </ul>
+                <li><a href="/">Profile</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="/logout">Logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
 
-                </div>
-            </nav>
         </div>
-    </div>
-
+    </nav>
 
     <ul id="center-dropdown-options-desktop" class="dropdown-content">
         <li><a href="/centers/district/all">
