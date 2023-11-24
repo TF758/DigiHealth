@@ -26,32 +26,32 @@
     </div>
     <div class="row center">
         <ul class="pagination justify-content-center teal">
-            <li class="page-item"><a class="page-link white-text" href='?q=a'>A</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=b">B</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=c">C</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=d">D</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=e">E</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=f">F</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=g">G</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=h">H</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=i">I</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=j">J</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=k">K</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=l">L</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=m">M</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=n">N</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=o">O</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=p">P</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=q">Q</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=r">R</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=s">S</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=t">T</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=u">U</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=v">V</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=w">W</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=x">X</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=y">Y</a></li>
-            <li class="page-item"><a class="page-link white-text" href="?q=z">Z</a></li>
+            <li class="page-item"><a id="query_a" class="page-link white-text" href='?q=a'>A</a></li>
+            <li class="page-item"><a id="query_b" class="page-link white-text" href="?q=b">B</a></li>
+            <li class="page-item"><a id="query_c" class="page-link white-text" href="?q=c">C</a></li>
+            <li class="page-item"><a id="query_d" class="page-link white-text" href="?q=d">D</a></li>
+            <li class="page-item"><a id="query_e" class="page-link white-text" href="?q=e">E</a></li>
+            <li class="page-item"><a id="query_f" class="page-link white-text" href="?q=f">F</a></li>
+            <li class="page-item"><a id="query_g" class="page-link white-text" href="?q=g">G</a></li>
+            <li class="page-item"><a id="query_h" class="page-link white-text" href="?q=h">H</a></li>
+            <li class="page-item"><a id="query_i" class="page-link white-text" href="?q=i">I</a></li>
+            <li class="page-item"><a id="query_j" class="page-link white-text" href="?q=j">J</a></li>
+            <li class="page-item"><a id="query_k" class="page-link white-text" href="?q=k">K</a></li>
+            <li class="page-item"><a id="query_l" class="page-link white-text" href="?q=l">L</a></li>
+            <li class="page-item"><a id="query_m" class="page-link white-text" href="?q=m">M</a></li>
+            <li class="page-item"><a id="query_n" class="page-link white-text" href="?q=n">N</a></li>
+            <li class="page-item"><a id="query_o" class="page-link white-text" href="?q=o">O</a></li>
+            <li class="page-item"><a id="query_p" class="page-link white-text" href="?q=p">P</a></li>
+            <li class="page-item"><a id="query_q" class="page-link white-text" href="?q=q">Q</a></li>
+            <li class="page-item"><a id="query_r" class="page-link white-text" href="?q=r">R</a></li>
+            <li class="page-item"><a id="query_s" class="page-link white-text" href="?q=s">S</a></li>
+            <li class="page-item"><a id="query_t" class="page-link white-text" href="?q=t">T</a></li>
+            <li class="page-item"><a id="query_u" class="page-link white-text" href="?q=u">U</a></li>
+            <li class="page-item"><a id="query_v" class="page-link white-text" href="?q=v">V</a></li>
+            <li class="page-item"><a id="query_w" class="page-link white-text" href="?q=w">W</a></li>
+            <li class="page-item"><a id="query_x" class="page-link white-text" href="?q=x">X</a></li>
+            <li class="page-item"><a id="query_y" class="page-link white-text" href="?q=y">Y</a></li>
+            <li class="page-item"><a id="query_z" class="page-link white-text" href="?q=z">Z</a></li>
         </ul>
     </div>
 
@@ -100,4 +100,26 @@
 </div>
 
 
+<script>
+
+
+    // Read a page's GET URL variables and return them as an associative array.
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    var query_paramter = getUrlVars()["q"];
+    var page_num = getUrlVars()["page"];
+    active_link = $("body").find('#' + "query_" + query_paramter);
+    if (active_link) {
+        active_link.addClass("red")
+    }
+</script>
 {% endblock %}
