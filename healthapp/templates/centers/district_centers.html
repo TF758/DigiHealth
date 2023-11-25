@@ -2,6 +2,25 @@
 {% block title %}District Wellness Centers{% endblock %}
 
 {% block content %}
+<div class="row">
+    <nav class="nav-extended blue">
+        <div>
+            <form action="" class="browser-default right" id="center-query-form">
+                {% csrf_token %}
+                <i class="material-icons search-icon Small" id="search-icon">search</i>
+                <input id="user-input" type="text" class="browser-default search-field form-control"
+                    placeholder=" Search Health center" autocomplete="off" aria-label="Search box">
+                <div class="search-popup" id="search-popup">
+                    <div class="search-content">
+                        <ul class="popup-list search-results" id="search-results">
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </nav>
+</div>
 <div class="row center">
     <ul class="pagination justify-content-center teal">
         <li class="page-item"><a id="query_GI" class="page-link white-text" href='?q=GI'>Gros-Islet</a></li>

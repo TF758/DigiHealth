@@ -136,13 +136,6 @@ class UpdateCenter(UserAccessMixin, UpdateView):
     success_url = reverse_lazy("manage-centers")
     template_name = 'auth/add-center.html'
 
-class CentersByDistrict(ListView):
-    model = Center
-    template_name = 'centers/centers_by_district.html'
-    context_object_name = 'centers'
-
-    def get_queryset(self):
-        return Center.objects.filter(district=self.kwargs['district'])
     
 class GetCentersByLetter(View):
     def get(self, request, *args, **kwargs):

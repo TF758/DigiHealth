@@ -1,4 +1,6 @@
 // Script for searching centers using Ajax
+var href = document.location.href;
+var lastPathSegment = href.lastIndexOf("/") + 1;
 
 const endpoint = "/centers/";
 function ajax_query() {
@@ -10,8 +12,7 @@ function ajax_query() {
       query: $("#user-input").val().trim(),
     },
     success: function (data) {
-      // console.log("SUCCESS");
-      // console.log(data.centers.length)
+      var current_title = $(document).attr("title");
       if (data.centers.length == 0) {
         anchor = document.createElement("a");
         link = "#";
@@ -26,7 +27,12 @@ function ajax_query() {
           $.each(data.centers, function (k, v) {
             // create link
             anchor = document.createElement("a");
-            link = v.center_abbreviation + "/";
+            if (current_title == "District Wellness Centers") {
+              link = "/centers/" + v.center_abbreviation + "/";
+            } else {
+              anchor = document.createElement("a");
+              link = v.center_abbreviation + "/";
+            }
 
             anchor.href = link;
             anchor.text = v.name;
@@ -89,4 +95,10 @@ function getUrlVars() {
     vars[hash[0]] = hash[1];
   }
   return vars;
+}
+function getPageName(url) {
+  var index = url.lastIndexOf("/") + 1;
+  var filenameWithExtension = url.substr(index);
+  var filename = filenameWithExtension.split(".")[0]; // <-- added this line
+  return filename; // <-- added this line
 }
