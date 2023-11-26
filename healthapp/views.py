@@ -226,26 +226,74 @@ class UpdateClinic(LoginRequiredMixin, UpdateView):
 
 
 class ActiveClinics(ListView):
-    model = ClinicEvent.objects.filter(is_active=True).order_by('start_date')     
+    queryset  = ClinicEvent.objects.filter(is_active=True).order_by('start_date')     
     template_name = 'clinics/active.html'  
-    context_object_name = "clinic_list"    
+    context_object_name = "active_clinics"    
     paginate_by = 1  
 
-class ActiveClinicsInDistrict(ListView):
-    template_name = 'clinics/active_district.html'  
-    context_object_name = "clinic_list"    
-    paginate_by = 10
+# class ActiveClinicsInDistrict(ListView):
+#     template_name = 'clinics/active_district.html'  
+#     context_object_name = "clinic_list"    
+#     paginate_by = 10
 
-    def get_queryset(self):
-        qs = ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).order_by('start_date')
-        return qs
+#     def get_queryset(self):
+#         q = self.request.GET.get('q')
+
+#         if q is not None:
+#             search_text = self.request.GET.get('q')
+#             print(search_text)
+#             qs = ClinicEvent.objects.filter(is_active=True,facility =search_text).order_by('start_date') 
+#         else:
+#             qs =  ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).order_by('start_date')
+#         page_num = self.request.GET.get("page",1)
+#         # qs = ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).order_by('start_date')
+#         return qs
     
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        centers_qs = ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).only('facility')
-        context['centers'] = centers_qs
-        return context
+#     def get_context_data(self, **kwargs):
+#         # Call the base implementation first to get a context
+#         context = super().get_context_data(**kwargs)
+#         centers_qs = ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).only('facility')
+#         context['centers'] = centers_qs
+#         return context
+    
+class ActiveClinicsInDistrict(View):
+    def get(self, request, district):
+        q = self.request.GET.get('q')
+        if q is not None:
+            search_text = self.request.GET.get('q')
+            qs = ClinicEvent.objects.filter(is_active=True,facility__district =search_text).order_by('start_date')
+            print("filtered qs")
+            print(qs)
+        else:
+            qs = ClinicEvent.objects.filter(is_active=True,facility__district =district).order_by('start_date')
+            print("base qs")
+            print(qs)
+        page_num = request.GET.get("page",1)
+        clinic_paginator = Paginator(qs, 10) 
+        context = {'centers':clinic_paginator.page(page_num)}
+        return render(request, 'clinics/active_district.html', context)
+
+
+    # def get_queryset(self):
+    #     q = self.request.GET.get('q')
+
+    #     if q is not None:
+    #         search_text = self.request.GET.get('q')
+    #         print(search_text)
+    #         qs = ClinicEvent.objects.filter(is_active=True,facility =search_text).order_by('start_date') 
+    #     else:
+    #         qs =  ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).order_by('start_date')
+    #     page_num = self.request.GET.get("page",1)
+    #     # qs = ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).order_by('start_date')
+    #     return qs
+    
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super().get_context_data(**kwargs)
+    #     centers_qs = ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).only('facility')
+    #     context['centers'] = centers_qs
+    #     return context
+
 
 
 def futureClinics(request, futuredate):
