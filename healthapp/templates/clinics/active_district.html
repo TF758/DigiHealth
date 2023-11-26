@@ -1,0 +1,50 @@
+{% extends 'includes/base.html' %}
+{% block title %}{{district.get_district_display}} Active Clinics{% endblock %}
+{% block content %}
+<h1>Hi</h1>
+
+<h2>Active Clinics for: {{district.get_district_display}}</h2>
+
+clinic events:
+<ul>
+    {% for clinic in clinic_list %}
+
+    <li>{{clinic}}</li>
+    {% empty %}
+    <h2>Nada</h2>
+    {%endfor%}
+</ul>
+
+centers:
+<ul>
+    {% for center in centers %}
+
+    <li>{{center.facility}}</li>
+    {% empty %}
+    <h2>Nada</h2>
+    {%endfor%}
+</ul>
+
+<!-- {% regroup object_list by category as category_list %}
+
+<ul>
+    {% for category in category_list %}
+    <li>{{ category.grouper }}
+        <ul>
+            {% for position in category.list %}
+            <li>{{ position.title }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul> -->
+<p>dinstinct centers</p>
+<div class=" center">
+    <ul class="pagination justify-content-center teal">
+        {% for city in centers %}
+        {% ifchanged %} <li class="page-item"><a class="page-link white-text"
+                href='?q={{city.facility}}'>{{city.facility}}</a></li>{% endifchanged %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

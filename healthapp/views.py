@@ -223,6 +223,31 @@ class UpdateClinic(LoginRequiredMixin, UpdateView):
     template_name = 'auth/add-clinic.html'
 
 
+
+
+class ActiveClinics(ListView):
+    model = ClinicEvent.objects.filter(is_active=True).order_by('start_date')     
+    template_name = 'clinics/active.html'  
+    context_object_name = "clinic_list"    
+    paginate_by = 1  
+
+class ActiveClinicsInDistrict(ListView):
+    template_name = 'clinics/active_district.html'  
+    context_object_name = "clinic_list"    
+    paginate_by = 10
+
+    def get_queryset(self):
+        qs = ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).order_by('start_date')
+        return qs
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        centers_qs = ClinicEvent.objects.filter(is_active=True,facility__district =self.kwargs['district']).only('facility')
+        context['centers'] = centers_qs
+        return context
+
+
 def futureClinics(request, futuredate):
     if request.method == 'GET':
         next_dates = []

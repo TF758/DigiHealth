@@ -1,0 +1,70 @@
+{% extends 'includes/base.html' %}
+{% block title %}Active Clinics{% endblock %}
+
+{% block content %}
+
+
+<li><a target="_blank" href="{% url 'district_active_clinics' district='GI' %}">{{key|date:'D d M'}}</a></li>
+<div class="row center">
+    <ul class="pagination justify-content-center teal">
+        <li class="page-item"><a class="page-link white-text" href='?q=GI'>Gros-Islet</a></li>
+        <li class="page-item"><a id="query_CAS" class="page-link white-text" href="?q=CAS">Castries</a></li>
+        <li class="page-item"><a id="query_ALR" class="page-link white-text" href="?q=ALR">Anse La Raye</a></li>
+        <li class="page-item"><a id="query_LAB" class="page-link white-text" href='?q=LAB'>Laborie</a></li>
+        <li class="page-item"><a id="query_CAN" class="page-link white-text" href="?q=CAN">Canaries</a></li>
+        <li class="page-item"><a id="query_CHO" class="page-link white-text" href="?q=CHO">Choiseul</a></li>
+        <li class="page-item"><a id="query_DEN" class="page-link white-text" href='?q=DEN'>Dennery</a></li>
+        <li class="page-item"><a id="query_MIC" class="page-link white-text" href="?q=MIC">Micoud</a></li>
+        <li class="page-item"><a id="query_VF" class="page-link white-text" href="?q=VF">Vieux-Fort</a></li>
+        <li class="page-item"><a id="query_SOU" class="page-link white-text" href="?q=SOU">Soufriere</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8 l6 offset-m2 offset-l3">
+            <ul class="collection">
+                {% for center in centers %}
+                <li class="collection-item avatar">
+                    <a href="/centers/{{center.center_abbreviation}}">
+                        <img src="{{center.center_image.url}}" alt="" class="circle">
+                    </a>
+                    <span class="title">{{center.name}}</span>
+                    <p>{{center.get_district_display}}<br>
+                        <a href="tel:+{{center.contact}}">{{center.contact}}</a>
+                    </p>
+                    <a href="/centers/{{center.center_abbreviation}}" target="_blank" class="secondary-content"><i
+                            class="material-icons">exit_to_app</i></a>
+                </li>
+                {% empty %}
+                <h2>No Medical facilities.</h2>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row center">
+    <ul class="pagination">
+        {% if centers.has_previous %}
+        <li class="waves-effect">
+            <a href="?page={{ centers.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                class="prev red"><i class="large material-icons">chevron_left</i></a>
+        </li>
+        {% endif %}
+        {% if centers.has_next %}
+        <li class="waves-effect green">
+            <a href="?page={{ centers.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                class="next"><i class="large material-icons">chevron_right</i></a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+<script>
+    var query_paramter = getUrlVars()["q"];
+    active_link = $("body").find('#' + "query_" + query_paramter);
+    if (active_link) {
+        active_link.addClass("red")
+    }
+</script>
+{% endblock %}
