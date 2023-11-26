@@ -56,20 +56,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
+class District(models.Model):
+    name =models.CharField(max_length=255)
+    abbreviation = models.CharField(max_length=5)
+
+    def __str__(self):
+        return self.name
 
 class Address(models.Model):
-    DISTRICTS = [
-        ("ALR", "Anse La Raye"),
-        ("CAN", "Canaries"),
-        ("CAS", "Castries"),
-        ("CHO", "Choiseul"),
-        ("DEN", "Dennery"),
-        ("GI", "Gros Islet"),
-        ("LAB", "Laborie"),
-        ("MIC", "Micoud"),
-        ("SOU", "Soufirere"),
-        ("VF", "Vieux Fort"),
-    ]
+
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
 
     address1 = models.CharField(
@@ -82,7 +77,7 @@ class Address(models.Model):
         max_length=1024, null=True
     )
 
-    district = models.CharField(max_length=150, null=True, choices=DISTRICTS)
+    district =  models.ForeignKey(District, null=True, on_delete=models.DO_NOTHING)
 
     class Meta:
         verbose_name = 'Address'
@@ -105,21 +100,10 @@ class UserProfile(models.Model):
         return  str(self.user.first_name +" " + self.user.last_name)
     
 class Center (models.Model):
-    DISTRICTS = [
-        ("ALR", "Anse La Raye"),
-        ("CAN", "Canaries"),
-        ("CAS", "Castries"),
-        ("CHO", "Choiseul"),
-        ("DEN", "Dennery"),
-        ("GI", "Gros Islet"),
-        ("LAB", "Laborie"),
-        ("MIC", "Micoud"),
-        ("SOU", "Soufirere"),
-        ("VF", "Vieux Fort"),
-    ]
+
     name = models.CharField(max_length=150, null=True)
     center_abbreviation = models.CharField(max_length=20, null=True)
-    district = models.CharField(max_length=150, null=True, choices=DISTRICTS)
+    district =  models.ForeignKey(District, null=True, on_delete=models.DO_NOTHING)
     contact = models.CharField(max_length=150, null=True, blank=True)
     center_image = models.ImageField(upload_to='center_images')
     address =  models.CharField(null=True, max_length=200)
