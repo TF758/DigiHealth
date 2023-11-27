@@ -238,9 +238,21 @@ class ActiveClinicsInDistrict(ListView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         centers_qs = ClinicEvent.objects.filter(is_active=True, facility__district__abbreviation =self.kwargs['district']).distinct()
-        print(centers_qs)
         context['centers'] = centers_qs
         context['district'] = District.objects.get(abbreviation =self.kwargs['district'])
+        return context
+
+class ActiveClinicsByCenter(ListView):    
+    template_name = 'clinics/center_active_clinics.html'  
+    context_object_name = "active_clinics"    
+    paginate_by = 1  
+    
+    def get_queryset(self):
+        return ClinicEvent.objects.filter(is_active=True, facility__center_abbreviation =self.kwargs['center'])
+    
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['center'] = Center.objects.get(center_abbreviation =self.kwargs['center'] )
         return context
 
 

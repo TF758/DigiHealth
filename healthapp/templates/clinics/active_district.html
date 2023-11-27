@@ -8,7 +8,9 @@
     <ul class="pagination justify-content-center teal">
         {% for center in centers %}
         {% ifchanged %}
-        <li class="page-item"><a class="page-link white-text" href=#'>{{center.facility.name}}</a></li>
+        <li class="page-item"><a class="page-link white-text"
+                href="{% url 'center_active_clinics' center.facility.center_abbreviation %}">{{center.facility.name}}</a>
+        </li>
         {%endifchanged %}
         {% endfor %}
     </ul>

@@ -22,9 +22,11 @@ urlpatterns = [
          ActiveClinics.as_view(), name='active_clinics'),
      path('clinics/active/<str:district>/',
          ActiveClinicsInDistrict.as_view(), name='district_active_clinics'),
-    path('future_clinics/<str:futuredate>/',
-         views.futureClinics, name='future_clinics'),
-    path('upcoming/',
-         UpcomingClinics.as_view(), name='upcoming_clinics'),
+     path('clinic/active/<str:center>/',
+         ActiveClinicsByCenter.as_view(), name='center_active_clinics'),
+#     path('future_clinics/<str:futuredate>/',
+#          views.futureClinics, name='future_clinics'),
+#     path('upcoming/',
+#          UpcomingClinics.as_view(), name='upcoming_clinics'),
 
 ]
