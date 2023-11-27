@@ -176,7 +176,7 @@ class DistrictCentersDirectory(View):
     def get(self, request):
         if 'q' in request.GET:
             search_text = request.GET['q']
-            search_objects = Center.objects.filter(district__abbreviation=search_text).order_by('name')    
+            search_objects = Center.objects.filter(district__abbreviation=search_text).order_by('district')    
         else:
             search_objects = Center.objects.all().order_by('district')
         page_num = request.GET.get("page",1)
@@ -232,13 +232,15 @@ class ActiveClinicsInDistrict(ListView):
     paginate_by = 1  
     
     def get_queryset(self):
-        return ClinicEvent.objects.filter(is_active=True, facility__abbreviation =self.kwargs['district'])
+        return ClinicEvent.objects.filter(is_active=True, facility__district__abbreviation =self.kwargs['district'])
     
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        centers_qs = ClinicEvent.objects.filter(is_active=True,facility__abbreviation =self.kwargs['district']).only('facility')
+        centers_qs = ClinicEvent.objects.filter(is_active=True, facility__district__abbreviation =self.kwargs['district']).distinct()
+        print(centers_qs)
         context['centers'] = centers_qs
+        context['district'] = District.objects.get(abbreviation =self.kwargs['district'])
         return context
 
 

@@ -1,14 +1,15 @@
 {% extends 'includes/base.html' %}
-{% block title %}{{active_clinics.get_facility__district_display}} Active Clinics{% endblock %}
+{% block title %}{{district.name}} Active Clinics{% endblock %}
 {% block content %}
-<h2>Active Clinics for: {{district.get_district_display}}</h2>
+<h2>Active Clinics for: {{district.name}}</h2>
 
 <p>dinstinct centers</p>
 <div class=" center">
     <ul class="pagination justify-content-center teal">
-        {% for city in centers %}
-        {% ifchanged %} <li class="page-item"><a class="page-link white-text"
-                href='?q={{city.facility}}'>{{city.facility}}</a></li>{% endifchanged %}
+        {% for center in centers %}
+        {% ifchanged %}
+        <li class="page-item"><a class="page-link white-text" href=#'>{{center.facility.name}}</a></li>
+        {%endifchanged %}
         {% endfor %}
     </ul>
 </div>

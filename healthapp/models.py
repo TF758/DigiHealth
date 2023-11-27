@@ -103,7 +103,7 @@ class Center (models.Model):
 
     name = models.CharField(max_length=150, null=True)
     center_abbreviation = models.CharField(max_length=20, null=True)
-    district =  models.ForeignKey(District, null=True, on_delete=models.DO_NOTHING)
+    district = models.ForeignKey(District, null=True, on_delete=models.DO_NOTHING)
     contact = models.CharField(max_length=150, null=True, blank=True)
     center_image = models.ImageField(upload_to='center_images')
     address =  models.CharField(null=True, max_length=200)
@@ -139,7 +139,7 @@ class ClinicEvent(models.Model):
     facility = models.ForeignKey(
         Center, null=True, on_delete=models.DO_NOTHING)
     clinic_type = models.ForeignKey(
-        ClinicType, null=True, on_delete=models.DO_NOTHING)
+        ClinicType, null=True, on_delete=models.DO_NOTHING, blank=True)
 
     def __str__(self):
         return str(self.event_name)
