@@ -9,7 +9,7 @@ from django.views import View
 from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date, timedelta
-# from .forms import *
+from django.contrib import messages
 from .filters import CenterFilter, EventFilter
 from django.contrib.auth import logout
 from django.http import JsonResponse
@@ -20,6 +20,7 @@ from django.http import Http404
 from django import template
 from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
+
 
 class UserAccessMixin(PermissionRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
@@ -87,6 +88,7 @@ class UserSignupView(CreateView):
     template_name ='register.html'
     form_class = UserProfileMultiForm
     success_url = reverse_lazy('home')
+
 
 # CENTER MANAGEMENT
    
@@ -298,3 +300,24 @@ class UpcomingClinics(View):
         context = {'gi_clinics': gi_clinics, 'cas_clinics': cas_clinics,
                    'next_dates': next_dates, 'upcoming_date':tomorrow}
         return render(request, 'clinics/upcoming.html', context)
+
+class UpcomingClinics(ListView):
+    queryset  = ClinicEvent.objects.filter(is_active=False).order_by('start_date')     
+    template_name = 'clinics/upcoming_clinics.html'  
+    context_object_name = "clinics"    
+    paginate_by = 1 
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        upcoming_clinics = []
+        next_dates = []
+
+        tomorrow = date.today() + timedelta(days=1)
+        for i in range(1, 5):
+            day = date.today() + timedelta(days=1+i)
+            string_date = str(day)
+            date_dict = {day: string_date}
+            next_dates.append(date_dict)
+        context['upcoming_date'] = tomorrow
+        context['next_dates'] =next_dates
+        return context 

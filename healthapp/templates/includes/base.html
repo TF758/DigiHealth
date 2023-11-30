@@ -36,18 +36,18 @@
     </nav>
 
     <ul id="center-dropdown-options-desktop" class="dropdown-content">
-        <li><a href="/centers/district/all">
+        <li><a href="{% url 'centers_all_districts' %}">
                 By District</a></li>
-        <li><a class="waves-effect" href="/centers/">A-Z</a></li>
+        <li><a class="waves-effect" href="{% url 'centers' %}">A-Z</a></li>
     </ul>
 
     <ul id="clinic-dropdown-dekstop" class="dropdown-content">
-        <li><a href="/clinics/active">Active</a></li>
+        <li><a href="{% url 'active_clinics' %}">Active</a></li>
         {% if user.is_authenticated %}
         <li><a href="#!">Active In My Area</a></li>
         {% endif %}
         <li class="divider"></li>
-        <li><a href="/upcoming">Upcoming</a></li>
+        <li><a href="{% url 'upcoming_clinics' %}">Upcoming</a></li>
     </ul>
 
     <ul id="auth-dropdown-options-desktop" class="dropdown-content">
