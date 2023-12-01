@@ -44,13 +44,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=255)
 
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = []
 
     class Meta:
         verbose_name = 'User'
@@ -61,7 +61,7 @@ class District(models.Model):
     abbreviation = models.CharField(max_length=5)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Address(models.Model):
 
@@ -84,7 +84,7 @@ class Address(models.Model):
         verbose_name_plural = 'Addresses'
 
     def __str__(self):
-        return str(self.user.first_name +" " + self.user.last_name+" " + self.district)
+        return str(str(self.user.first_name) +str(" ") + str(self.user.last_name)+str(" ") + str(self.district))
 
 class UserProfile(models.Model):
     GENDERS = [

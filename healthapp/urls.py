@@ -10,9 +10,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="home"),
+    path('accounts/', include('allauth.urls')), # new
     path('login/', UserLogin.as_view(), name="login"),
-    path('logout/', Logout.as_view(), name="logout"),
-    path("register/", UserSignupView.as_view(), name='register'),
+    # path('logout/', Logout.as_view(), name="logout"),
+    # path("register/", UserSignupView.as_view(), name='register'),
     path("centers/", GetCentersByLetter.as_view(), name="centers"),
     path("centers/<str:center_abbreviation>/",
          CenterDetails.as_view(), name="center_details"),

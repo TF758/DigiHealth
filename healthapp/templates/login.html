@@ -18,6 +18,12 @@
             </div>
             {% endif %}
             <form method="POST" autocomplete="off">
+                <div class="center-align">
+                    <p>
+                        If you have not created an account yet, then please
+                        <a href="{% url 'account_signup' %}">sign up</a> first
+                    </p>
+                </div>
                 {% csrf_token %}
                 <div class="card-content">
                     <div class="form-field">
@@ -30,7 +36,7 @@
                         {{form.password.label}}
                     </div><br>
                     <label style='float: right;'>
-                        <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                        <a class='pink-text' href="{% url 'account_reset_password' %}"><b>Forgot Password?</b></a>
                     </label>
 
                     <div class="form-field">
@@ -42,9 +48,7 @@
                         <button type='submit' name='btn_login' class="btn-large waves-effect waves-dark"
                             style="width:100%;">Login</button>
                     </div><br>
-                    <div class="center-align">
-                        <a href="/register">Create account</a>
-                    </div>
+
                 </div>
             </form>
 

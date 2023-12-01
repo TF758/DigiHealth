@@ -22,6 +22,7 @@ from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
 
 
+
 class UserAccessMixin(PermissionRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
         if (not self.request.user.is_authenticated):
@@ -88,6 +89,9 @@ class UserSignupView(CreateView):
     template_name ='register.html'
     form_class = UserProfileMultiForm
     success_url = reverse_lazy('home')
+
+
+
 
 
 # CENTER MANAGEMENT
