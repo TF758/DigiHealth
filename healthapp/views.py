@@ -42,15 +42,6 @@ class AdminDashBoard(View):
         context = {}
         return render(request, "auth/dashboard.html", context)
     
-class UserLogin(LoginView):
-    form_class = LoginForm
-    template_name = 'login.html'
-    success_url = reverse_lazy("/")
-
-class Logout(View):
-    def get(self, request):
-        logout(request)
-        return redirect('/')
 
 # class CreateNewArticle(LoginRequiredMixin, CreateView):
 #     template_name = 'new_article.html'
