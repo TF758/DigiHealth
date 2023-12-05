@@ -6,33 +6,36 @@
 {% block content %}
 
 <div class="row">
-    <div class="col s12 m8 l6 offset-m2 offset-l3">
+    <div class="col s12 m8 l4 offset-m2 offset-l3">
         <div class="card">
             <div class="card-action teal lighten-1 white-text">
                 <h3>Register Account</h3>
             </div>
-            <p>
-                Already have an account? Then please <a href="{% url 'account_login' %}">Login</a>.
-            </p>
+            <div class="center-align">
+                <p>
+                    Already have an account? Then please <a href="{% url 'account_login' %}">Login</a>.
+                </p>
+            </div>
             <form method="POST" autocomplete="off">
                 {% csrf_token %}
                 <div class="card-content">
                     <div class="row">
-
-                        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-                        {% slot body %}
-                        {% csrf_token %}
-                        {% element fields form=form unlabeled=False %}
-                        {% endelement %}
-                        {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                        {% endif %}
-                        {% endslot %}
-                        {% slot actions %}
-
-                        {% endslot %}
-                        {% endelement %}
-                        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div class="form-field">
+                                {{ field }}
+                                {{ field.label }}<br>
+                                {% if field.help_text %}
+                                <small style="color: grey">{{ field.help_text|safe }}</small>
+                                {% endif %}
+                            </div>
+                            {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                            </p>
+                            {% endfor %}
+                        </form>
                     </div>
 
                     <div class='row'>

@@ -29,12 +29,12 @@
                 {% endif %}
 
                 <li><a href="/">Profile</a></li>
-                <li>
-                    <a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-                </li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'account_logout' %}">Logout</a></li>
                 {% else %}
+                <li>
+                    <a href="{% url 'account_signup' %}">Register</a>
+                </li>
                 <li><a href="{% url 'account_login' %}">Login</a></li>
                 {% endif %}
             </ul>
