@@ -2,20 +2,7 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<div class="right-align row  hide-on-med-and-down">
-    <a tabindex="0" href="/register" class="btn  tonal icon-right waves-effect">
-        <i class="material-icons">person_add</i>Register
-    </a>
-    {% if user.is_authenticated %}
-    <a tabindex="0" class="btn tonal icon-right waves-effect disabled">
-        <i class="material-icons">exit_to_app</i>Login
-    </a>
-    {% else %}
-    <a tabindex="0" href="/login" class="btn tonal icon-right waves-effectW">
-        <i class="material-icons">exit_to_app</i>Login
-    </a>
-    {% endif %}
-</div>
+
 
 <div class="row ">
     <div class="col s12 m12 l9 ">

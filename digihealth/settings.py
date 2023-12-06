@@ -45,6 +45,12 @@ INSTALLED_APPS = [
     'django_filters',
     'easy_maps',
     'betterforms',
+
+    'allauth', # new
+    'allauth.account', # new
+    'allauth.socialaccount', # new
+    'allauth.socialaccount.providers.github', # new
+
 ]
 
 MIDDLEWARE = [
@@ -55,10 +61,19 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+   
 ]
 
 AUTH_USER_MODEL = 'healthapp.CustomUser'
-AUTHENTICATION_BACKENDS = ['healthapp.backends.EmailBackend']
+AUTHENTICATION_BACKENDS = ['healthapp.backends.EmailBackend',
+                            'django.contrib.auth.backends.ModelBackend',
+                            'allauth.account.auth_backends.AuthenticationBackend',]
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
 
 ROOT_URLCONF = 'digihealth.urls'
 
@@ -77,6 +92,10 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
+ 'django.template.loaders.app_directories.Loader')
+
 
 WSGI_APPLICATION = 'digihealth.wsgi.application'
 
@@ -138,7 +157,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/login'
+LOGIN_URL = '/accounts/login'
 LOGOUT_REDIRECT_URL = ''
 
 EASY_MAPS_GOOGLE_KEY = config("GOOGLE_MAPS_KEY")
@@ -147,3 +166,18 @@ EASY_MAPS_LANGUAGE = 'en'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
 
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #new
+EMAIL_HOST = 'smtp.gmail.com' #new
+EMAIL_PORT = 587 #new
+EMAIL_HOST_USER = 'teryllfelix@gmail.com'  #new
+EMAIL_HOST_PASSWORD = "rtwd efxa jwjp iemm" #new
+EMAIL_USE_TLS = True #new
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_UNIQUE = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED=True
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False

@@ -14,12 +14,14 @@ from .filters import CenterFilter, EventFilter
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from .serializers import *
 from django.http import Http404
 from django import template
 from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
+from django.core.exceptions import PermissionDenied
+
 
 
 class UserAccessMixin(PermissionRequiredMixin):
@@ -32,8 +34,6 @@ class UserAccessMixin(PermissionRequiredMixin):
         return super(UserAccessMixin, self).dispatch(
                 request, *args, **kwargs)
    
-   
-
 # # Create your views here.
 
 class AdminDashBoard(View):
@@ -41,15 +41,6 @@ class AdminDashBoard(View):
         context = {}
         return render(request, "auth/dashboard.html", context)
     
-class UserLogin(LoginView):
-    form_class = LoginForm
-    template_name = 'login.html'
-    success_url = reverse_lazy("/")
-
-class Logout(View):
-    def get(self, request):
-        logout(request)
-        return redirect('/')
 
 # class CreateNewArticle(LoginRequiredMixin, CreateView):
 #     template_name = 'new_article.html'
@@ -139,7 +130,7 @@ class UpdateCenter(UserAccessMixin, UpdateView):
     template_name = 'auth/add-center.html'
 
     
-class GetCentersByLetter(View):
+class GetCentersByLetter(View, UserProfileExistMixin):
     def get(self, request, *args, **kwargs):
         if 'q' in request.GET:
             search_text = request.GET['q']
@@ -321,3 +312,32 @@ class UpcomingClinics(ListView):
         context['upcoming_date'] = tomorrow
         context['next_dates'] =next_dates
         return context 
+
+class GetUserProfile(LoginRequiredMixin, DetailView):
+    model = CustomUser
+    context_object_name = "profile_data"
+    template_name="profile/profile_details.html"
+
+
+    slug_url_kwarg = 'email'
+    slug_field = 'email'
+    
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        if not self.request.user:
+            qs = qs.filter(pk=self.request.user.pk)
+        return qs
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        try:
+            context["profile_data"] = UserProfile.objects.get(user = self.request.user)
+        except (UserProfile.DoesNotExist):
+            context["profile_data"] = False
+        print(context["profile_data"])
+        return context
+  
+
+
+   
