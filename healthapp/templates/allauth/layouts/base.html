@@ -1,12 +1,11 @@
 {% include "includes/header.html" %}
 {% load i18n %}
 {% load auth_extras %}
-
+<!DOCTYPE html>
 
 <title>{% block title %}{% endblock %}</title>
 {% block extra_head %}
 {% endblock extra_head %}
-
 </header>
 
 <body>
@@ -28,22 +27,39 @@
                 </li>
                 {% endif %}
 
-                <li><a href="/profile/{{user}}">Profile</a></li>
+                <li><a href="/">Profile</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'account_logout' %}">Logout</a></li>
                 {% else %}
-                <li>
-                    <a href="{% url 'account_signup' %}">Register</a>
-                </li>
                 <li><a href="{% url 'account_login' %}">Login</a></li>
                 {% endif %}
             </ul>
+            <div>
+                <strong>{% trans "Menu:" %}</strong>
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'account_email' %}">{% trans "Change Email" %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
 
         </div>
     </nav>
 
     <ul id="center-dropdown-options-desktop" class="dropdown-content">
-        <li><a href="{% url 'centers_all_districts' %}">
+        <li><a href="{% url 'account_reset_password' %}">
                 By District</a></li>
         <li><a class="waves-effect" href="{% url 'centers' %}">A-Z</a></li>
     </ul>
@@ -102,35 +118,12 @@
         <li class="divider"></li>
         <li><a href="/upcoming">Upcoming</a></li>
     </ul>
-    {% if messages %}
-    <div>
-        {% for message in messages%}
-        {% if message.tags == 'info' %}
-        <div class="alert card blue lighten-4 blue-text text-darken-3">
-            <div class="card-content">
-                <p><i class="material-icons">info</i>{{message}}</p>
-            </div>
-        </div>
-        {% endif %}
-        {% if message.tags == 'error' %}
-        <div class="alert card red lighten-4 red-text text-darken-4">
-            <div class="card-content">
-                <p><i class="material-icons">report</i> {{message}}</p>
-            </div>
-        </div>
-        {% endif %}
-        {% if message.tags == 'success' %}
-        <div class="alert card green lighten-4 green-text text-darken-4">
-            <div class="card-content">
-                <p><i class="material-icons">check_circle</i>{{message}}</p>
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% endif %}
-        <main>
-            {% block content %}
-            {% endblock %}
-        </main>
+    <main>
+        {% block content %}
+        {% endblock %}
+        {% block extra_body %}
+        {% endblock extra_body %}
+    </main>
 </body>
+
 {% include "includes/footer.html" %}

@@ -1,0 +1,49 @@
+{% extends 'includes/base.html' %}
+{% load allauth i18n socialaccount %}
+{% block head_title %}
+{% trans "Signup" %}
+{% endblock head_title %}
+{% block content %}
+
+<div class="row">
+    <div class="col s12 m8 l4 offset-m2 offset-l3">
+        <div class="card">
+            <div class="card-action teal lighten-1 white-text">
+                <h3>Register Account</h3>
+            </div>
+            <div class="center-align">
+                <p>
+                    Already have an account? Then please <a href="{% url 'account_login' %}">Login</a>.
+                </p>
+            </div>
+            <form method="POST" autocomplete="off">
+                {% csrf_token %}
+                <div class="card-content">
+                    <div class="row">
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div class="form-field">
+                                {{ field }}
+                                {{ field.label }}<br>
+                                {% if field.help_text %}
+                                <small style="color: grey">{{ field.help_text|safe }}</small>
+                                {% endif %}
+                            </div>
+                            {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                            </p>
+                            {% endfor %}
+                        </form>
+                    </div>
+
+                    <div class='row'>
+                        <button type='submit' class='col s12 btn btn-large waves-effect teal'>Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

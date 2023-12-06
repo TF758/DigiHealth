@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import datetime
+import uuid 
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
@@ -42,15 +43,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(db_index=True, unique=True, max_length=254)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    user_id = models.UUIDField(default=uuid.uuid4, editable=False)
 
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = []
 
     class Meta:
         verbose_name = 'User'
@@ -61,7 +63,7 @@ class District(models.Model):
     abbreviation = models.CharField(max_length=5)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Address(models.Model):
 
@@ -69,12 +71,12 @@ class Address(models.Model):
 
     address1 = models.CharField(
         "Address line 1",
-        max_length=1024, null=True
+        max_length=1024, null=True,
     )
 
     address2 = models.CharField(
         "Address line 2",
-        max_length=1024, null=True
+        max_length=1024, null=True, blank=True
     )
 
     district =  models.ForeignKey(District, null=True, on_delete=models.DO_NOTHING)
@@ -84,20 +86,27 @@ class Address(models.Model):
         verbose_name_plural = 'Addresses'
 
     def __str__(self):
-        return str(self.user.first_name +" " + self.user.last_name+" " + self.district)
+        return str(str(self.user.first_name) +str(" ") + str(self.user.last_name)+str(" ") + str(self.district))
 
 class UserProfile(models.Model):
     GENDERS = [
         ("M", "Male"),
         ("F", "Female"),
     ]
+    STATUS = [
+        ("pending", "Pending"),
+        ("updated", "Updated"),
+    ]
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, related_name="user_profiles")
+    display_name =  models.CharField(max_length=150,  null=True, blank=False)
     address = models.ForeignKey(Address, null=True, on_delete=models.DO_NOTHING)
     gender = models.CharField(max_length=150, null=True, choices=GENDERS)
+    update_status =  models.BooleanField(default=False)
+    
     
     def __str__(self):
-        return  str(self.user.first_name +" " + self.user.last_name)
+        return  str(self.display_name)
     
 class Center (models.Model):
 
