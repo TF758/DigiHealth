@@ -1,0 +1,16 @@
+{% extends 'includes/base.html' %}
+{% block title %}Register Account{% endblock %}
+
+{% block content %}
+<h1>Profile</h1>
+<h2>This is {{request.user.email}}</h2>
+
+
+{% if profile_data %}
+<h3>Display name: {{profile_data}}</h3>
+
+{% else %}
+
+<h3>set up profile</h3>
+{% endif %}
+{% endblock %}
