@@ -28,8 +28,8 @@
                 </li>
                 {% endif %}
 
-                <li><a href="/profile/{{user}}">Profile</a></li>
                 {% if user.is_authenticated %}
+                <li><a href="/profile/{{user}}">Profile</a></li>
                 <li><a href="{% url 'account_logout' %}">Logout</a></li>
                 {% else %}
                 <li>

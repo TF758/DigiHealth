@@ -12,5 +12,6 @@
 {% else %}
 
 <h3>set up profile</h3>
+<p><a href="{% url 'create_user_profile' request.user.email %}">Create</a></p>
 {% endif %}
 {% endblock %}
