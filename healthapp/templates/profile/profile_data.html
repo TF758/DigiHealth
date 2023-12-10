@@ -1,0 +1,17 @@
+{% extends 'includes/base.html' %}
+{% load materializecss %}
+{% block title %}Profile Data{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn" type="submit" value="Save" />
+    </form>
+</div>
+
+
+
+{% endblock %}

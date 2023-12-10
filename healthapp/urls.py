@@ -30,5 +30,10 @@ urlpatterns = [
          UpcomingClinics.as_view(), name='upcoming_clinics'),
     path('profile/<str:email>/',
          GetUserProfile.as_view(), name='get_user_profile'),
+     path('profile/<str:email>/new',
+         CreateUserProfile.as_view(), name='create_user_profile'),
+    path('profile/<str:email>/update',
+         UpdateUserProfile.as_view(), name='update_user_profile'),
+
 
 ]

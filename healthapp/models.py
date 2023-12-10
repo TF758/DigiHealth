@@ -5,7 +5,7 @@ import uuid
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
-    def _create_user(self, email, password, first_name, last_name, **extra_fields):
+    def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("Email must be provided")
         if not password:
@@ -13,8 +13,6 @@ class CustomUserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            first_name=first_name,
-            last_name=last_name,
             **extra_fields
         )
 
@@ -41,9 +39,6 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(db_index=True, unique=True, max_length=254)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    user_id = models.UUIDField(default=uuid.uuid4, editable=False)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -67,7 +62,7 @@ class District(models.Model):
 
 class Address(models.Model):
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True)
 
     address1 = models.CharField(
         "Address line 1",
@@ -86,7 +81,7 @@ class Address(models.Model):
         verbose_name_plural = 'Addresses'
 
     def __str__(self):
-        return str(str(self.user.first_name) +str(" ") + str(self.user.last_name)+str(" ") + str(self.district))
+        return str(self.user)
 
 class UserProfile(models.Model):
     GENDERS = [
@@ -98,15 +93,16 @@ class UserProfile(models.Model):
         ("updated", "Updated"),
     ]
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, related_name="user_profiles")
-    display_name =  models.CharField(max_length=150,  null=True, blank=False)
+    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, related_name="user_profiles")
+    first_name = models.CharField(max_length=255, null=True)
+    last_name = models.CharField(max_length=255 ,null=True)
     address = models.ForeignKey(Address, null=True, on_delete=models.DO_NOTHING)
     gender = models.CharField(max_length=150, null=True, choices=GENDERS)
     update_status =  models.BooleanField(default=False)
     
     
     def __str__(self):
-        return  str(self.display_name)
+        return  str(self.first_name)
     
 class Center (models.Model):
 

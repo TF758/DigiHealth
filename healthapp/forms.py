@@ -18,39 +18,7 @@ class AddressForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['gender']
-        
-class UserCreateForm(UserCreationForm):
-    class Meta:
-        model = get_user_model()
-        fields = ('first_name','last_name','email', 'password1', 'password2')
-
-
-class UserProfileMultiForm(multiform.MultiModelForm):
-    form_classes = OrderedDict((
-        ('user', UserCreateForm),
-        ('profile', UserProfileForm),
-        ('address', AddressForm),
-    ))
-
-    def save(self, commit=True):
-        objects = super(UserProfileMultiForm, self).save(commit=False)
-
-        if commit:
-            user = objects['user']
-            user.save()
-            address = objects['address']
-            address.user = user
-            address.save()
-            profile = objects['profile']
-            profile.user = user
-            profile.address = address
-            profile.save()
-
-        return objects
-
-class LoginForm(AuthenticationForm):
-    username = forms.EmailField(label='Email')
+        fields = ['first_name', 'last_name','gender']
 
 class AddCenterForm(ModelForm):
 

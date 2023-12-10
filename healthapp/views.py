@@ -3,24 +3,20 @@ from django.http import HttpResponse
 from django.views.generic import CreateView, FormView, ListView, DeleteView, UpdateView, DetailView
 from django.contrib.auth.views import redirect_to_login
 from django.views.generic.list import ListView
-from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views import View
 from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date, timedelta
-from django.contrib import messages
 from .filters import CenterFilter, EventFilter
-from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .serializers import *
 from django.http import Http404
-from django import template
 from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
-from django.core.exceptions import PermissionDenied
+from django.urls import reverse
 
 
 
@@ -33,6 +29,13 @@ class UserAccessMixin(PermissionRequiredMixin):
             raise Http404 
         return super(UserAccessMixin, self).dispatch(
                 request, *args, **kwargs)
+
+class SetUserMixin(LoginRequiredMixin):
+    user_field = 'user'
+
+    def form_valid(self, form):
+        setattr(form.instance, self.user_field, self.request.user)
+        return super().form_valid(form)
    
 # # Create your views here.
 
@@ -75,10 +78,10 @@ def auth_index(request):
         return render(request, "manage.html", context)
 
 
-class UserSignupView(CreateView):
-    template_name ='register.html'
-    form_class = UserProfileMultiForm
-    success_url = reverse_lazy('home')
+# class UserSignupView(CreateView):
+#     template_name ='register.html'
+#     form_class = UserProfileMultiForm
+#     success_url = reverse_lazy('home')
 
 
 # CENTER MANAGEMENT
@@ -130,7 +133,7 @@ class UpdateCenter(UserAccessMixin, UpdateView):
     template_name = 'auth/add-center.html'
 
     
-class GetCentersByLetter(View, UserProfileExistMixin):
+class GetCentersByLetter(View):
     def get(self, request, *args, **kwargs):
         if 'q' in request.GET:
             search_text = request.GET['q']
@@ -340,4 +343,27 @@ class GetUserProfile(LoginRequiredMixin, DetailView):
   
 
 
-   
+
+class CreateUserProfile(SetUserMixin, LoginRequiredMixin, CreateView):
+    model = UserProfile
+    form_class = UserProfileForm
+    template_name = 'profile/profile_data.html'
+
+    def get_success_url(self):
+        return reverse('get_user_profile', kwargs={'email': self.kwargs['email']})
+
+
+class UpdateUserProfile( LoginRequiredMixin,UpdateView):
+    model = UserProfile
+    fields = ['first_name','last_name','gender']
+    template_name = 'profile/profile_data.html'
+
+    slug_field = 'email'
+    slug_url_kwarg = 'email'
+    
+    def get_success_url(self):
+        return reverse('get_user_profile', kwargs={'email': self.kwargs['email']})
+    
+    def get_object(self, queryset=None):
+        obj = UserProfile.objects.get(user=self.request.user)
+        return obj
