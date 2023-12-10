@@ -34,6 +34,10 @@ urlpatterns = [
          CreateUserProfile.as_view(), name='create_user_profile'),
     path('profile/<str:email>/update',
          UpdateUserProfile.as_view(), name='update_user_profile'),
+    path('profile/<str:email>/address/create',
+         CreateUserAddress.as_view(), name='create_user_address'),
+    path('profile/<str:email>/address/update',
+         UpdateUserAddress.as_view(), name='update_user_address'),
 
 
 ]

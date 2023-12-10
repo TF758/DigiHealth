@@ -17,6 +17,7 @@ from django.http import Http404
 from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 
 
@@ -338,7 +339,10 @@ class GetUserProfile(LoginRequiredMixin, DetailView):
             context["profile_data"] = UserProfile.objects.get(user = self.request.user)
         except (UserProfile.DoesNotExist):
             context["profile_data"] = False
-        print(context["profile_data"])
+        try:
+            context["user_address"] =  Address.objects.get(user = self.request.user)
+        except (Address.DoesNotExist):
+            context["user_address"] = False
         return context
   
 
@@ -366,4 +370,28 @@ class UpdateUserProfile( LoginRequiredMixin,UpdateView):
     
     def get_object(self, queryset=None):
         obj = UserProfile.objects.get(user=self.request.user)
+        return obj
+    
+class CreateUserAddress(SetUserMixin, LoginRequiredMixin, CreateView):
+    model = Address
+    form_class = AddressForm
+    template_name = 'profile/profile_data.html'
+
+    def get_success_url(self):
+        return reverse('get_user_profile', kwargs={'email': self.kwargs['email']})
+    
+
+class UpdateUserAddress( LoginRequiredMixin,UpdateView):
+    model = Address
+    fields = ['address1','address2','district']
+    template_name = 'profile/profile_data.html'
+
+    slug_field = 'email'
+    slug_url_kwarg = 'email'
+    
+    def get_success_url(self):
+        return reverse('get_user_profile', kwargs={'email': self.kwargs['email']})
+    
+    def get_object(self, queryset=None):
+        obj = Address.objects.get(user=self.request.user)
         return obj

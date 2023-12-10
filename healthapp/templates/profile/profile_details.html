@@ -10,8 +10,16 @@
 <h3>Display name: {{profile_data}}</h3>
 <p><a href="{% url 'update_user_profile' request.user.email %}">Update</a></p>
 {% else %}
-
 <h3>set up profile</h3>
 <p><a href="{% url 'create_user_profile' request.user.email %}">Create</a></p>
 {% endif %}
+
+{% if user_address %}
+<p><a href="{% url 'update_user_address' request.user.email %}">Update address</a></p>
+{% else %}
+<h3>set up address</h3>
+<p><a href="{% url 'create_user_address' request.user.email %}">Create address</a></p>
+{% endif %}
+
+
 {% endblock %}
