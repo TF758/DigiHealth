@@ -2,7 +2,7 @@
 {% block title %}District Wellness Centers{% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row search-bar-section">
     <nav class="nav-extended blue">
         <div>
             <form action="" class="browser-default right" id="center-query-form">
@@ -22,7 +22,7 @@
     </nav>
 </div>
 <div class="row center">
-    <ul class="pagination justify-content-center teal">
+    <ul class="pagination justify-content-center teal nav-filters">
         <li class="page-item"><a id="query_GI" class="page-link white-text" href='?q=GI'>Gros-Islet</a></li>
         <li class="page-item"><a id="query_CAS" class="page-link white-text" href="?q=CAS">Castries</a></li>
         <li class="page-item"><a id="query_ALR" class="page-link white-text" href="?q=ALR">Anse La Raye</a></li>
@@ -80,7 +80,7 @@
     var query_paramter = getUrlVars()["q"];
     active_link = $("body").find('#' + "query_" + query_paramter);
     if (active_link) {
-        active_link.addClass("red")
+        active_link.addClass("active-link")
     }
 </script>
 {% endblock %}

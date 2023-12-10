@@ -25,7 +25,7 @@
         </nav>
     </div>
     <div class=" center">
-        <ul class="pagination justify-content-center teal">
+        <ul class="pagination justify-content-center teal nav-filters">
             <li class="page-item"><a id="query_a" class="page-link white-text" href='?q=a'>A</a></li>
             <li class="page-item"><a id="query_b" class="page-link white-text" href="?q=b">B</a></li>
             <li class="page-item"><a id="query_c" class="page-link white-text" href="?q=c">C</a></li>
@@ -104,7 +104,7 @@
     var query_paramter = getUrlVars()["q"];
     active_link = $("body").find('#' + "query_" + query_paramter);
     if (active_link) {
-        active_link.addClass("red")
+        active_link.addClass("active-link")
     }
 </script>
 {% endblock %}

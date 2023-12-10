@@ -1,0 +1,77 @@
+/* STYLESHEET FOR ELEMENTS THAT OCCUR THROUGHOUT WESBITE */
+/* :root {
+  --primary-color: #0486CC; CONTRAST CHECK FAIL
+  --primary-color: #0486cc;
+  --secondary-color: #f3f3f3;
+} */
+
+:root {
+  --primary-color: #0486cc;
+  --secondary-color: #f3f3f3;
+  --accent-color: #59d359;
+  --black: #00171f;
+}
+
+/* navigation */
+.nav-wrapper {
+  background-color: var(--primary-color) !important;
+  font-weight: 600;
+}
+
+nav ul a {
+  color: var(--secondary-color) !important;
+}
+
+.dropdown-content li > a {
+  color: var(--primary-color) !important;
+}
+
+/* footer content */
+
+.page-footer {
+  background-color: var(--primary-color) !important;
+}
+
+/* search bar area */
+
+.search-bar-section {
+  margin-top: 0.8rem;
+}
+
+.search-bar-section input {
+  border: 1.5px solid var(--primary-color);
+  margin-right: 0.8rem;
+  color: var(--black);
+}
+
+.search-bar-section input:hover {
+  background-color: var(--accent-color);
+}
+
+.search-bar-section input:focus {
+  border: 2px solid var(--black);
+}
+
+.search-bar-section .search-icon {
+  color: var(--accent-color);
+}
+
+/* filter links */
+
+.pagination.nav-filters {
+  background-color: var(--accent-color) !important;
+}
+
+.nav-filters .page-item a {
+  color: var(--black) !important;
+  font-weight: 500;
+}
+
+.nav-filters .page-item .active-link {
+  background-color: var(--primary-color);
+}
+
+.nav-filters .page-item .page-link.active-link {
+  color: var(--secondary-color) !important;
+  font-weight: 700;
+}

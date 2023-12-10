@@ -26,6 +26,9 @@
         <link href="{% static 'css/global_helper_styles.css' %}" rel="stylesheet">
         <link href="{% static 'css/formStyles.css' %}" rel="stylesheet">
         <link href="{% static 'css/buttonStyles.css' %}" rel="stylesheet">
+        <link href="{% static 'css/globalStyles.css' %}" rel="stylesheet">
+        {% block page_css %}
+        {% endblock page_css %}
         <script src="{% static 'js/scripts.js' %}"></script>
         <script src="{% static 'js/materialize_scripts.js' %}"></script>
 
