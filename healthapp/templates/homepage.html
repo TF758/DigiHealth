@@ -3,9 +3,51 @@
 
 {% block content %}
 
-<div class="row red">
-    <h3 class="center-align">Urgent Cares</h3>
+
+<div class="row">
+    <nav class="nav-extended blue  search-bar-section">
+        <div>
+            <form action="" class="browser-default right" id="center-query-form">
+                {% csrf_token %}
+                <i class="material-icons search-icon Small" id="search-icon">search</i>
+                <input id="user-input" type="text" class="browser-default search-field form-control"
+                    placeholder=" Search" autocomplete="off" aria-label="Search box">
+            </form>
+        </div>
+
+    </nav>
 </div>
+
+<div class="container">
+    <div class="row">
+        <h3 class="center-align">Urgent Cares</h3>
+        <table class="">
+            <thead>
+                <tr>
+                    <th>Facility</th>
+                    <th>Location</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for center in urgents %}
+                <tr>
+                    <td> {{ center.name }}</td>
+                    <td> {{ center.district }}</td>
+                    <td>
+                        {{ center.address }}
+                    </td>
+                    <td><a href="tel:+{{center.contact}}">{{center.contact}}</a></td>
+                    <td><a href="
+                        {%url 'center_details' center.center_abbreviation %}" target="_blank">Visit</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 
 <div class="row ">
@@ -21,7 +63,6 @@
     </div>
     <div class="col s12 m12 l3 blue">
         <h3>Bulletin Board</h3>
-
     </div>
 </div>
 

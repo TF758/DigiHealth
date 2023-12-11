@@ -69,7 +69,9 @@ class AdminDashBoard(View):
 
 def index(request):
     if request.method == 'GET':
-        context = {}
+        urgent_cares = Center.objects.filter(tags__name__in=["urgent care"])
+        print(urgent_cares)
+        context = {'urgents': urgent_cares}
         return render(request, "homepage.html", context)
 
 
