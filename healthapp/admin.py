@@ -26,7 +26,10 @@ class ClinicTypeAdmin(admin.ModelAdmin):
 
 
 class WellnessCenterAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['center_abbreviation', 'tag_list']
+
+    def tag_list(self, obj):
+        return u", ".join(o.name for o in obj.tags.all())
 
 
 class OpeningHoursAdmin(admin.ModelAdmin):

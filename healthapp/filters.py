@@ -53,5 +53,5 @@ class CenterFilter(django_filters.FilterSet):
     class Meta:
         model = Center
         fields = "__all__"
-        exclude = ['center_abbreviation', 'contact', 'center_image']
+        exclude = ['center_abbreviation', 'contact', 'center_image', 'tags']
       

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_filters',
     'easy_maps',
     'betterforms',
+    'taggit',
 
     'allauth', # new
     'allauth.account', # new
@@ -181,3 +182,4 @@ ACCOUNT_EMAIL_REQUIRED=True
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
+TAGGIT_CASE_INSENSITIVE = True

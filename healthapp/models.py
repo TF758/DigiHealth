@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import datetime
+from taggit.managers import TaggableManager
 import uuid 
 
 # Create your models here.
@@ -112,6 +113,8 @@ class Center (models.Model):
     contact = models.CharField(max_length=150, null=True, blank=True)
     center_image = models.ImageField(upload_to='center_images')
     address =  models.CharField(null=True, max_length=200)
+    
+    tags = TaggableManager()
 
     def __str__(self):
         return self.center_abbreviation
