@@ -66,14 +66,19 @@ class AdminDashBoard(View):
 #         #     is_active=True, facility__district='CAS')
 #         return context
 
+class HomePage(ListView):
+    template_name = 'homepage.html'
+    context_object_name = 'urgents'
 
-def index(request):
-    if request.method == 'GET':
-        urgent_cares = Center.objects.filter(tags__name__in=["urgent care"])
-        print(urgent_cares)
-        context = {'urgents': urgent_cares}
-        return render(request, "homepage.html", context)
-
+    def get_queryset(self):
+        return Center.objects.filter(tags__name__in=["urgent care"]).order_by('name')
+    
+    def get_context_data(self, **kwargs):
+        context = super(HomePage, self).get_context_data(**kwargs)
+        context['articles'] = Article.objects.filter(is_global = True)
+        print(context['articles'])
+        return context
+    
 
 def auth_index(request):
     if request.method == 'GET':

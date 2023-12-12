@@ -10,7 +10,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.index, name="home"),
+    path('', HomePage.as_view(), name="home"),
     path('accounts/', include('allauth.urls')), # new
     # path("register/", UserSignupView.as_view(), name='register'),
     path("centers/", GetCentersByLetter.as_view(), name="centers"),
