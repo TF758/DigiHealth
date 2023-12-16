@@ -159,11 +159,11 @@ class Article(models.Model):
         body = models.CharField(max_length=500, null=False)
         is_global = models.BooleanField(default=False, null=True)
         center_id = models.ForeignKey(
-        Center, null=True, on_delete=models.DO_NOTHING)
+        Center, null=True,blank=True, on_delete=models.DO_NOTHING)
         article_image = models.ImageField(upload_to='article_images', null=True, blank=True)
 
         def __str__(self):
-            return str(str(self.date) + " " + str(self.title))
+            return str(self.title)
         
 
 class OpeningHours(models.Model):
