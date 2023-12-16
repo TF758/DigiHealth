@@ -75,8 +75,16 @@ class HomePage(ListView):
     
     def get_context_data(self, **kwargs):
         context = super(HomePage, self).get_context_data(**kwargs)
-        context['articles'] = Article.objects.filter(is_global = True)
-        print(context['articles'])
+
+        try:
+            profile = UserProfile.objects.get(user = self.request.user.id)
+            context['nearby_centers'] = Center.objects.filter(district__name = profile.address.district)[:3]
+            context['nearby_active_clinics'] = ClinicEvent.objects.filter(facility__district__name = profile.address.district,is_active = True )[:3]
+        except(UserProfile.DoesNotExist):
+            context['nearby_centers'] = False
+        context['centers'] = Center.objects.all().order_by('name')[:3]
+        context['active_clinics'] = ClinicEvent.objects.filter(is_active = True).order_by('start_date')[:3]
+        context['articles'] = Article.objects.filter(is_global = True).order_by('date')
         return context
     
 

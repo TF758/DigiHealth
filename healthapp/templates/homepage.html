@@ -55,10 +55,30 @@
         <h2 class="center-align">Health Services</h2>
 
         <div class="col s12 m12 l6 amber">
+            {% if nearby_centers %}
             <h3 class="center-align">Health Facilities In Area</h3>
+            {% for center in nearby_centers %}
+            <h2>{{center}}</h2>
+            {% endfor %}
+            {% else %}
+            <h3 class="center-align">Health Facilities</h3>
+            {% for center in centers %}
+            <h2>{{center}}</h2>
+            {% endfor %}
+            {% endif %}
         </div>
         <div class="col s12 m12 l6 green">
-            <h3 class="center-align">Activate Clinics</h3>
+            {% if nearby_active_clinics %}
+            <h3 class="center-align">Clinics in area</h3>
+            {% for clinic in nearby_active_clinics %}
+            <h2>{{clinic}}</h2>
+            {% endfor %}
+            {% else %}
+            <h3 class="center-align">Available Clinics</h3>
+            {% for clinic in active_clinics %}
+            <h2>{{clinic}}</h2>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
     <div class="col s12 m12 l3 blue">
@@ -70,6 +90,8 @@
         {% endfor %}
     </div>
 </div>
+
+
 
 <div class="row">
     <div class="col s12 m12 l8 offset-l2 ">
