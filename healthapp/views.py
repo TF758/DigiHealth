@@ -93,13 +93,6 @@ def auth_index(request):
         context = {}
         return render(request, "manage.html", context)
 
-
-# class UserSignupView(CreateView):
-#     template_name ='register.html'
-#     form_class = UserProfileMultiForm
-#     success_url = reverse_lazy('home')
-
-
 # CENTER MANAGEMENT
    
 class CreateNewCenter(UserAccessMixin,CreateView):
@@ -174,15 +167,23 @@ class GetCentersByLetter(View):
         return HttpResponse("TEST")
 
 
-class CenterDetails(View):
-    def get(self, request, *args, **kwargs):
+class CenterDetails(ListView):
+    template_name = 'centers/center_details.html'
+    context_object_name = 'center_details'
+
+    def get_queryset(self):
         center_abbreviation = self.kwargs['center_abbreviation']
-        center_data = Center.objects.get(center_abbreviation=center_abbreviation)
-        articles = Article.objects.filter(center_id__center_abbreviation=center_abbreviation)
-        operating_hours =  OpeningHours.objects.filter(center__center_abbreviation=center_abbreviation)
-        context = {'center_details': center_data,
-                   'center_news': articles, 'address':  center_data.address, 'operating_hours':operating_hours}
-        return render(request, 'centers/center_details.html', context)
+        return Center.objects.get(center_abbreviation=center_abbreviation)
+    
+    def get_context_data(self, **kwargs):
+        context = super(CenterDetails, self).get_context_data(**kwargs)
+
+        center_abbreviation = self.kwargs['center_abbreviation']
+
+        context['center_news'] =  Article.objects.filter(center_id__center_abbreviation=center_abbreviation)
+        context['operating_hours'] = OpeningHours.objects.filter(center__center_abbreviation=center_abbreviation)
+        context['address'] = Center.objects.get(center_abbreviation=center_abbreviation).address
+        return context
     
 class DistrictCentersDirectory(View):
     def get(self, request):
