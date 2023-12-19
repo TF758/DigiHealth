@@ -411,3 +411,14 @@ class UpdateUserAddress( LoginRequiredMixin,UpdateView):
     def get_object(self, queryset=None):
         obj = Address.objects.get(user=self.request.user)
         return obj
+
+class ViewArticle( DetailView):
+    model = Article
+    context_object_name = "article_data"
+    template_name="article.html"
+
+
+    slug_url_kwarg = 'email'
+    slug_field = 'email'
+    
+   

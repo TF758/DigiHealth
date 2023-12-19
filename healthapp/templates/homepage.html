@@ -81,13 +81,20 @@
             {% endif %}
         </div>
     </div>
-    <div class="col s12 m12 l3 blue">
+    <div class="col s12 m12 l3 red">
         <h3>Bulletin Board</h3>
-        {% for article in articles %}
-        test
-        {% empty %}
-        nothing to post
-        {% endfor %}
+        <ul>
+            {% for article in articles %}
+            <li>
+                <a href="
+                        {%url 'article_details' article.id %}" target="_blank">{{article.title}}</a>
+            </li>
+
+            {% empty %}
+            nothing to post
+            {% endfor %}
+        </ul>
+
     </div>
 </div>
 

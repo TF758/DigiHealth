@@ -1,0 +1,26 @@
+{% extends 'includes/base.html' %}
+{% block title %}{{article_data.title}}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="demo-ribbon"></div>
+    <div class="demo-layout">
+        <main class="demo-main">
+
+            <div class="demo-content card-panel col s12 m8 offset-m2">
+                <div class="demo-crumbs">
+                    Google &gt; Bulletin Board &gt;<a
+                        href=" {%url 'article_details' article_data.id %}">{{article_data.title}}</a>
+                </div>
+                <h3>{{article_data.title}}</h3>
+                {% if article_data.article_image %}
+                <img src="{{article_data.article_image.url}}" style="float:left;width:70%; max-width: 500px;" />
+                {% endif %}
+                <div class="article-data right-align">{{article_data.date|date:"D d M Y"}}</div>
+                <p class="flow-text">{{article_data.body|linebreaksbr}}</p>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

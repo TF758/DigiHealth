@@ -156,7 +156,7 @@ class ClinicEvent(models.Model):
 class Article(models.Model):
         title  = models.CharField(max_length=100, null=False)
         date = models.DateTimeField(auto_now_add=True)
-        body = models.CharField(max_length=500, null=False)
+        body = models.TextField(max_length=10000, null=False)
         is_global = models.BooleanField(default=False, null=True)
         center_id = models.ForeignKey(
         Center, null=True,blank=True, on_delete=models.DO_NOTHING)
