@@ -138,3 +138,9 @@ nav ul a {
   background-color: #008cba;
   color: white;
 }
+
+.material-tooltip {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-weight: 500;
+}

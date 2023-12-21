@@ -47,6 +47,8 @@ $(document).ready(function () {
   $("select").formSelect();
 
   $(".parallax").parallax();
+
+  $(".tooltipped").tooltip();
 });
 
 function scrollSmoothTo(elementId) {
