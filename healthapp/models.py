@@ -152,8 +152,11 @@ class ClinicEvent(models.Model):
     def __str__(self):
         return str(self.event_name)
     
-    def get_clinic_name(self):
+    def get_clinic_facility_long(self):
         return str(self.facility.name)
+    
+    def get_clinic_facility_short(self):
+        return str(self.facility.center_abbreviation)
     
     def get_clinic_district(self):
          return str(self.facility.district.abbreviation)
