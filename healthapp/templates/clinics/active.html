@@ -10,27 +10,42 @@
 </div>
 
 <div class="container">
-    <h2 class="header">Medical Clinics</h2>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur ad facilis maxime repudiandae, ullam
         animi iste dolor, enim reprehenderit quam, error nulla voluptatem quisquam non quas explicabo consectetur ab.
     </p>
 </div>
 
-<div class="row center">
-    <ul class="pagination justify-content-center nav-filters">
-        {% for clinic in districts %}
-        {% ifchanged %}
-        <li class="page-item"><a class="page-link white-text"
-                href="{% url 'district_active_clinics' clinic.0 %}">{{clinic.1}}</a></li>
-        {%endifchanged %}
-        {% endfor %}
-    </ul>
-    <a href="" class="btn right">Future clinics</a>
+
+<div class="container">
+    <div class="right-align">
+        <a class="btn" href="{% url 'active_clinics' %}">Clear</a>
+    </div>
+    <form action="" method="get">
+        <div class="row">
+            <div class="col s12 m4 l4">
+                {{event_filter.form.event_name.label}}
+                {{event_filter.form.event_name}}
+            </div>
+            <div class="col s12 m4 l4 ">
+                {{event_filter.form.facility.label}}
+                {{event_filter.form.facility}}
+            </div>
+            <div class="col s12 m4 l4 ">
+                {{event_filter.form.location.label}}
+                {{event_filter.form.location}}
+            </div>
+        </div>
+        <div class="center-align">
+            <input type="submit" class="btn" value="Search">
+        </div>
+    </form>
 </div>
 
 
+<h2 class="header center">Active Medical Clinics</h2>
 <div class="container">
-    <table>
+    {%if active_clinics %}
+    <table class="responsive-table">
         <thead>
             <tr>
                 <th>Clinic</th>
@@ -53,7 +68,12 @@
             {% endfor %}
         </tbody>
     </table>
-
+    {%else %}
+    <div class="">
+        <p>Sorry but your search found nohing that matched your query. Adjust your search parameters and try again. <a
+                class="" href="{% url 'active_clinics' %}">Clear</a> </p>
+    </div>
+    {%endif%}
 </div>
 
 <div class="pagination center">

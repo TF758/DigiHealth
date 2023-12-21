@@ -9,15 +9,46 @@
         src="https://previews.123rf.com/images/nattyblissful/nattyblissful1906/nattyblissful190600019/124032714-woman-doctor-near-the-calendar-work-schedule-make-an-appointment-online-note-important-flat-vector.jpg"
         alt="">
 </div>
-
-<h1>Upcoming Clinics</h1>
 <div class="container">
-    <table>
+    <div class="right-align">
+        <a class="btn" href="{% url 'upcoming_clinics' %}">Clear</a>
+    </div>
+    <form action="" method="get">
+        <div class="row">
+            <div class="col s12 m6 l3">
+                {{event_filter.form.start_date.label}}
+                {{event_filter.form.start_date}}
+            </div>
+            <div class="col s12 m6 l3">
+                {{event_filter.form.event_name.label}}
+                {{event_filter.form.event_name}}
+            </div>
+            <div class="col s12 m6 l3 ">
+                {{event_filter.form.facility.label}}
+                {{event_filter.form.facility}}
+            </div>
+            <div class="col s12 m6 l3 ">
+                {{event_filter.form.location.label}}
+                {{event_filter.form.location}}
+            </div>
+        </div>
+        <div class="center-align">
+            <input type="submit" class="btn" value="Search">
+        </div>
+    </form>
+</div>
+
+<h1 class="center">Upcoming Clinics</h1>
+<div class="container">
+    {%if upcoming_clinics %}
+
+    <table class="responsive-table">
         <thead>
             <tr>
                 <th>Date</th>
                 <th>Clinic</th>
                 <th>Facility</th>
+                <th>Location</th>
                 <th>Start Time</th>
                 <th>End Time</th>
             </tr>
@@ -31,15 +62,20 @@
                 <td> <a
                         href="{% url 'center_details' clinic.get_clinic_facility_short %}">{{clinic.get_clinic_facility_long}}</a>
                 </td>
+                <td>{{clinic.get_clinic_district_long}}</td>
                 <td>{{clinic.start_time| time:"g:i A"}}</td>
                 <td>{{clinic.end_time| time:"g:i A"}}</td>
             </tr>
-            {% empty %}
-            <h2>No data</h2>
+
             {% endfor %}
         </tbody>
     </table>
-
+    {%else %}
+    <div class="">
+        <p>Sorry but your search found nohing that matched your query. Adjust your search parameters and try again. <a
+                class="" href="{% url 'upcoming_clinics' %}">Clear</a> </p>
+    </div>
+    {% endif %}
 </div>
 
 <div class="pagination center">

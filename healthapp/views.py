@@ -54,19 +54,6 @@ class AdminDashBoard(View):
 #     success_url = reverse_lazy("home")
 
 
-# class ActiveClinics(LoginRequiredMixin, ListView):
-#     template_name = 'clinics/active_clinics.html'
-#     context_object_name = 'active_clinics'
-#     model = ClinicEvent
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['gi_clinics'] = ClinicEvent.objects.filter(
-#             is_active=True, facility__district='GI')
-#         # context['cas_clinics'] = ClinicEvent.objects.filter(
-#         #     is_active=True, facility__district='CAS')
-#         return context
-
 class HomePage(ListView):
     template_name = 'homepage.html'
     context_object_name = 'urgents'
@@ -254,17 +241,24 @@ class UpdateClinic(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("manage-clinics")
     template_name = 'auth/add-clinic.html'
 
-class ActiveClinics(ListView):
-    queryset  = ClinicEvent.objects.filter(is_active=True).order_by('start_date')     
+
+class ActiveClinics(ListView):    
     template_name = 'clinics/active.html'  
-    context_object_name = "active_clinics"    
-    paginate_by = 12  
-
+    context_object_name = "active_clinics"
+    model = ClinicEvent    
+    paginate_by = 10 
+    
+    def get_queryset(self):
+        events = ClinicEvent.objects.filter(is_active=True)
+        event_filter = EventFilter(self.request.GET, queryset=events)
+        events = event_filter.qs
+        return events
+    
     def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        context['districts'] = ClinicEvent.objects.values_list('facility__district__abbreviation','facility__district__name').filter(is_active=True).distinct()
+        context['event_filter'] = EventFilter()
         return context
-
     
 class ActiveClinicsInDistrict(ListView):    
     template_name = 'clinics/active_district.html'  
@@ -319,7 +313,19 @@ class UpcomingClinics(ListView):
     queryset  = ClinicEvent.objects.filter(is_active=False).order_by('start_date')  
     template_name = 'clinics/upcoming.html'
     context_object_name = 'upcoming_clinics'
-    paginate_by = 10
+    paginate_by = 2
+    
+    def get_queryset(self):
+        events = ClinicEvent.objects.filter(is_active=False).order_by('start_date')  
+        event_filter = EventFilter(self.request.GET, queryset=events)
+        events = event_filter.qs
+        return events
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        context['event_filter'] = EventFilter()
+        return context
 
 
 class GetUserProfile(LoginRequiredMixin, DetailView):

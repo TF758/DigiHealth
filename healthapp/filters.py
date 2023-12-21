@@ -7,10 +7,12 @@ class EventFilter(django_filters.FilterSet):
     event_name = CharFilter(
         field_name='event_name',
         lookup_expr='icontains',
+        label="Search By Clinic"
     )
     start_date = DateFilter(
         field_name='start_date',
         lookup_expr='gte',
+        label="Search By Date"
     )
     end_date = DateFilter(
         field_name='start_date',
@@ -23,6 +25,12 @@ class EventFilter(django_filters.FilterSet):
     facility = CharFilter(
         field_name='facility__name',
         lookup_expr='icontains',
+        label="Search By Facility"
+    )
+    location = CharFilter(
+        field_name='facility__district__name',
+        lookup_expr='icontains',
+        label="Search by District"
     )
 
     class Meta:
