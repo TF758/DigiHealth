@@ -152,6 +152,9 @@ class ClinicEvent(models.Model):
     def __str__(self):
         return str(self.event_name)
     
+    def get_clinic_name(self):
+        return str(self.facility.name)
+    
 
 class Article(models.Model):
         title  = models.CharField(max_length=100, null=False)

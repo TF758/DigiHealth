@@ -18,6 +18,7 @@ from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
+from datetime import datetime, timedelta, time
 
 
 
@@ -83,8 +84,8 @@ class HomePage(ListView):
         except(UserProfile.DoesNotExist):
             context['nearby_centers'] = False
         context['centers'] = Center.objects.all().order_by('name')[:3]
-        context['active_clinics'] = ClinicEvent.objects.filter(is_active = True).order_by('start_date')[:3]
-        context['articles'] = Article.objects.filter(is_global = True).order_by('date')
+        context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date')[:5]
+        context['articles'] = Article.objects.filter(is_global = True).order_by('date')[:5]
         return context
     
 
@@ -179,10 +180,16 @@ class CenterDetails(ListView):
         context = super(CenterDetails, self).get_context_data(**kwargs)
 
         center_abbreviation = self.kwargs['center_abbreviation']
-
+        today = datetime.now().date()
+        tomorrow = today + timedelta(1)
+        today_start = datetime.combine(today, time())
+        today_end = datetime.combine(tomorrow, time())
+        
         context['center_news'] =  Article.objects.filter(center_id__center_abbreviation=center_abbreviation)
         context['operating_hours'] = OpeningHours.objects.filter(center__center_abbreviation=center_abbreviation)
         context['address'] = Center.objects.get(center_abbreviation=center_abbreviation).address
+        context['active_clinics'] = ClinicEvent.objects.filter(start_date=today, facility__center_abbreviation =center_abbreviation, is_active=True)
+
         return context
     
 class DistrictCentersDirectory(View):

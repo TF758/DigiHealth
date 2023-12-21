@@ -1,5 +1,10 @@
 {% extends 'includes/base.html' %}
+{% load static %}
 {% block title %}Homepage{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/homepage.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
 
@@ -11,119 +16,180 @@
                 {% csrf_token %}
                 <i class="material-icons search-icon Small" id="search-icon">search</i>
                 <input id="user-input" type="text" class="browser-default search-field form-control"
-                    placeholder=" Search" autocomplete="off" aria-label="Search box">
+                    placeholder=" Help me find" autocomplete="off" aria-label="Search box">
             </form>
         </div>
 
     </nav>
 </div>
 
+
 <div class="container">
-    <div class="row">
-        <h3 class="center-align">Urgent Cares</h3>
-        <table class="">
-            <thead>
-                <tr>
-                    <th>Facility</th>
-                    <th>Location</th>
-                    <th>Address</th>
-                    <th>Contact</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for center in urgents %}
-                <tr>
-                    <td> {{ center.name }}</td>
-                    <td> {{ center.district }}</td>
-                    <td>
-                        {{ center.address }}
-                    </td>
-                    <td><a href="tel:+{{center.contact}}">{{center.contact}}</a></td>
-                    <td><a href="
-                        {%url 'center_details' center.center_abbreviation %}" target="_blank">Visit</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-
-<div class="row ">
-    <div class="col s12 m12 l9">
-        <h2 class="center-align">Health Services</h2>
-
-        <div class="col s12 m12 l6 amber">
-            {% if nearby_centers %}
-            <h3 class="center-align">Health Facilities In Area</h3>
-            {% for center in nearby_centers %}
-            <h2>{{center}}</h2>
-            {% endfor %}
-            {% else %}
-            <h3 class="center-align">Health Facilities</h3>
-            {% for center in centers %}
-            <h2>{{center}}</h2>
-            {% endfor %}
-            {% endif %}
+    <div class="row ">
+        <div class="col s12 m12 l4">
+            <div class="card no-shadows">
+                <div class="card-image">
+                    <img
+                        src="https://us.images.westend61.de/0000864566pw/doctors-rushing-patient-on-stretcher-down-hospital-corridor-CAIF18512.jpg">
+                </div>
+                <div class="card-content">
+                    <span>Urgent Cares</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat nihil beatae temporibus, id
+                        unde est asperiores iure, perspiciatis quae autem omnis deleniti ipsam totam minima officia quam
+                        dolore modi ad?</p>
+                    <div class="center">
+                        <a href="#" class="btn homepage-action">Urgent Cares</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col s12 m12 l6 green">
-            {% if nearby_active_clinics %}
-            <h3 class="center-align">Clinics in area</h3>
-            {% for clinic in nearby_active_clinics %}
-            <h2>{{clinic}}</h2>
-            {% endfor %}
-            {% else %}
-            <h3 class="center-align">Available Clinics</h3>
-            {% for clinic in active_clinics %}
-            <h2>{{clinic}}</h2>
-            {% endfor %}
-            {% endif %}
+        <div class="col s12 m12 l4">
+            <div class="card no-shadows">
+                <div class="card-image">
+                    <img
+                        src="https://thumbs.dreamstime.com/z/serious-male-gp-talk-consult-female-patient-meeting-private-clinic-man-physician-doctor-white-medical-uniform-speak-183923235.jpg">
+                </div>
+                <div class="card-content">
+                    <span>Primary Care</span>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci iusto velit, error quas eum
+                        qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
+                        accusantium blanditiis, assumenda inventore?</p>
+                    <div class="center">
+                        <a href="#" class="btn homepage-action">Primary Care Facilitites</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m12 l4">
+            <div class="card no-shadows">
+                <div class="card-image">
+                    <img
+                        src="https://img.freepik.com/premium-photo/medical-clinic-patient-reception-area-filled-with-multiple-nationalities-people-african-american-man-requesting-patient-information-front-desk-hospital-sanatorium-staff-attending-patients_482257-52792.jpg?w=2000">
+                </div>
+                <div class="card-content">
+                    <span>Clinics</span>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci iusto velit, error quas eum
+                        qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
+                        accusantium blanditiis, assumenda inventore?</p>
+                    <div class="center">
+                        <a href="#" class="btn homepage-action">Clinics</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col s12 m12 l3 red">
-        <h3>Bulletin Board</h3>
-        <ul>
-            {% for article in articles %}
-            <li>
-                <a href="
-                        {%url 'article_details' article.id %}" target="_blank">{{article.title}}</a>
-            </li>
-
-            {% empty %}
-            nothing to post
-            {% endfor %}
-        </ul>
-
-    </div>
 </div>
-
-
-
 <div class="row">
-    <div class="col s12 m12 l8 offset-l2 ">
+    <div class="col s12 m12 l12  ">
         <div class="carousel carousel-slider center ">
             <div class="carousel-item red white-text" href="#one!">
-                <h2>First Panel</h2>
+                <h2>Article title here</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, consequuntur quaerat? Laborum
+                    sunt et facilis tempore necessitatibus amet praesentium quos, numquam dicta minima provident neque
+                    ab sed quibusdam architecto molestiae. <a href="#" class="">Read more</a></p>
+                <div class="hide-on-small-only"><img
+                        src="https://thevoiceslu.com/wp-content/uploads/2023/03/anesthesia-machine-donated-to-St-Jude-Hospital.jpg"
+                        alt=""></div>
+
             </div>
             <div class="carousel-item amber white-text" href="#two!">
-                <h2>Second Panel</h2>
-                <p class="white-text">This is your second panel</p>
+                <h2>Article title here</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, consequuntur quaerat? Laborum
+                    sunt et facilis tempore necessitatibus amet praesentium quos, numquam dicta minima provident neque
+                    ab sed quibusdam architecto molestiae. <a href="#" class="">Read more</a></p>
+                <div class="hide-on-small-only"> <img
+                        src="https://loopnewslive.blob.core.windows.net/liveimage/sites/default/files/2022-12/slhta_tourism_enhancement_fund_55a2e9a1c57ebbdf76bfaf57a0a6a3d2.jpg"
+                        alt=""></div>
             </div>
             <div class="carousel-item green white-text" href="#three!">
-                <h2>Third Panel</h2>
-                <p class="white-text">This is your third panel</p>
+                <h2>Article title here</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, consequuntur quaerat? Laborum
+                    sunt et facilis tempore necessitatibus amet praesentium quos, numquam dicta minima provident neque
+                    ab sed quibusdam architecto molestiae. <a href="#" class="">Read more</a></p>
+                <div class="hide-on-small-only"> <img
+                        src="https://www.paho.org/sites/default/files/styles/max_1500x1500/public/2019-10/hearts-launch-st-lucia-1500x855.jpg?itok=PLDdHhD9"
+                        alt=""></div>
             </div>
             <div class="carousel-item blue white-text" href="#four!">
-                <h2>Fourth Panel</h2>
-                <p class="white-text">This is your fourth panel</p>
+                <h2>Article title here</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, consequuntur quaerat? Laborum
+                    sunt et facilis tempore necessitatibus amet praesentium quos, numquam dicta minima provident neque
+                    ab sed quibusdam architecto molestiae. <a href="#" class="">Read more</a></p>
+                <div class="hide-on-small-only"> <img
+                        src="https://www.paho.org/sites/default/files/styles/max_1500x1500/public/2023-03/ecc-lcalabtraining.jpg?itok=dJAXxEUG"
+                        alt=""></div>
             </div>
         </div>
         <br>
         <div class="center-align">
-            <div class="btn green prev waves-effect">Prev</div>
-            <div class="btn green next waves-effect">Next</div>
+            <div class="btn  prev waves-effect">Prev</div>
+            <div class="btn  next waves-effect">Next</div>
         </div>
     </div>
 </div>
-{% endblock %}
+
+
+<div class="container">
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col s12 m6 l4">
+            <div class="row">
+                <a class="nav-btn right" href="#">See all<i class="material-icons right">arrow_forward</i></a>
+                <h4 class="">Updates</h4>
+                {% for article in articles %}
+                <div class="row">
+                    <div class="col s12 m12 l12 homepage-updates ">
+                        {%if article.article_image%}
+                        <div class="homepage-article-img">
+                            <a href="{%url 'article_details' article.id %}"> <img src="{{article.article_image.url}}"
+                                    alt="" class="article-thumbnail"></a>
+                        </div>
+                        {% else %}
+                        <div class="homepage-article-img">
+                            <a href="{%url 'article_details' article.id %}"> <img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png"
+                                    alt="" class="article-thumbnail"></a>
+                        </div>
+                        {% endif %}
+                        <div class="homepage-article-text">
+                            <a href="{%url 'article_details' article.id %}">
+                                <p class=" article-thumbnail-text">{{article.title}}</p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+                {% empty %}
+                <h5>No updates available.</h5>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col s12 m6 l4 offset-l2">
+            <div class="row">
+                <a class="nav-btn right" href="#">See all<i class="material-icons right">arrow_forward</i></a>
+                <h4 class="">Upcoming Clinics</h4>
+                {% for clinic in upcoming_clinics %}
+                <div class="row">
+                    <div class="clinic-container ">
+                        <div class="date-container">
+                            <span>{{clinic.start_date|date:"M"}}</span>
+                            <span>{{clinic.start_date|date:"d"}}</span>
+                        </div>
+                        <div class="homepage-clinic-text ">
+                            <p>{{clinic.get_clinic_name}}- {{clinic.event_name}}</p>
+                            <span>{{clinic.start_date|date:"l"}} {{clinic.start_time| time:"g:i A" }} -
+                                {{clinic.end_time| time:"g:i A" }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <h5>No Clinics Available</h5>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock %}

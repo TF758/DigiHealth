@@ -1,0 +1,71 @@
+:root {
+  --primary-color: #0486cc;
+  --secondary-color: #f3f3f3;
+  --accent-color: #59d359;
+  --black: #00171f;
+}
+.homepage-action {
+  margin-top: 1rem;
+}
+.carousel-item img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 700px;
+}
+
+.article-thumbnail {
+  width: 100px;
+  height: 100px;
+}
+
+.article-thumbnail-text {
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.homepage-updates {
+  display: flex !important;
+}
+.homepage-article-text {
+  margin-left: 1.2rem;
+}
+
+.clinic-container {
+  display: flex;
+  align-items: center;
+}
+.date-container {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.date-container span:first-of-type {
+  font-style: italic;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.date-container span:nth-child(2) {
+  font-size: 1.2rem;
+}
+.homepage-clinic-text {
+  margin-left: 1.2rem;
+}
+
+.homepage-clinic-text p {
+  font-size: 1.2em;
+  font-weight: 500;
+  text-decoration: underline;
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+.homepage-clinic-text span {
+  font-size: 0.9em;
+  font-style: italic;
+}
