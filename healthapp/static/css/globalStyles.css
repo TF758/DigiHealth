@@ -12,6 +12,11 @@
   --accent-color: #59d359;
   --black: #00171f;
 }
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 
 /* navigation */
 .nav-wrapper {
