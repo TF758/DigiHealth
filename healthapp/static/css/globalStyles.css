@@ -7,10 +7,12 @@
 
 :root {
   --primary-color: #0486cc;
+  --primary-color-dark: #026194;
   --primary-color-transparent: #0486cc3f;
   --secondary-color: #f3f3f3;
   --accent-color: #59d359;
   --black: #00171f;
+  --dark-grey: #414141ab;
 }
 .sticky-nav {
   position: fixed;
@@ -74,7 +76,7 @@ nav ul a {
 }
 
 .nav-filters .page-item .active-link {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color-dark);
 }
 
 .nav-filters .page-item .page-link.active-link {
@@ -170,4 +172,21 @@ nav ul a {
 }
 .row-highlight:hover {
   background-color: var(--primary-color-transparent);
+}
+
+.date-container {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+::placeholder {
+  color: var(--dark-grey);
+  opacity: 1; /* Firefox */
 }

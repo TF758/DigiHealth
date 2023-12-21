@@ -166,7 +166,7 @@ class GetCentersByLetter(View):
         else:
             search_objects = Center.objects.all().order_by('name')
         page_num = request.GET.get("page",1)
-        center_paginator = Paginator(search_objects, 1)
+        center_paginator = Paginator(search_objects, 10)
         context = {'centers':center_paginator.page(page_num)}
         return render(request, "centers/center_list.html", context)
 

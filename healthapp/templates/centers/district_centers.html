@@ -22,7 +22,8 @@
     </nav>
 </div>
 <div class="row center">
-    <ul class="pagination justify-content-center teal nav-filters">
+    <ul class="pagination justify-content-center nav-filters">
+        <li class="page-item"><a class="page-link white-text" href="{% url 'centers_all_districts' %}">All</a></li>
         <li class="page-item"><a id="query_GI" class="page-link white-text" href='?q=GI'>Gros-Islet</a></li>
         <li class="page-item"><a id="query_CAS" class="page-link white-text" href="?q=CAS">Castries</a></li>
         <li class="page-item"><a id="query_ALR" class="page-link white-text" href="?q=ALR">Anse La Raye</a></li>
@@ -37,26 +38,35 @@
 </div>
 
 <div class="container">
+    {% for center in centers %}
     <div class="row">
-        <div class="col s12 m8 l6 offset-m2 offset-l3">
-            <ul class="collection">
-                {% for center in centers %}
-                <li class="collection-item avatar">
-                    <a href="/centers/{{center.center_abbreviation}}">
-                        <img src="{{center.center_image.url}}" alt="" class="circle">
-                    </a>
-                    <span class="title">{{center.name}}</span>
-                    <p>{{center.district}}<br>
-                        <a href="tel:+{{center.contact}}">{{center.contact}}</a>
-                    </p>
-                    <a href="/centers/{{center.center_abbreviation}}" target="_blank" class="secondary-content"><i
-                            class="material-icons">exit_to_app</i></a>
-                </li>
-                {% empty %}
-                <h2>No Medical facilities.</h2>
-                {% endfor %}
-            </ul>
+        <div class="col s12 m3 l3">
+            <div class="card no-shadows">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator center-thumbnail" src="{{center.center_image.url}}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{center.name}}<i
+                            class="material-icons right">more_vert</i></span>
+                    <p><a href="{% url 'center_details' center.center_abbreviation %}">Learn More</a></p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{center.name}}<i
+                            class="material-icons right">close</i></span>
+                    <ul>
+                        <li>Contact - {{center.contact}}</li>
+                        <li>Located - {{center.address}}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
+        {% empty %}
+        <div class="empty-msg">
+            No Centers
+        </div>
+
+
+        {% endfor %}
     </div>
 </div>
 <div class="row center">
