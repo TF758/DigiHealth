@@ -1,0 +1,68 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% block title %}Urgent Care Facilities{% endblock %}
+{% block extra_css %}
+<link href="{% static 'css/urgent_care.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <img class="hero-banner" src="https://cdn2.hubspot.net/hubfs/2687194/Freestanding%20Emergency%20Department.jpg"
+        alt="">
+    <div class="card-panel">
+        <h2 class="header">Urgent Care</h2>
+        <p class="">Urgent Care centers are setup to assist patients with an illness or injury that does not appear to
+            be life-threatening, but also can't wait until the next day, or for primary care doctor to see them.
+
+            For the days and hours that primary care physicians are closed, or for someone who does not have a primary
+            care physician, urgent care centers provide easy access to quality healthcare without the hassle of
+            emergency room.
+
+            Urgent medical conditions are ones that are not considered emergencies but still require care within 24
+            hours. Some examples of such conditions include:
+        <ul>
+            <li> Accidents and falls</li>
+            <li>Sprains and strains</li>
+            <li> Breathing difficulties (i.e. mild to moderate asthma)</li>
+            <li> Bleeding/cuts — not bleeding a lot but requiring stitches</li>
+            <li> Fever or flu</li>
+            <li> Minor broken bones and fractures (i.e. fingers, toes)</li>
+        </ul>
+        Life-threatening emergencies, such as a heart attack or a serious head injury, require a visit to the
+        Emergency Department
+        <br>
+        <br>
+        Below are a list of available medical facilities which offer Urgent Care services
+        </p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {% for center in centers %}
+        <div class="col s12 m6 l4">
+            <div class="card no-shadows">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{center.center_image.url}}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{center.name}}<i
+                            class="material-icons right">more_vert</i></span>
+                    <p><a href="{% url 'center_details' center.center_abbreviation %}">Learn More</a></p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">More Information<i
+                            class="material-icons right">close</i></span>
+                    <ul>
+                        <li>Contact - {{center.contact}}</li>
+                        <li>Located - {{center.address}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

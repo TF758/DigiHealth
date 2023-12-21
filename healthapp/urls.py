@@ -28,6 +28,8 @@ urlpatterns = [
          views.futureClinics, name='future_clinics'),
     path('clinics/upcoming/',
          UpcomingClinics.as_view(), name='upcoming_clinics'),
+     path('clinics/urgent/',
+         UrgentCareGlobal.as_view(), name='urgent_care_global'),
     path('profile/<str:email>/',
          GetUserProfile.as_view(), name='get_user_profile'),
      path('profile/<str:email>/new',

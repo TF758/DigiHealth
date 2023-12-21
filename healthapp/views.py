@@ -87,7 +87,14 @@ class HomePage(ListView):
         context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date')[:5]
         context['articles'] = Article.objects.filter(is_global = True).order_by('date')[:5]
         return context
-    
+
+class UrgentCareGlobal(ListView):
+    template_name = 'centers/urgent_care.html'
+    context_object_name = 'centers'
+
+    def get_queryset(self):
+        return Center.objects.filter(tags__name__in=["urgent care"]).order_by('name')
+
 
 def auth_index(request):
     if request.method == 'GET':
