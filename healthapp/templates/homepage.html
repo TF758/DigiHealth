@@ -74,7 +74,7 @@
                         qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
                         accusantium blanditiis, assumenda inventore?</p>
                     <div class="center">
-                        <a href="#" class="btn homepage-action">Clinics</a>
+                        <a href="{% url 'active_clinics' %}" class="btn homepage-action">Clinics</a>
                     </div>
                 </div>
             </div>
@@ -172,7 +172,7 @@
                 <h4 class="">Upcoming Clinics</h4>
                 {% for clinic in upcoming_clinics %}
                 <div class="row">
-                    <div class="clinic-container ">
+                    <div class="clinic-container">
                         <div class="date-container">
                             <span>{{clinic.start_date|date:"M"}}</span>
                             <span>{{clinic.start_date|date:"d"}}</span>

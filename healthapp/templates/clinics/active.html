@@ -3,24 +3,57 @@
 
 {% block content %}
 
+<div class="banner-container">
+    <img class="hero-banner"
+        src="https://rater8.com/wp-content/uploads/2022/10/Managing-Patient-Expectations-in-the-Waiting-Room-rater8.png"
+        alt="">
+</div>
 
+<div class="container">
+    <h2 class="header">Medical Clinics</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur ad facilis maxime repudiandae, ullam
+        animi iste dolor, enim reprehenderit quam, error nulla voluptatem quisquam non quas explicabo consectetur ab.
+    </p>
+</div>
 
 <div class="row center">
-    <ul class="pagination justify-content-center teal">
+    <ul class="pagination justify-content-center nav-filters">
+        {% for clinic in districts %}
+        {% ifchanged %}
         <li class="page-item"><a class="page-link white-text"
-                href="{% url 'district_active_clinics' 'GI' %}">Gros-Islet</a></li>
-        <li class="page-item"><a class="page-link white-text"
-                href="{% url 'district_active_clinics' 'CAS' %}">Castries</a></li>
+                href="{% url 'district_active_clinics' clinic.0 %}">{{clinic.1}}</a></li>
+        {%endifchanged %}
+        {% endfor %}
+    </ul>
+    <a href="" class="btn right">Future clinics</a>
 </div>
+
+
 <div class="container">
-    <div class="row">
-        <div class="col s12 m8 l6 offset-m2 offset-l3">
+    <table>
+        <thead>
+            <tr>
+                <th>Clinic</th>
+                <th>Facility</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
             {% for clinic in active_clinics %}
-            <p>{{clinic}}</p>
+            <tr class="row-highlight">
+                <td>{{clinic.event_name}}</td>
+                <td>{{clinic.facility.name}}</td>
+                <td>{{clinic.start_time| time:"g:i A"}}</td>
+                <td>{{clinic.end_time| time:"g:i A"}}</td>
+            </tr>
             {% endfor %}
-        </div>
-    </div>
+        </tbody>
+    </table>
+
 </div>
+
 <div class="pagination center">
     <span class="page-links">
         {% if page_obj.has_previous %}
@@ -34,4 +67,5 @@
         {% endif %}
     </span>
 </div>
+
 {% endblock %}

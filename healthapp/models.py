@@ -155,6 +155,9 @@ class ClinicEvent(models.Model):
     def get_clinic_name(self):
         return str(self.facility.name)
     
+    def get_clinic_district(self):
+         return str(self.facility.district.abbreviation)
+    
 
 class Article(models.Model):
         title  = models.CharField(max_length=100, null=False)

@@ -7,6 +7,7 @@
 
 :root {
   --primary-color: #0486cc;
+  --primary-color-transparent: #0486cc3f;
   --secondary-color: #f3f3f3;
   --accent-color: #59d359;
   --black: #00171f;
@@ -59,12 +60,12 @@ nav ul a {
 /* filter links */
 
 .pagination.nav-filters {
-  background-color: var(--accent-color) !important;
+  background-color: var(--primary-color) !important;
 }
 
 .nav-filters .page-item a {
-  color: var(--black) !important;
-  font-weight: 500;
+  color: var(--secondary-color) !important;
+  font-weight: 500 !important;
 }
 
 .nav-filters .page-item .active-link {
@@ -144,13 +145,24 @@ nav ul a {
   color: var(--secondary-color);
   font-weight: 500;
 }
+.banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .hero-banner {
-  width: 100%;
+  max-width: 100%;
   max-height: 500px;
 }
 
 .center-thumbnail {
   object-fit: contain;
   max-height: 300px;
+}
+.row-highlight {
+  transition: background-color 0.2s ease-out;
+}
+.row-highlight:hover {
+  background-color: var(--primary-color-transparent);
 }

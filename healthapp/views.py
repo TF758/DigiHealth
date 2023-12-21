@@ -258,7 +258,12 @@ class ActiveClinics(ListView):
     queryset  = ClinicEvent.objects.filter(is_active=True).order_by('start_date')     
     template_name = 'clinics/active.html'  
     context_object_name = "active_clinics"    
-    paginate_by = 1  
+    paginate_by = 12  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['districts'] = ClinicEvent.objects.values_list('facility__district__abbreviation','facility__district__name').filter(is_active=True).distinct()
+        return context
 
     
 class ActiveClinicsInDistrict(ListView):    
