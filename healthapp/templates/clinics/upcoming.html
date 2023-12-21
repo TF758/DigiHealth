@@ -4,172 +4,56 @@
 {% block content %}
 {% load materializecss %}
 
-<h1>Future Clinics</h1>
-
-{% for date in next_dates %}
-{% for key, value in date.items %}
-
-<li><a target="_blank" href="{% url 'future_clinics' futuredate=value %}">{{key|date:'D d M'}}</a></li>
-{%endfor%}
-{%endfor%}
-
-<h1>Clinic Scchdeule for {{upcoming_date|date:'D d M'}} </h1>
-<a href="#" data-target="slide-out" class="sidenav-trigger btn side-nav-trigger-btn">Navigate</a>
-<ul id="slide-out" class="sidenav mobile-submenu">
-
-    <li><a class="waves-effect" onclick="scrollSmoothTo('giNavHeader')">Gros-Islet</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('casNavHeader')">Castries</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('alrNavHeader')">Anse La Raye</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('denNavHeader')">Dennery</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('canNavHeader')">Canaries</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('micNavHeader')">Micoud</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('souNavHeader')">Sourfriere</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('choNavHeader')">Choiseul</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('labNavHeader')">Labourie</a></li>
-    <li><a class="waves-effect" onclick="scrollSmoothTo('vfNavHeader')">Vieux Fort</a></li>
-</ul>
-
-<h1 class="center-align" id="giNavHeader">Gros-Islet</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in gi_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
+<div class="banner-container">
+    <img class="hero-banner"
+        src="https://previews.123rf.com/images/nattyblissful/nattyblissful1906/nattyblissful190600019/124032714-woman-doctor-near-the-calendar-work-schedule-make-an-appointment-online-note-important-flat-vector.jpg"
+        alt="">
 </div>
 
-<h1 class="center-align" id="casNavHeader">Castries</h1>
+<h1>Upcoming Clinics</h1>
 <div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Clinic</th>
+                <th>Facility</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for clinic in upcoming_clinics %}
+            <tr class="row-highlight">
+                <td>{{clinic.start_date}}</td>
+                <td>{{clinic.event_name}}</td>
+                <td> <a
+                        href="{% url 'center_details' clinic.get_clinic_facility_short %}">{{clinic.get_clinic_facility_long}}</a>
+                </td>
+                <td>{{clinic.start_time| time:"g:i A"}}</td>
+                <td>{{clinic.end_time| time:"g:i A"}}</td>
+            </tr>
+            {% empty %}
+            <h2>No data</h2>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 
-<h1 class="center-align" id="alrNavHeader">Anse La Raye</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
-</div>
-<h1 class="center-align" id="denNavHeader">Dennery</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
-</div>
-<h1 class="center-align" id="canNavHeader">Canaries</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
-</div>
-<h1 class="center-align" id="micNavHeader">Micoud</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
-</div>
-<h1 class="center-align" id="souNavHeader">Sourfriere</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
-</div>
-<h1 class="center-align" id="choNavHeader">Choiseul</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
-</div>
-<h1 class="center-align" id="labNavHeader">Labourie</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
-</div>
-<h1 class="center-align" id="vfNavHeader">Vieux Fort</h1>
-<div class="container">
-    <div class="row">
-        {% for clinic in cas_clinics %}
-        <div class="col s12 m6 l4">
-            <div class="card-panel light-blue">{{clinic.clinic_type}}
-                <p>{{clinic.start_date}}</p>
-            </div>
-        </div>
-        {% empty %}
-        <h2 class="center-align">No upcoming clinics for this area</h2>
-        {% endfor %}
-    </div>
+<div class="pagination center">
+    <span class="page-links">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
 </div>
 
 

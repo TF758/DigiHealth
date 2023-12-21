@@ -44,7 +44,9 @@
             {% for clinic in active_clinics %}
             <tr class="row-highlight">
                 <td>{{clinic.event_name}}</td>
-                <td>{{clinic.facility.name}}</td>
+                <td> <a
+                        href="{% url 'center_details' clinic.get_clinic_facility_short %}">{{clinic.get_clinic_facility_long}}</a>
+                </td>
                 <td>{{clinic.start_time| time:"g:i A"}}</td>
                 <td>{{clinic.end_time| time:"g:i A"}}</td>
             </tr>

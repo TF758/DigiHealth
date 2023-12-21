@@ -315,50 +315,12 @@ def futureClinics(request, futuredate):
         else:
             return HttpResponse(' invalid')
 
-
-class UpcomingClinics(View):
-    def get(self, request):
-        upcoming_clinics = []
-        next_dates = []
-
-        tomorrow = date.today() + timedelta(days=1)
-        for i in range(1, 5):
-            day = date.today() + timedelta(days=1+i)
-            string_date = str(day)
-            date_dict = {day: string_date}
-            next_dates.append(date_dict)
-
-        gi_clinics = ClinicEvent.objects.filter(start_date=(
-            tomorrow), facility__district='GI', is_active=False)
-        cas_clinics = ClinicEvent.objects.filter(start_date=(
-            tomorrow), facility__district='CAS', is_active=False)
-
-        print(upcoming_clinics)
-
-        context = {'gi_clinics': gi_clinics, 'cas_clinics': cas_clinics,
-                   'next_dates': next_dates, 'upcoming_date':tomorrow}
-        return render(request, 'clinics/upcoming.html', context)
-
 class UpcomingClinics(ListView):
-    queryset  = ClinicEvent.objects.filter(is_active=False).order_by('start_date')     
-    template_name = 'clinics/upcoming_clinics.html'  
-    context_object_name = "clinics"    
-    paginate_by = 1 
+    queryset  = ClinicEvent.objects.filter(is_active=False).order_by('start_date')  
+    template_name = 'clinics/upcoming.html'
+    context_object_name = 'upcoming_clinics'
+    paginate_by = 10
 
-    def get_context_data(self,**kwargs):
-        context = super().get_context_data(**kwargs)
-        upcoming_clinics = []
-        next_dates = []
-
-        tomorrow = date.today() + timedelta(days=1)
-        for i in range(1, 5):
-            day = date.today() + timedelta(days=1+i)
-            string_date = str(day)
-            date_dict = {day: string_date}
-            next_dates.append(date_dict)
-        context['upcoming_date'] = tomorrow
-        context['next_dates'] =next_dates
-        return context 
 
 class GetUserProfile(LoginRequiredMixin, DetailView):
     model = CustomUser
