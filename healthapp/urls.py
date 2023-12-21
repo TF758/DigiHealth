@@ -30,6 +30,8 @@ urlpatterns = [
          UpcomingClinics.as_view(), name='upcoming_clinics'),
      path('clinics/urgent/',
          UrgentCareGlobal.as_view(), name='urgent_care_global'),
+     path('clinics/phc/',
+         PHCCentersGlobal.as_view(), name='phc_centers_global'),
     path('profile/<str:email>/',
          GetUserProfile.as_view(), name='get_user_profile'),
      path('profile/<str:email>/new',

@@ -96,6 +96,14 @@ class UrgentCareGlobal(ListView):
         return Center.objects.filter(tags__name__in=["urgent care"]).order_by('name')
 
 
+class PHCCentersGlobal(ListView):
+    template_name = 'centers/phc.html'
+    context_object_name = 'centers'
+
+    def get_queryset(self):
+        return Center.objects.filter(tags__name__in=["phc"]).order_by('name')
+
+
 def auth_index(request):
     if request.method == 'GET':
         context = {}
