@@ -168,7 +168,8 @@
         </div>
         <div class="col s12 m6 l4 offset-l2">
             <div class="row">
-                <a class="nav-btn right" href="#">See all<i class="material-icons right">arrow_forward</i></a>
+                <a class="nav-btn right" href="{% url 'upcoming_clinics' %}">See all<i
+                        class="material-icons right">arrow_forward</i></a>
                 <h4 class="">Upcoming Clinics</h4>
                 {% for clinic in upcoming_clinics %}
                 <div class="row">
