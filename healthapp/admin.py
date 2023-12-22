@@ -37,7 +37,10 @@ class OpeningHoursAdmin(admin.ModelAdmin):
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'tag_list']
+
+    def tag_list(self, obj):
+        return u", ".join(o.name for o in obj.tags.all())
 
 
 class ClinicEventAdmin(admin.ModelAdmin):

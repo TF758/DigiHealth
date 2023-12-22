@@ -174,6 +174,8 @@ class Article(models.Model):
         Center, null=True,blank=True, on_delete=models.DO_NOTHING)
         article_image = models.ImageField(upload_to='article_images', null=True, blank=True)
 
+        tags = TaggableManager()
+
         def __str__(self):
             return str(self.title)
         
