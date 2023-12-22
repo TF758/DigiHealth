@@ -28,9 +28,9 @@
                         class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/">Home</a></li>
-                    <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Wellness
-                            Centers <i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="#">Hospitals</a></li>
+                    <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Medical
+                            Facilities <i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a href="#">News</a></li>
                     <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
                                 class="material-icons right">arrow_drop_down</i></a>
                     </li>
@@ -59,14 +59,13 @@
         <li><a href="{% url 'centers_all_districts' %}">
                 By District</a></li>
         <li><a class="waves-effect" href="{% url 'centers' %}">A-Z</a></li>
+        <li><a href="{% url 'urgent_care_global' %}">
+                Urgent Care</a></li>
+        <li><a class="waves-effect" href="{% url 'phc_centers_global' %}">Primary Care</a></li>
     </ul>
 
     <ul id="clinic-dropdown-dekstop" class="dropdown-content">
         <li><a href="{% url 'active_clinics' %}">Active</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="#!">Active In My Area</a></li>
-        {% endif %}
-        <li class="divider"></li>
         <li><a href="{% url 'upcoming_clinics' %}">Upcoming</a></li>
     </ul>
 
@@ -82,38 +81,37 @@
 
     <!-- mobile side nav -->
 
-    <ul id="mobile-side-nav" class="sidenav">
-        <li><a href="/">Home</a></li>
-        <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-mobile">Wellness
-                Centers <i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><a href="#">Hospitals</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-mobile">Clinics<i
-                    class="material-icons right">arrow_drop_down</i></a>
+    <ul id="mobile-side-nav" class="sidenav side-navbar blue">
+        <li><a href="/" class="white-text">Home</a></li>
+        <li><a href="#" class="dropdown-trigger white-text" data-target="center-dropdown-options-mobile">Medical
+                Facilities <i class="material-icons right white-text">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-trigger white-text" href="#!" data-target="clinic-dropdown-mobile">Clinics<i
+                    class="material-icons right white-text">arrow_drop_down</i></a>
         </li>
-        <li><a href="#">News</a></li>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/">Profile</a></li>
         {% if user.is_authenticated %}
-        <li><a href="/logout">Logout</a></li>
+        <li><a href="/profile/{{user}}" class="white-text">Profile</a></li>
+        <li><a href="{% url 'account_logout' %}" class="white-text">Logout</a></li>
         {% else %}
-        <li><a href="/login">Login</a></li>
+        <li>
+            <a href="{% url 'account_signup' %}" class="white-text">Register</a>
+        </li>
+        <li><a href="{% url 'account_login' %}" class="white-text">Login</a></li>
         {% endif %}
 
     </ul>
 
     <ul id="center-dropdown-options-mobile" class="dropdown-content">
-        <li><a href="/centers/district/all">
+        <li><a href="{% url 'centers_all_districts' %}">
                 By District</a></li>
-        <li><a class="waves-effect" href="/centers/">A-Z</a></li>
+        <li><a class="waves-effect" href="{% url 'centers' %}">A-Z</a></li>
+        <li><a href="{% url 'urgent_care_global' %}">
+                Urgent Care</a></li>
+        <li><a class="waves-effect" href="{% url 'phc_centers_global' %}">Primary Care</a></li>
     </ul>
 
     <ul id="clinic-dropdown-mobile" class="dropdown-content">
-        <li><a href="/active_clinics">Active</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="#!">Active In My Area</a></li>
-        {% endif %}
-        <li class="divider"></li>
-        <li><a href="/upcoming">Upcoming</a></li>
+        <li><a href="{% url 'active_clinics' %}">Active</a></li>
+        <li><a href="{% url 'upcoming_clinics' %}">Upcoming</a></li>
     </ul>
     {% if messages %}
     <div>
