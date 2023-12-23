@@ -28,10 +28,10 @@ function ajax_query() {
             // create link
             anchor = document.createElement("a");
             if (current_title == "District Wellness Centers") {
-              link = "/centers/" + v.center_abbreviation + "/";
+              link = "/center/" + v.center_abbreviation + "/";
             } else {
               anchor = document.createElement("a");
-              link = v.center_abbreviation + "/";
+              link = "/center/" + v.center_abbreviation + "/";
             }
 
             anchor.href = link;
