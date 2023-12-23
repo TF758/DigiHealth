@@ -81,6 +81,7 @@ class CenterDetails(ListView):
         context['operating_hours'] = OpeningHours.objects.filter(center__center_abbreviation=center_abbreviation)
         context['address'] = Center.objects.get(center_abbreviation=center_abbreviation).address
         context['active_clinics'] = ClinicEvent.objects.filter(start_date=today, facility__center_abbreviation =center_abbreviation, is_active=True)
+        context['upcoming_clinics'] = ClinicEvent.objects.filter(start_date__gte = tomorrow, facility__center_abbreviation =center_abbreviation, is_active=False)
 
         return context
     

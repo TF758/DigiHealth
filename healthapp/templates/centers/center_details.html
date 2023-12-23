@@ -1,6 +1,9 @@
 {% extends 'includes/base.html' %}
+{% load static %}
 {% block title %}{{center_details.name}}{% endblock %}
-
+{% block extra_css %}
+<link href="{% static 'css/articleStyles.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 <div id="modal1" class="modal">
     <div class="modal-content">
@@ -13,102 +16,170 @@
 </div>
 
 
-<div class="parallax-container">
-    <div class="parallax"><img src="{{center_details.center_image.url}}"" style=" width:100%; height:auto;">
+<div class="row">
+    <div class="banner-container">
+        <img class="hero-banner"
+            src="https://www.mountsinai.org/files/MSHealth/Assets/Media/final/HS/Care/PrimaryCare.jpg" alt="">
     </div>
-</div>
 
-<div class=" section white">
-    <div class="row">
+    <div class="container">
         <h2 class="header">{{center_details.name}}</h2>
-        <p class="grey-text text-darken-3 lighten-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic ut rem
-            cumque necessitatibus maxime ipsum ducimus quo. Similique fuga voluptas, dolor molestiae debitis maxime
-            iusto mollitia eaque, ad repellendus possimus.
-            Possimus in voluptas ratione non aliquid sunt facilis dolorem, quia vitae quae earum ipsam modi ab
-            accusantium amet animi tempora temporibus exercitationem sapiente ullam nobis ea. Nam sint laborum veniam?
-            Excepturi, ut itaque? Iure est voluptas minus animi dolore a tenetur sapiente dolores aliquid rem
-            repudiandae natus facilis quaerat quibusdam beatae eum, velit vitae dignissimos? Ipsum unde in veritatis
-            suscipit?
-            Alias cumque, provident delectus, dolorem aliquid earum tempore sunt fuga maxime corporis nisi incidunt
-            corrupti tenetur sequi vel beatae aut praesentium. Harum illo natus praesentium pariatur minus facere eaque?
-            Dolor.
-            Veniam illum, ad numquam quae consequatur porro eligendi, vel error dolorum nemo sequi est? Alias ullam
-            laboriosam officiis nam velit molestias, iste quidem perspiciatis, sequi tenetur, aliquam inventore
-            molestiae accusamus?
-            Unde, corporis error, sunt dolore inventore blanditiis, nostrum dignissimos impedit obcaecati eligendi
-            nulla. Cupiditate veritatis corporis dolor a quia, nobis ad velit debitis non! Dolorem minus nemo voluptatum
-            eveniet suscipit.
-            Vero ab natus sit aut quia voluptatibus qui, unde sed, dolore nulla alias quae nisi quo aliquam provident
-            sunt autem nam veniam consectetur distinctio nemo, ea reprehenderit vel pariatur! Recusandae!
-            At provident itaque eos, consequuntur, molestias aspernatur quo dolore nobis fugiat ullam mollitia libero
-            inventore ea harum nihil a, voluptas corrupti! Inventore aperiam eum molestiae omnis distinctio. Quidem,
-            ipsa ratione!
-            Impedit tenetur sunt voluptatem atque molestiae sequi praesentium suscipit eaque fugiat culpa eos quidem
-            ullam explicabo recusandae vero veniam veritatis ratione, qui velit delectus repudiandae, est officiis
-            eligendi corporis! Necessitatibus!
-            Expedita quo iure quos iste inventore explicabo voluptate architecto! Sunt obcaecati similique est
-            praesentium doloribus mollitia, sint temporibus incidunt doloremque vero itaque perferendis? Maiores
-            reprehenderit ullam in accusamus voluptatibus facilis?</p><a class="waves-effect waves-light modal-trigger"
-            href="#modal1">Open Map</a>
+        <p class="">Primary care is the first point of contact between a patient and the healthcare system, and it gives
+            patients access to the knowledge and facilities they need to achieve their health goals. Primary care
+            providers usually deal with various patients and have a proper knowledge of the many physical,
+            psychological, and social factors that affect their patients.
+            <br>
+            Primary care practitioners are responsible for the ongoing health of their patients by preventing,
+            diagnosing early and managing common health conditions. An important aspect of their work is making
+            referrals to specialists as and when needed.
+            <br>
+            <br>
+            They are also in a unique position to understand and study the natural course of disease, the family setting
+            in which the patient is placed, and to treat and follow up chronic or recurrent health conditions.
+            <br>
+            <br>
+            <a class="waves-effect waves-light modal-trigger" href="#modal1">Open Map</a>
+        </p>
+
     </div>
 </div>
-</div>
 
-<div class="row">
-    <div class="col s12 m12 l6">
-        <h3>Clinics</h3>
-        <div class="col s12 m12 l6  blue">
-            <a class="white-text" href="{%url 'center_active_clinics' center_details.center_abbreviation %}">
-                <h4>Active Clinics</h4>
-            </a>
+<div class="container">
+    <h2 class="center">Clinics</h2>
+    <div class="row">
+        <div class="col s12 m6 l4 ">
+            <h3 class="center">Active Clinics</h3>
+            {% if active_clinics%}
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for clinic in active_clinics %}
+                    <tr class="row-highlight">
+                        <td> {{ clinic.event_name }}</td>
+                        <td> {{ clinic.start_time | time:"g : i A" }}</td>
+                        <td> {{ clinic.end_time | time:"g : i A" }}</td>
+                    </tr>
+                    <tr class="row-highlight">
+                        <td> {{ clinic.event_name }}</td>
+                        <td> {{ clinic.start_time | time:"g : i A" }}</td>
+                        <td> {{ clinic.end_time | time:"g : i A" }}</td>
+                    </tr>
+                    <tr class="row-highlight">
+                        <td> {{ clinic.event_name }}</td>
+                        <td> {{ clinic.start_time | time:"g : i A" }}</td>
+                        <td> {{ clinic.end_time | time:"g : i A" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4 class="center">No Active Clinics.</h4>
+            {% endif %}
         </div>
-        <div class="col s12 m12 l6 yellow">
-            <h4>Upcoming Clinics</h4>
+        <div class="col s12 m6 l5 offset-l3">
+            <h3 class="center">Upcoming Clinics</h3>
+            {% if upcoming_clinics%}
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for clinic in upcoming_clinics %}
+                    <tr class="row-highlight">
+                        <td> {{ clinic.start_date }}</td>
+                        <td> {{ clinic.event_name }}</td>
+                        <td> {{ clinic.start_time | time:"g : i A" }}</td>
+                        <td> {{ clinic.end_time | time:"g : i A" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4 class="center">No Clinics Scheduled for this facility.</h4>
+            {% endif %}
         </div>
     </div>
-    <div class="col s12 m12 l6">
-        <h3>Clinic Updates</h3>
-        <ul>
-            {% for article in center_news %}
-            <li><a href="#">
-                    <h4>{{article.title}}</h4>
-                </a>
-                <p>{{article.date|date:"M d, Y"}}</p>
-            </li>
-            {% empty %}
-            <p>No articles, yet</p>
-            {% endfor %}
-        </ul>
-    </div>
-
 </div>
 
-<div class="row">
-    <div class="col s12 m4 l4 ">
-        <h2 class="title">Operating Hours</h2>
-        <table class="">
-            <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>Open</th>
-                    <th>Close</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for hours in operating_hours %}
-                <tr>
-                    <td> {{ hours.get_weekday_display }}</td>
-                    <td> {{ hours.from_hour }}</td>
-                    <td> {{ hours.to_hour }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+
+<div class="container">
+    <h3 class="center">Clinic Updates</h3>
+    <div class="row">
+        <div class="article-container center-details col s12 m6 l3 center ">
+            <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                alt="">
+            <div class="article-text-container center-details">
+                <p class="">article.title</p>
+                <p>This is a test title.</p>
+            </div>
+        </div>
+        <div class="article-container center-details col s12 m6 l3 center ">
+            <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                alt="">
+            <div class="article-text-container center-details">
+                <p class="">article.title</p>
+                <p>This is a test title.</p>
+            </div>
+        </div>
+        <div class="article-container center-details col s12 m6 l3 center ">
+            <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                alt="">
+            <div class="article-text-container center-details">
+                <p class="">article.title</p>
+                <p>This is a test title.</p>
+            </div>
+        </div>
+        <div class="article-container center-details col s12 m6 l3 center ">
+            <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                alt="">
+            <div class="article-text-container center-details">
+                <p class="">article.title</p>
+                <p>This is a test title.</p>
+            </div>
+        </div>
+
+
     </div>
 </div>
-<script>
-    day_today = new Date().getDay();
-    console.log(day_today)
-</script>
+<div class="container">
+    <div class="row center">
+        <div class="col s12 m4 l4 offset-l4  offset-m4 ">
+            <h2 class="title">Operating Hours</h2>
+            {% if operating_hours %}
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Open</th>
+                        <th>Close</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hours in operating_hours %}
+                    <tr>
+                        <td> {{ hours.get_weekday_display }}</td>
+                        <td> {{ hours.from_hour }}</td>
+                        <td> {{ hours.to_hour }}</td>
+                    </tr>
 
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4 class="center">No operating hours listed for this facility</h4>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
