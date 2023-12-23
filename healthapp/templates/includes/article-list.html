@@ -1,0 +1,35 @@
+{% for article in articles %}
+
+{% if forloop.last %}
+
+<div hx-get="{% url 'news' %}?page={{page_obj.number|add:1}}" hx-trigger="revealed" hx-swap="afterend" hx-target="this">
+    {% else %}
+    <div class="">
+        {% endif %}
+        <div class="">
+            <div class="article-container updates">
+                <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                    alt="" class="col s12">
+                <div class="article-text-container col s12 ">
+                    <p>This is a test title.</p>
+
+                </div>
+            </div>
+            <!-- <div class="article-container updates">
+                <div class="img-container col s12 m6 l6">
+                    <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                        alt="">
+                </div>
+                <div class="article-text-container col s12 m6 l6">
+                    <p>Title</p>
+                    <p>Subtitle</p>
+                    <p class="">date</p>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- <h1>{{article}}</h1>
+        <h2>{{article.date}}</h2> -->
+    </div>
+
+    {% endfor %}

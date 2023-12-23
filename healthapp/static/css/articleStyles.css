@@ -1,0 +1,27 @@
+.article-container img {
+  max-width: 400px;
+}
+.article-container.updates {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.article-text-container {
+  margin-left: 1.5rem;
+
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* .article-container.updates img {
+  flex-basis: 50%;
+}
+
+.article-text-container {
+  border: 2px solid blueviolet;
+  flex-basis: 50%;
+} */
