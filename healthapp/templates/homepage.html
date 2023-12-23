@@ -37,8 +37,10 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat nihil beatae temporibus, id
                         unde est asperiores iure, perspiciatis quae autem omnis deleniti ipsam totam minima officia quam
                         dolore modi ad?</p>
+                    <br>
                     <div class="center">
-                        <a href="{% url 'urgent_care_global' %}" class="btn homepage-action">Urgent Cares</a>
+                        <a href="{% url 'urgent_care_global' %}" class="nav-btn homepage-action"> View Urgent Care
+                            Facilities</a>
                     </div>
                 </div>
             </div>
@@ -54,14 +56,14 @@
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci iusto velit, error quas eum
                         qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
                         accusantium blanditiis, assumenda inventore?</p>
+                    <br>
                     <div class="center">
-                        <a href="{% url 'phc_centers_global' %}" class="btn homepage-action">Primary Care
+                        <a href="{% url 'phc_centers_global' %}" class="nav-btn homepage-action">View Primary Care
                             Facilitites</a>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="col s12 m12 l4">
             <div class="card no-shadows">
                 <div class="card-image">
@@ -73,54 +75,36 @@
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci iusto velit, error quas eum
                         qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
                         accusantium blanditiis, assumenda inventore?</p>
+                    <br>
                     <div class="center">
-                        <a href="{% url 'active_clinics' %}" class="btn homepage-action">Clinics</a>
+                        <a href="{% url 'active_clinics' %}" class="nav-btn homepage-action">See All Active Clinics</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col s12 m12 l12  ">
-        <div class="carousel carousel-slider center ">
-            <div class="carousel-item blue white-text" href="#one!">
-                <h2>Article title here</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, consequuntur quaerat? Laborum
-                    sunt et facilis tempore necessitatibus amet praesentium quos, numquam dicta minima provident neque
-                    ab sed quibusdam architecto molestiae. <a href="#" class="red-text">Read more</a></p>
-                <div class="hide-on-small-only"><img
-                        src="https://thevoiceslu.com/wp-content/uploads/2023/03/anesthesia-machine-donated-to-St-Jude-Hospital.jpg"
-                        alt=""></div>
 
+<div class="row">
+    <div class="col s12 m8 l8 offset-l2 offset-m2 ">
+        <div class="carousel carousel-slider center ">
+            {% for article in pinned_articles %}
+
+            <div class="carousel-item blue " href="">
+                <span>{{article.title}}</span>
+                <p>{{article.subtitle}}
+                    <a href="{% url 'article_details' article.id %}" class="red-text">Read more</a>
+                </p>
+                {% if article.article_image %}
+                <a href="{% url 'article_details' article.id %}" class="red-text"><img
+                        src="{{article.article_image.url}}" alt=""></a>
+                {% else %}
+                <a href="{% url 'article_details' article.id %}" class="red-text"><img
+                        src="https://i.fbcd.co/products/original/s2303-important-an-mainpreview-3298ae1bcde81ea0024e1dbc56a39ad5c5debcb8816fe0813f827920fdc02cbf.jpg"
+                        alt=""></a>
+                {% endif %}
             </div>
-            <div class="carousel-item blue white-text" href="#two!">
-                <h2>Article title here</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, consequuntur quaerat? Laborum
-                    sunt et facilis tempore necessitatibus amet praesentium quos, numquam dicta minima provident neque
-                    ab sed quibusdam architecto molestiae. <a href="#" class="red-text">Read more</a></p>
-                <div class="hide-on-small-only"> <img
-                        src="https://loopnewslive.blob.core.windows.net/liveimage/sites/default/files/2022-12/slhta_tourism_enhancement_fund_55a2e9a1c57ebbdf76bfaf57a0a6a3d2.jpg"
-                        alt=""></div>
-            </div>
-            <div class="carousel-item blue white-text" href="#three!">
-                <h2>Article title here</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, consequuntur quaerat? Laborum
-                    sunt et facilis tempore necessitatibus amet praesentium quos, numquam dicta minima provident neque
-                    ab sed quibusdam architecto molestiae. <a href="#" class="red-text">Read more</a></p>
-                <div class="hide-on-small-only"> <img
-                        src="https://www.paho.org/sites/default/files/styles/max_1500x1500/public/2019-10/hearts-launch-st-lucia-1500x855.jpg?itok=PLDdHhD9"
-                        alt=""></div>
-            </div>
-            <div class="carousel-item blue white-text" href="#four!">
-                <h2>Article title here</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, consequuntur quaerat? Laborum
-                    sunt et facilis tempore necessitatibus amet praesentium quos, numquam dicta minima provident neque
-                    ab sed quibusdam architecto molestiae. <a href="#" class="red-text">Read more</a></p>
-                <div class="hide-on-small-only"> <img
-                        src="https://www.paho.org/sites/default/files/styles/max_1500x1500/public/2023-03/ecc-lcalabtraining.jpg?itok=dJAXxEUG"
-                        alt=""></div>
-            </div>
+            {%endfor%}
         </div>
         <br>
         <div class="center-align">
@@ -135,7 +119,8 @@
     <div class="row">
         <div class="col s12 m6 l4">
             <div class="row">
-                <a class="nav-btn right" href="#">See all<i class="material-icons right">arrow_forward</i></a>
+                <a class="nav-btn right" href="{% url 'news' %}">See all<i
+                        class=" material-icons right">arrow_forward</i></a>
                 <h4 class="">Updates</h4>
                 {% for article in articles %}
                 <div class="row">
@@ -201,13 +186,13 @@
                     <i class="material-icons">info</i></a></h4>
             <div class="row">
                 <div class="col s12 m12 l4 center">
-                    <p><a href="" class="btn">Active Clinics</a></p>
+                    <p><a href="" class="nav-btn">Active Clinics</a></p>
                 </div>
                 <div class="col s12 m12 l4 center">
-                    <p><a href="" class="btn ">Medical facilitites</a></p>
+                    <p><a href="" class="nav-btn ">Medical facilitites</a></p>
                 </div>
                 <div class="col s12 m12 l4 center">
-                    <p><a href="" class="btn">Upcoming Clinics</a></p>
+                    <p><a href="" class="nav-btn">Upcoming Clinics</a></p>
                 </div>
 
             </div>
