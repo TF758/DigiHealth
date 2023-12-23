@@ -114,7 +114,7 @@ class Center (models.Model):
     center_image = models.ImageField(upload_to='center_images')
     address =  models.CharField(null=True, max_length=200)
     
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     def __str__(self):
         return self.center_abbreviation
@@ -174,7 +174,7 @@ class Article(models.Model):
         Center, null=True,blank=True, on_delete=models.DO_NOTHING)
         article_image = models.ImageField(upload_to='article_images', null=True, blank=True)
 
-        tags = TaggableManager()
+        tags = TaggableManager(blank=True)
 
         def __str__(self):
             return str(self.title)

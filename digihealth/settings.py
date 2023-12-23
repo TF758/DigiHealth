@@ -44,14 +44,15 @@ INSTALLED_APPS = [
     'materializecssform',
     'django_filters',
     'easy_maps',
-    'betterforms',
+    'betterforms',  #uninstall this
     'taggit',
 
-    'allauth', # new
-    'allauth.account', # new
-    'allauth.socialaccount', # new
-    'allauth.socialaccount.providers.github', # new
-     "django_browser_reload",
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.github', 
+    "django_browser_reload",
+    "django_htmx",
 
 ]
 
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    "django_htmx.middleware.HtmxMiddleware",
    
 ]
 
