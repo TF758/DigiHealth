@@ -9,6 +9,7 @@ from django.contrib.auth.views import LoginView
 from . import views
 from . import center_views
 from . import clinic_views
+from . import profile_views
 
 
 urlpatterns = [
@@ -31,11 +32,11 @@ urlpatterns = [
     path('clinics/upcoming/',
          clinic_views.UpcomingClinics.as_view(), name='upcoming_clinics'),
     path('profile/<str:email>/',
-         GetUserProfile.as_view(), name='get_user_profile'),
+         profile_views.GetUserProfile.as_view(), name='get_user_profile'),
      path('profile/<str:email>/new',
-         CreateUserProfile.as_view(), name='create_user_profile'),
+         profile_views.CreateUserProfile.as_view(), name='create_user_profile'),
     path('profile/<str:email>/update',
-         UpdateUserProfile.as_view(), name='update_user_profile'),
+         profile_views.UpdateUserProfile.as_view(), name='update_user_profile'),
     path('profile/<str:email>/address/create',
          CreateUserAddress.as_view(), name='create_user_address'),
     path('profile/<str:email>/address/update',

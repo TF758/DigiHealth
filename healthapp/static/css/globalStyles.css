@@ -7,6 +7,7 @@
 
 :root {
   --primary-color: #0486cc;
+  --primary-color-light: #41a3d8;
   --primary-color-dark: #026194;
   --primary-color-transparent: #0486cc3f;
   --secondary-color: #f3f3f3;
@@ -189,4 +190,21 @@ nav ul a {
 ::placeholder {
   color: var(--dark-grey);
   opacity: 1; /* Firefox */
+}
+
+/* SIDE NAV STYLING */
+
+.side-navbar li {
+  border-bottom: 0.1px solid var(--secondary-color);
+}
+
+.rotate {
+  -moz-transition: all 0.05s linear;
+  -webkit-transition: all 0.05s linear;
+  transition: all 0.05s linear;
+}
+.rotate.down {
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
