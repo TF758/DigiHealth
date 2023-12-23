@@ -166,7 +166,9 @@ class ClinicEvent(models.Model):
     
 
 class Article(models.Model):
+        dummy_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec massa enim, ultrices ac quam in, semper aliquam sem. Sed ante ex, interdum lacinia urna at, faucibus hendrerit enim. Morbi varius porta neque, quis viverra ex posuere sit amet. Nam quis arcu eget dui vestibulum mollis"
         title  = models.CharField(max_length=100, null=False)
+        subtitle  = models.CharField(max_length=200, null=True,blank=True, default=dummy_text)
         date = models.DateTimeField(auto_now_add=True)
         body = models.TextField(max_length=10000, null=False)
         is_global = models.BooleanField(default=False, null=True)

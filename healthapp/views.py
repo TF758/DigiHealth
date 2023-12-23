@@ -73,6 +73,7 @@ class HomePage(ListView):
         context['centers'] = Center.objects.all().order_by('name')[:3]
         context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date').reverse()[:5]
         context['articles'] = Article.objects.filter(is_global = True).order_by('date')[:5]
+        context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
         return context
 
 
@@ -213,7 +214,5 @@ class ArticleList(ListView):
         
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
-
-       
         context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
         return context

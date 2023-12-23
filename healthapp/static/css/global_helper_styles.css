@@ -1,11 +1,4 @@
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-main {
-  flex: 1 0 auto;
-}
+/* UNIVERSAL STLYES PRESENT IN MORE THAN ONE PAGE */
 
 /* for dropdown menus in nav */
 .dropdown-content.nested {
@@ -15,7 +8,8 @@ main {
 .dropdown-content .dropdown-content {
   margin-left: 100%;
 }
-/* blinker icons in search mens */
+
+/* blinker icons in search Bar */
 @keyframes blinker {
   from {
     opacity: 1;
@@ -103,6 +97,7 @@ input.search-field:focus:hover {
   background-color: #fff;
 }
 
+/* Search Bar nav elements */
 nav ul.popup-list li {
   float: none;
 }
