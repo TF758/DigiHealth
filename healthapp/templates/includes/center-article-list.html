@@ -2,7 +2,8 @@
 
 {% if forloop.last %}
 
-<div hx-get="{% url 'news' %}?page={{page_obj.number|add:1}}" hx-trigger="revealed" hx-swap="afterend" hx-target="this">
+<div hx-get="{% url 'center_news'  center.center_abbreviation %}?page={{page_obj.number|add:1}}" hx-trigger="revealed"
+    hx-swap="afterend" hx-target="this">
     {% else %}
     <div class="">
         {% endif %}

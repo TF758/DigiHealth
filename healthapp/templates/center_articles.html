@@ -1,0 +1,63 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% block title %}{{center.name}} Bulletin Board{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/articleStyles.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <a class="nav-btn left" href="{% url 'center_details' center.center_abbreviation %}">{{center.name}}<i
+            class="material-icons left">arrow_back</i></a>
+
+    <h1 class="center section-title">{{center.name}} Notices</h1>
+    <div class="divider"></div>
+    <br>
+    <div class="row">
+        {% for article in pinned_articles %}
+        <div class="col s12 m6 l4 center">
+            <div class="card no-shadows">
+                {% if article.article_image %}
+                <a href="{% url 'article_details' article.id %}">
+                    <div class="card-image">
+                        <img src="{{article.article_image.url}}" alt="">
+                    </div>
+                </a>
+                {% else %}
+                <a href="{% url 'article_details' article.id %}">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                            alt="">
+                    </div>
+                </a>
+                {% endif %}
+                <div class="card-content">
+                    <a href="{% url 'article_details' article.id %}">
+                        <p>{{article.center_id}}</p>
+                        <p class="card-title emphasis"> {{article.title}} In one sentence to test length with abit more
+                            text to make sure</p>
+                    </a>
+                    <br>
+                    <div class="center">
+                        <a href="{% url 'urgent_care_global' %}" class="nav-btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="center section-title">{{center.name}} Updates</h2>
+    <div class="divider"></div>
+    <br>
+
+    <div>
+        {% include 'includes/center-article-list.html' %}
+    </div>
+</div>
+</div>
+
+{% endblock %}

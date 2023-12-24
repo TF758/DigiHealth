@@ -49,6 +49,8 @@ urlpatterns = [
          
     path('news/',
          ArticleList.as_view(), name='news'),
+     path('news/<str:center_abbreviation>/',
+         CenterArticleList.as_view(), name='center_news'),
      path('article/<int:pk>',
          ViewArticle.as_view(), name='article_details'),
          

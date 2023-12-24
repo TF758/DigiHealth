@@ -204,8 +204,6 @@ class ArticleList(ListView):
     context_object_name = 'articles'
     paginate_by = 1
     
-
-    
     def get_template_names(self, *args, **kwargs):
         if self.request.htmx:
             return "includes/article-list.html"
@@ -215,4 +213,29 @@ class ArticleList(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
         context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
+        return context
+
+class CenterArticleList(ListView):
+    template_name = 'center_articles.html'
+    context_object_name = 'articles'
+    paginate_by = 1
+
+    def get_queryset(self):
+        center_abbreviation = self.kwargs['center_abbreviation']
+        print(center_abbreviation)
+        return Article.objects.filter(center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
+    
+    def get_template_names(self, *args, **kwargs):
+        if self.request.htmx:
+            return "includes/center-article-list.html"
+        else:
+            return self.template_name
+        
+    def get_context_data(self, **kwargs):
+        context = super(CenterArticleList, self).get_context_data(**kwargs)
+
+        center_abbreviation = self.kwargs['center_abbreviation']
+
+        context['center'] = Center.objects.get(center_abbreviation =self.kwargs['center_abbreviation'] )
+        context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"], center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
         return context
