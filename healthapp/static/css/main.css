@@ -346,3 +346,7 @@ nav ul.popup-list li a:hover {
 .blue {
   background-color: var(--primary-color) !important;
 }
+
+.space-from-top {
+  padding-top: 2rem;
+}
