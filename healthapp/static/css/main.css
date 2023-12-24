@@ -21,7 +21,7 @@
   width: 100%;
 }
 
-/* navigation */
+/* navigation styling START */
 .nav-wrapper {
   background-color: var(--primary-color) !important;
   font-weight: 600;
@@ -34,35 +34,12 @@ nav ul a {
 .dropdown-content li > a {
   color: var(--primary-color) !important;
 }
+/* navigation styling END */
 
 /* footer content */
 
 .page-footer {
   background-color: var(--primary-color) !important;
-}
-
-/* search bar area */
-
-.search-bar-section {
-  margin-top: 0.8rem;
-}
-
-.search-bar-section input {
-  border: 1.5px solid var(--primary-color);
-  margin-right: 0.8rem;
-  color: var(--black);
-}
-
-.search-bar-section input:hover {
-  background-color: var(--accent-color);
-}
-
-.search-bar-section input:focus {
-  border: 2px solid var(--black);
-}
-
-.search-bar-section .search-icon {
-  color: var(--accent-color);
 }
 
 /* filter links */
@@ -179,15 +156,189 @@ nav ul a {
   border-radius: 50%;
 }
 
-::placeholder {
-  color: var(--dark-grey);
-  opacity: 1; /* Firefox */
-}
-
 /* SIDE NAV STYLING */
 
 .side-navbar li {
   border-bottom: 0.1px solid var(--secondary-color);
 }
 
-/* carosul */
+/* for dropdown menus in nav */
+.dropdown-content.nested {
+  overflow-y: visible;
+}
+
+.dropdown-content .dropdown-content {
+  margin-left: 100%;
+}
+
+/* blinker icons in search Bar */
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.blink {
+  text-decoration: blink;
+  animation-name: blinker;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+/* blinker icons in search Bar END */
+
+/* search bar stlyings START */
+nav form {
+  position: relative;
+  background: inherit;
+  height: auto;
+}
+.search-close-icon {
+  display: none !important;
+  position: absolute;
+  top: 0;
+  left: 100% !important;
+  padding-left: 0px;
+  color: rgba(0, 0, 0, 0.54);
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+input.search-field {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.54);
+  border-radius: 2px;
+  border: 0;
+  border-radius: 5px;
+  height: 50px;
+  padding: 8px 8px 8px 60px;
+  width: 350px;
+  background: #f7f7f7;
+  transition: background 0.2s;
+}
+input.search-field:hover {
+  background: #ebebeb;
+}
+
+input.search-field:focus {
+  outline: none;
+  color: #212121;
+}
+input.search-field:focus:hover {
+  background: #f7f7f7;
+}
+.search-icon {
+  position: absolute;
+  top: 0;
+  padding-left: 20px;
+  color: rgba(0, 0, 0, 0.54);
+}
+.search-content {
+  color: #303c42;
+  width: 90%;
+  margin: auto;
+  height: auto;
+  padding: 8px 10px;
+}
+
+.search-popup {
+  overflow: hidden;
+  left: 0px;
+  min-height: 50px;
+  max-height: 700px;
+  width: 350px;
+  top: -450px;
+  position: absolute;
+  z-index: 2;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.search-bar-section {
+  margin-top: 0.8rem;
+}
+
+.search-bar-section input {
+  border: 1.5px solid var(--primary-color);
+  margin-right: 0.8rem;
+  color: var(--black);
+}
+
+.search-bar-section input:hover {
+  border: 2px solid var(--primary-color-transparent);
+}
+
+.search-bar-section input:focus {
+  border: 2px solid var(--black);
+}
+
+.search-bar-section .search-icon {
+  color: var(--primary-color);
+}
+
+/* search bar stlyings END */
+
+/* Search Bar nav elements START */
+nav ul.popup-list li {
+  float: none;
+}
+nav ul.popup-list li a {
+  line-height: 30px;
+  padding: 0;
+  font-size: 1.2em;
+  color: #212121 !important;
+}
+nav ul.popup-list li a:hover {
+  background-color: #f7f7f7;
+}
+
+.top-margin {
+  margin-top: 8px;
+}
+
+.search-popup-populated {
+  top: 50px;
+}
+/* Search Bar nav elements END */
+
+/* alert styles START */
+
+.alert .card-content .material-icons {
+  font-size: 1.5em;
+  position: relative;
+  top: 5px;
+  margin-right: 0.5em;
+}
+
+/* alert styles END */
+
+.card-content span {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 4px;
+}
+
+/* for center query */
+.center-query-form {
+  height: auto !important;
+}
+
+.remove-padding {
+  padding: 0;
+  margin: 0;
+  display: inline;
+  height: 100%;
+}
+
+/* CAROUSEL STYLING */
+
+.blue {
+  background-color: var(--primary-color) !important;
+}
