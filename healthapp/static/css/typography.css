@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+/* top nav styling for text */
+.nav-wrapper ul a {
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+/* side nav text styling */
+:root {
+  --primary-color: #0486cc;
+  --primary-color-light: #41a3d8;
+  --primary-color-dark: #026194;
+  --primary-color-transparent: #0486cc3f;
+  --secondary-color: #f3f3f3;
+  --accent-color: #59d359;
+  --black: #00171f;
+  --dark-grey: #414141ab;
+}
+
+.sidenav li a {
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.3px;
+}
+.section-title {
+  font-family: "Open Sans", sans-serif;
+}
+
+/* HOMEPAGE START */
+.card-title.homepage {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+}
+.card-subtitle {
+  font-size: 1.1rem !important;
+  letter-spacing: 1.1px;
+}
+
+.read-btn {
+  text-decoration: none;
+  color: red;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  -webkit-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+  transition: color 0.1s ease-out;
+  cursor: pointer;
+  padding: 0.3em 0.5em;
+  border-radius: 5px;
+}
+.read-btn:hover {
+  background-color: var(--primary-color-dark);
+  color: white;
+}

@@ -9,22 +9,9 @@
 {% block content %}
 
 
-<div class="row">
-    <nav class="nav-extended blue  search-bar-section">
-        <div>
-            <form action="" class="browser-default right" id="center-query-form">
-                {% csrf_token %}
-                <i class="material-icons search-icon Small" id="search-icon">search</i>
-                <input id="user-input" type="text" class="browser-default search-field form-control"
-                    placeholder=" Help me find" autocomplete="off" aria-label="Search box">
-            </form>
-        </div>
 
-    </nav>
-</div>
-
-
-<div class="container">
+<section class="container">
+    <h2 class="center section-title">Medical Services</h2>
     <div class="row ">
         <div class="col s12 m12 l4">
             <div class="card no-shadows">
@@ -33,13 +20,14 @@
                         src="https://us.images.westend61.de/0000864566pw/doctors-rushing-patient-on-stretcher-down-hospital-corridor-CAIF18512.jpg">
                 </div>
                 <div class="card-content">
-                    <span>Urgent Cares</span>
+                    <h3 class="card-title homepage">Urgent Cares</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat nihil beatae temporibus, id
                         unde est asperiores iure, perspiciatis quae autem omnis deleniti ipsam totam minima officia quam
                         dolore modi ad?</p>
                     <br>
                     <div class="center">
-                        <a href="{% url 'urgent_care_global' %}" class="nav-btn homepage-action"> View Urgent Care
+                        <a href="{% url 'urgent_care_global' %}" class="nav-btn homepage-action "> View Urgent
+                            Care
                             Facilities</a>
                     </div>
                 </div>
@@ -52,7 +40,7 @@
                         src="https://thumbs.dreamstime.com/z/serious-male-gp-talk-consult-female-patient-meeting-private-clinic-man-physician-doctor-white-medical-uniform-speak-183923235.jpg">
                 </div>
                 <div class="card-content">
-                    <span>Primary Care</span>
+                    <h3 class="card-title homepage">Primary Care</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci iusto velit, error quas eum
                         qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
                         accusantium blanditiis, assumenda inventore?</p>
@@ -71,7 +59,7 @@
                         src="https://img.freepik.com/premium-photo/medical-clinic-patient-reception-area-filled-with-multiple-nationalities-people-african-american-man-requesting-patient-information-front-desk-hospital-sanatorium-staff-attending-patients_482257-52792.jpg?w=2000">
                 </div>
                 <div class="card-content">
-                    <span>Clinics</span>
+                    <h3 class="card-title homepage">Clinics</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci iusto velit, error quas eum
                         qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
                         accusantium blanditiis, assumenda inventore?</p>
@@ -83,17 +71,21 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="row">
+<section class="row">
+    <h2 class="center section-title">Annoucments</h2>
     <div class="col s12 m8 l8 offset-l2 offset-m2 ">
         <div class="carousel carousel-slider center ">
             {% for article in pinned_articles %}
 
             <div class="carousel-item blue " href="">
-                <span>{{article.title}}</span>
-                <p>{{article.subtitle}}
-                    <a href="{% url 'article_details' article.id %}" class="red-text">Read more</a>
+                <span class="white-text card-title homepage">{{article.title}}</span>
+                <p class="white-text card-subtitle">{{article.subtitle}} Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit.
+                    Laborum at cum animi voluptas, fugiat rerum distinctio explicabo inventore aspernatur repellendus
+                    laboriosam quia dolorum ut! Modi repudiandae quia expedita neque similique.
+                    <a href="{% url 'article_details' article.id %}" class="read-btn">Read more</a>
                 </p>
                 {% if article.article_image %}
                 <a href="{% url 'article_details' article.id %}" class="red-text"><img
@@ -112,16 +104,17 @@
             <div class="btn  next waves-effect">Next</div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="container">
+<section class="container">
+    <h2 class="center section-title">Further Information</h2>
     <div class="divider"></div>
     <div class="row">
         <div class="col s12 m6 l4">
             <div class="row">
                 <a class="nav-btn right" href="{% url 'news' %}">See all<i
                         class=" material-icons right">arrow_forward</i></a>
-                <h4 class="">Updates</h4>
+                <h3 class="">Updates</h3>
                 {% for article in articles %}
                 <div class="row">
                     <div class="col s12 m12 l12 homepage-updates ">
@@ -138,8 +131,9 @@
                         </div>
                         {% endif %}
                         <div class="homepage-article-text">
-                            <a href="{%url 'article_details' article.id %}">
-                                <p class=" article-thumbnail-text">{{article.title}}</p>
+                            <a class=" article-thumbnail-text card-subtitle"
+                                href="{%url 'article_details' article.id %}">
+                                {{article.title}}
                             </a>
 
                         </div>
@@ -155,7 +149,7 @@
             <div class="row">
                 <a class="nav-btn right" href="{% url 'upcoming_clinics' %}">See all<i
                         class="material-icons right">arrow_forward</i></a>
-                <h4 class="">Upcoming Clinics</h4>
+                <h3 class="">Clinics</h3>
                 {% for clinic in upcoming_clinics %}
                 <div class="row">
                     <div class="clinic-container">
@@ -198,5 +192,6 @@
             </div>
         </div>
     </div>
-    {% endif %}
-    {% endblock %}
+</section>
+{% endif %}
+{% endblock %}
