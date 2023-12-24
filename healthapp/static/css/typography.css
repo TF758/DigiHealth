@@ -76,3 +76,12 @@ p {
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
+
+/* NEWS SECTION START */
+
+.article-date {
+  text-align: right;
+}
+.update-subtitle {
+  font-family: "Lato", sans-serif;
+}

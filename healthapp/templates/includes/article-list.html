@@ -21,12 +21,14 @@
             </div>
             <div class="article-container col s12 m12 l8">
                 <div class="article-text-container">
-                    <a href="{% url 'article_details' article.id %}">
-                        <p>{{article.title}}</p>
-                        <p>This is a test title.</p>
-                        <p>{{article.date}}</p>
+                    <a class="flow-text" href="{% url 'article_details' article.id %}">
+                        {{article.title}}
                     </a>
-
+                    <div class="divider"></div>
+                    <a class="update-subtitle" href="{% url 'article_details' article.id %}">
+                        {{article.subtitle}}
+                    </a>
+                    <p class="article-date">{{article.date| date:"d M Y"}}</p>
                 </div>
             </div>
 

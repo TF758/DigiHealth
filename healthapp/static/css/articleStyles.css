@@ -1,6 +1,7 @@
 .article-container img {
   max-width: 400px;
 }
+
 .article-container.updates {
   display: flex;
   flex-direction: row;
@@ -11,17 +12,19 @@
 .article-text-container {
   margin-left: 1.5rem;
 
-  border: 2px solid red;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-/* .article-container.updates img {
-  flex-basis: 50%;
+.article-text-container p {
+  width: 100%;
 }
 
-.article-text-container {
-  border: 2px solid blueviolet;
-  flex-basis: 50%;
-} */
+.article-text-container.center-details {
+  margin: 0;
+}
+
+.center-details img {
+  max-width: 300px;
+}

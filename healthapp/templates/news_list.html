@@ -9,35 +9,43 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="center">Notices</h1>
+    <h1 class="center section-title">Notices</h1>
     <div class="divider"></div>
     <br>
     <div class="row">
         {% for article in pinned_articles %}
         <div class="col s12 m6 l4 center">
-            <div class="article-container ">
+            <div class="card no-shadows">
                 {% if article.article_image %}
                 <a href="{% url 'article_details' article.id %}">
-                    <img src="{{article.article_image.url}}" alt="">
+                    <div class="card-image">
+                        <img src="{{article.article_image.url}}" alt="">
+                    </div>
                 </a>
                 {% else %}
                 <a href="{% url 'article_details' article.id %}">
-                    <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
-                        alt="">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                            alt="">
+                    </div>
                 </a>
                 {% endif %}
-                <div class="pinned-article-text center">
+                <div class="card-content">
                     <a href="{% url 'article_details' article.id %}">
-                        {{article.title}}
+                        <p class="card-title emphasis"> {{article.title}} In one sentence to test length with abit more
+                            text to make sure</p>
                     </a>
-
+                    <br>
+                    <div class="center">
+                        <a href="{% url 'urgent_care_global' %}" class="nav-btn">Read More</a>
+                    </div>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 
-    <h2 class="center">Updates</h2>
+    <h2 class="center section-title">Updates</h2>
     <div class="divider"></div>
     <br>
 
