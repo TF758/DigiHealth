@@ -50,7 +50,8 @@
     <div class="row">
         <div class="col s12 m6 l4 ">
             <div>
-                <a class="nav-btn right" href="#!">See all<i class="material-icons right">arrow_forward</i></a>
+                <a class="nav-btn right" href="{%url 'center_active_clinics' center_details.center_abbreviation%}">See
+                    all<i class="material-icons right">arrow_forward</i></a>
                 <h3 class="center">Active Clinics</h3>
             </div>
 
@@ -89,7 +90,8 @@
         </div>
         <div class="col s12 m6 l5 offset-l3">
             <div>
-                <a class="nav-btn right" href="#!">See all<i class="material-icons right">arrow_forward</i></a>
+                <a class="nav-btn right" href="{%url 'center_upcoming_clinics' center_details.center_abbreviation%}">See
+                    all<i class="material-icons right">arrow_forward</i></a>
                 <h3 class="center">Upcoming Clinics <span></span></h3>
             </div>
 
@@ -187,8 +189,8 @@
                     {% else %}
                     <tr class="row-highlight">
                         <td> {{ hours.get_weekday_display }}</td>
-                        <td> {{ hours.from_hour|time:"g :i a " }}</td>
-                        <td> {{ hours.to_hour|time:"g :i a " }}</td>
+                        <td> {{ hours.from_hour|time:"g : i a " }}</td>
+                        <td> {{ hours.to_hour|time:"g : i a " }}</td>
                     </tr>
                     {% endif %}
                     {% endfor %}

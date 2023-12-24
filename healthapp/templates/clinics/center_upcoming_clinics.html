@@ -1,0 +1,89 @@
+{% extends 'includes/base.html' %}
+{% block title %}{{center.name}} Upcoming Clinics{% endblock %}
+
+{% block content %}
+{% load materializecss %}
+
+
+<div class="container space-from-top">
+
+    <a class="nav-btn left" href="{% url 'center_details' center.center_abbreviation %}">{{center.name}}<i
+            class="material-icons left">arrow_back</i></a>
+
+    <div class="right-align">
+        <a class="btn" href="{%url 'center_upcoming_clinics' center.center_abbreviation%}">Clear</a>
+    </div>
+    <form action="" method="get">
+        <div class="row">
+            <div class="col s12 m6 l3 offset-l4 offset-m3">
+                <div class="center">
+                    {{event_filter.form.start_date.label}}
+                </div>
+                {{event_filter.form.start_date}}
+            </div>
+
+        </div>
+        <div class="center-align">
+            <input type="submit" class="btn" value="Search">
+        </div>
+    </form>
+</div>
+
+<h1 class="center section-title">{{center.name}} Upcoming Clinics</h1>
+<div class="container">
+    {%if upcoming_clinics %}
+
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th class="flow-text">Date</th>
+                <th class="flow-text">Clinic</th>
+                <th class="flow-text">Start Time</th>
+                <th class="flow-text">End Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for clinic in upcoming_clinics %}
+            <tr class="row-highlight">
+                <td class="flow-text">{{clinic.start_date}}</td>
+                <td class="flow-text">{{clinic.event_name}}</td>
+                <td class="flow-text">{{clinic.start_time| time:"g:i A"}}</td>
+                <td class="flow-text">{{clinic.end_time| time:"g:i A"}}</td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+    {%else %}
+    <div class="">
+        <p class="center flow-text">Sorry but your search found nohing that matched your query. Clear your search
+            parameters and try again.
+        </p>
+        <div class="center">
+
+            <a class="btn" href="{%url 'center_upcoming_clinics' center.center_abbreviation%}">Clear</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="container">
+    <div class="pagination center">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+
+
+{% endblock %}
