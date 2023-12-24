@@ -200,8 +200,9 @@ class OpeningHours(models.Model):
         choices=WEEKDAYS,
         unique=True
     )
-    from_hour = models.TimeField()
-    to_hour = models.TimeField()
+    is_closed = models.BooleanField(default=False,null=True,blank=True,)
+    from_hour = models.TimeField( null=True,blank=True,)
+    to_hour = models.TimeField(null=True,blank=True,)
 
     class Meta:
         verbose_name = 'Opening Hours'
