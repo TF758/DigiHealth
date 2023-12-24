@@ -204,6 +204,9 @@ class OpeningHours(models.Model):
     to_hour = models.TimeField()
 
     class Meta:
+        verbose_name = 'Opening Hours'
+        verbose_name_plural = 'Opening Hours'
+        
         constraints = [
             models.UniqueConstraint(fields=['center', 'weekday'], name='center operating days')
         ]

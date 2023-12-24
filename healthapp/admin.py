@@ -33,7 +33,7 @@ class WellnessCenterAdmin(admin.ModelAdmin):
 
 
 class OpeningHoursAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('center','weekday',)
 
 
 class ArticleAdmin(admin.ModelAdmin):

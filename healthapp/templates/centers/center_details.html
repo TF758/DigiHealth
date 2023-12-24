@@ -179,10 +179,10 @@
                 </thead>
                 <tbody>
                     {% for hours in operating_hours %}
-                    <tr>
+                    <tr class="row-highlight">
                         <td> {{ hours.get_weekday_display }}</td>
-                        <td> {{ hours.from_hour }}</td>
-                        <td> {{ hours.to_hour }}</td>
+                        <td> {{ hours.from_hour|time:"g :i a " }}</td>
+                        <td> {{ hours.to_hour|time:"g :i a " }}</td>
                     </tr>
 
                     {% endfor %}
