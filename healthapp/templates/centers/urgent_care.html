@@ -13,8 +13,9 @@
     </div>
 
     <div class="container">
-        <h2 class="header">Urgent Care</h2>
-        <p class="">Urgent Care centers are setup to assist patients with an illness or injury that does not appear to
+        <h2 class="section-title">Urgent Care</h2>
+        <p class="flow-text">Urgent Care centers are setup to assist patients with an illness or injury that does not
+            appear to
             be life-threatening, but also can't wait until the next day, or for primary care doctor to see them.
 
             For the days and hours that primary care physicians are closed, or for someone who does not have a primary
@@ -23,7 +24,7 @@
 
             Urgent medical conditions are ones that are not considered emergencies but still require care within 24
             hours. Some examples of such conditions include:
-        <ul>
+        <ul class="flow-text">
             <li> Accidents and falls</li>
             <li>Sprains and strains</li>
             <li> Breathing difficulties (i.e. mild to moderate asthma)</li>
@@ -31,11 +32,14 @@
             <li> Fever or flu</li>
             <li> Minor broken bones and fractures (i.e. fingers, toes)</li>
         </ul>
-        Life-threatening emergencies, such as a heart attack or a serious head injury, require a visit to the
-        Emergency Department
-        <br>
-        <br>
-        Below are a list of available medical facilities which offer Urgent Care services
+        <p class="flow-text">
+            Life-threatening emergencies, such as a heart attack or a serious head injury, require a visit to the
+            Emergency Department
+        </p>
+
+        <p class="flow-text">
+            Below are a list of available medical facilities which offer Urgent Care services
+        </p>
         </p>
     </div>
 </div>
@@ -48,14 +52,14 @@
                     <img class="activator" src="{{center.center_image.url}}">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">{{center.name}}<i
+                    <span class="card-title emphasis activator">{{center.name}}<i
                             class="material-icons right">more_vert</i></span>
                     <a class="nav-btn " href="{% url 'center_details' center.center_abbreviation %}">Learn
                         More</a>
 
                 </div>
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{center.name}}<i
+                    <span class="card-title emphasis grey-text text-darken-4">{{center.name}}<i
                             class="material-icons right">close</i></span>
                     <ul>
                         <li>Contact - {{center.contact}}</li>

@@ -11,8 +11,9 @@
     </div>
 
     <div class="container">
-        <h2 class="header">Primary Health Care</h2>
-        <p class="">Primary care is the first point of contact between a patient and the healthcare system, and it gives
+        <h2 class="section-title">Primary Health Care</h2>
+        <p class="flow-text">Primary care is the first point of contact between a patient and the healthcare system, and
+            it gives
             patients access to the knowledge and facilities they need to achieve their health goals. Primary care
             providers usually deal with various patients and have a proper knowledge of the many physical,
             psychological, and social factors that affect their patients.
@@ -36,14 +37,13 @@
                     <img class="activator center-thumbnail" src="{{center.center_image.url}}">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">{{center.name}}<i
+                    <span class="card-title emphasis activator ">{{center.name}}<i
                             class="material-icons right">more_vert</i></span>
                     <p><a class="nav-btn" href="{% url 'center_details' center.center_abbreviation %}">Learn More</a>
                     </p>
                 </div>
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{center.name}}<i
-                            class="material-icons right">close</i></span>
+                    <span class="card-title emphasis ">{{center.name}}<i class="material-icons right">close</i></span>
                     <ul>
                         <li>Contact - {{center.contact}}</li>
                         <li>Located - {{center.address}}</li>

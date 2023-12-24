@@ -10,7 +10,8 @@
 </div>
 
 <div class="container">
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur ad facilis maxime repudiandae, ullam
+    <p class="flow-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur ad facilis maxime
+        repudiandae, ullam
         animi iste dolor, enim reprehenderit quam, error nulla voluptatem quisquam non quas explicabo consectetur ab.
     </p>
 </div>
@@ -42,28 +43,28 @@
 </div>
 
 
-<h2 class="header center">Active Medical Clinics</h2>
+<h2 class="header center section-title">Active Medical Clinics</h2>
 <div class="container">
     {%if active_clinics %}
     <table class="responsive-table">
         <thead>
             <tr>
-                <th>Clinic</th>
-                <th>Facility</th>
-                <th>Start Time</th>
-                <th>End Time</th>
+                <th class="flow-text">Clinic</th>
+                <th class="flow-text">Facility</th>
+                <th class="flow-text">Start Time</th>
+                <th class="flow-text">End Time</th>
             </tr>
         </thead>
 
         <tbody>
             {% for clinic in active_clinics %}
             <tr class="row-highlight">
-                <td>{{clinic.event_name}}</td>
-                <td> <a
+                <td class="flow-text">{{clinic.event_name}}</td>
+                <td class="flow-text"> <a
                         href="{% url 'center_details' clinic.get_clinic_facility_short %}">{{clinic.get_clinic_facility_long}}</a>
                 </td>
-                <td>{{clinic.start_time| time:"g:i A"}}</td>
-                <td>{{clinic.end_time| time:"g:i A"}}</td>
+                <td class="flow-text">{{clinic.start_time| time:"g:i A"}}</td>
+                <td class="flow-text">{{clinic.end_time| time:"g:i A"}}</td>
             </tr>
             {% endfor %}
         </tbody>
