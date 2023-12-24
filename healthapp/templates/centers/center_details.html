@@ -179,12 +179,18 @@
                 </thead>
                 <tbody>
                     {% for hours in operating_hours %}
+                    {% if hours.is_closed %}
+                    <tr class="row-highlight">
+                        <td> {{ hours.get_weekday_display }}</td>
+                        <td colspan="2" class="strong"> closed</td>
+                    </tr>
+                    {% else %}
                     <tr class="row-highlight">
                         <td> {{ hours.get_weekday_display }}</td>
                         <td> {{ hours.from_hour|time:"g :i a " }}</td>
                         <td> {{ hours.to_hour|time:"g :i a " }}</td>
                     </tr>
-
+                    {% endif %}
                     {% endfor %}
                 </tbody>
             </table>

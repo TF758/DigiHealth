@@ -85,3 +85,12 @@ p {
 .update-subtitle {
   font-family: "Lato", sans-serif;
 }
+
+/* TABLE DATA Styling */
+
+td.strong {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
