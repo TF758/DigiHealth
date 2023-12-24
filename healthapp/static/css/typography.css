@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:wght@600&display=swap");
 
 /* top nav styling for text */
 .nav-wrapper ul a {
@@ -64,4 +65,14 @@ p {
 .read-btn:hover {
   background-color: var(--primary-color-dark);
   color: white;
+}
+/* HOMEPAGE END */
+
+/* CENTER LIST A/Z OR DISTRICT START */
+
+.nav-filters .page-item a {
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
