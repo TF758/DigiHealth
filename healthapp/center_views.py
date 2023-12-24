@@ -74,14 +74,13 @@ class CenterDetails(ListView):
         center_abbreviation = self.kwargs['center_abbreviation']
         today = datetime.now().date()
         tomorrow = today + timedelta(1)
-        today_start = datetime.combine(today, time())
-        today_end = datetime.combine(tomorrow, time())
+
         
-        context['center_news'] =  Article.objects.filter(center_id__center_abbreviation=center_abbreviation)
+        context['center_articles'] =  Article.objects.filter(center_id__center_abbreviation=center_abbreviation)[:4]
         context['operating_hours'] = OpeningHours.objects.filter(center__center_abbreviation=center_abbreviation)
         context['address'] = Center.objects.get(center_abbreviation=center_abbreviation).address
-        context['active_clinics'] = ClinicEvent.objects.filter(start_date=today, facility__center_abbreviation =center_abbreviation, is_active=True)
-        context['upcoming_clinics'] = ClinicEvent.objects.filter(start_date__gte = tomorrow, facility__center_abbreviation =center_abbreviation, is_active=False)
+        context['active_clinics'] = ClinicEvent.objects.filter( facility__center_abbreviation =center_abbreviation, is_active=True)[:5]
+        context['upcoming_clinics'] = ClinicEvent.objects.filter( facility__center_abbreviation =center_abbreviation, is_active=False).order_by('start_date')[:5]
 
         return context
     

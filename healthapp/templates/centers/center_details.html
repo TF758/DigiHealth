@@ -23,8 +23,9 @@
     </div>
 
     <div class="container">
-        <h2 class="header">{{center_details.name}}</h2>
-        <p class="">Primary care is the first point of contact between a patient and the healthcare system, and it gives
+        <h1 class=" section-title">{{center_details.name}}</h1>
+        <p class="flow-text">Primary care is the first point of contact between a patient and the healthcare system, and
+            it gives
             patients access to the knowledge and facilities they need to achieve their health goals. Primary care
             providers usually deal with various patients and have a proper knowledge of the many physical,
             psychological, and social factors that affect their patients.
@@ -45,10 +46,14 @@
 </div>
 
 <div class="container">
-    <h2 class="center">Clinics</h2>
+    <h2 class="center section-title">Clinics</h2>
     <div class="row">
         <div class="col s12 m6 l4 ">
-            <h3 class="center">Active Clinics</h3>
+            <div>
+                <a class="nav-btn right" href="#!">See all<i class="material-icons right">arrow_forward</i></a>
+                <h3 class="center">Active Clinics</h3>
+            </div>
+
             {% if active_clinics%}
             <table class="centered">
                 <thead>
@@ -83,7 +88,11 @@
             {% endif %}
         </div>
         <div class="col s12 m6 l5 offset-l3">
-            <h3 class="center">Upcoming Clinics</h3>
+            <div>
+                <a class="nav-btn right" href="#!">See all<i class="material-icons right">arrow_forward</i></a>
+                <h3 class="center">Upcoming Clinics <span></span></h3>
+            </div>
+
             {% if upcoming_clinics%}
             <table class="centered">
                 <thead>
@@ -114,43 +123,46 @@
 
 
 <div class="container">
-    <h3 class="center">Clinic Updates</h3>
+    <a class="" href="#!">
+        <h2 class="section-title center ">Clinic Updates</h2>
+    </a>
+    {% if center_articles %}
     <div class="row">
-        <div class="article-container center-details col s12 m6 l3 center ">
-            <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
-                alt="">
-            <div class="article-text-container center-details">
-                <p class="">article.title</p>
-                <p>This is a test title.</p>
+        {% for article in center_articles %}
+        <div class="col s12 m6 l3 center">
+            <div class="card no-shadows">
+                {% if article.article_image %}
+                <a href="{% url 'article_details' article.id %}">
+                    <div class="card-image">
+                        <img src="{{article.article_image.url}}" alt="">
+                    </div>
+                </a>
+                {% else %}
+                <a href="{% url 'article_details' article.id %}">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                            alt="">
+                    </div>
+                </a>
+                {% endif %}
+                <div class="card-content">
+                    <p>{{article.date|date:"D d M, Y"}}</p>
+                    <a href="{% url 'article_details' article.id %}">
+                        <p class="card-title emphasis"> {{article.title}} In one sentence to test length with abit more
+                            text to make sure</p>
+                    </a>
+                    <br>
+                    <div class="center">
+                        <a href="{% url 'urgent_care_global' %}" class="nav-btn">Read More</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="article-container center-details col s12 m6 l3 center ">
-            <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
-                alt="">
-            <div class="article-text-container center-details">
-                <p class="">article.title</p>
-                <p>This is a test title.</p>
-            </div>
-        </div>
-        <div class="article-container center-details col s12 m6 l3 center ">
-            <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
-                alt="">
-            <div class="article-text-container center-details">
-                <p class="">article.title</p>
-                <p>This is a test title.</p>
-            </div>
-        </div>
-        <div class="article-container center-details col s12 m6 l3 center ">
-            <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
-                alt="">
-            <div class="article-text-container center-details">
-                <p class="">article.title</p>
-                <p>This is a test title.</p>
-            </div>
-        </div>
-
-
+        {% endfor %}
     </div>
+    {% else %}
+    <h3 class="center">No notices for this facility</h3>
+    {% endif %}
 </div>
 <div class="container">
     <div class="row center">
