@@ -10,6 +10,12 @@
         alt="">
 </div>
 <div class="container">
+    <p class="flow-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur ad facilis maxime
+        repudiandae, ullam
+        animi iste dolor, enim reprehenderit quam, error nulla voluptatem quisquam non quas explicabo consectetur ab.
+    </p>
+</div>
+<div class="container">
     <div class="right-align">
         <a class="btn" href="{% url 'upcoming_clinics' %}">Clear</a>
     </div>
@@ -45,26 +51,26 @@
     <table class="responsive-table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Clinic</th>
-                <th>Facility</th>
-                <th>Location</th>
-                <th>Start Time</th>
-                <th>End Time</th>
+                <th class="flow-text">Date</th>
+                <th class="flow-text">Clinic</th>
+                <th class="flow-text">Facility</th>
+                <th class="flow-text">Location</th>
+                <th class="flow-text">Start Time</th>
+                <th class="flow-text">End Time</th>
             </tr>
         </thead>
 
         <tbody>
             {% for clinic in upcoming_clinics %}
             <tr class="row-highlight">
-                <td>{{clinic.start_date}}</td>
-                <td>{{clinic.event_name}}</td>
-                <td> <a
+                <td class="flow-text">{{clinic.start_date}}</td>
+                <td class="flow-text">{{clinic.event_name}}</td>
+                <td class="flow-text"> <a
                         href="{% url 'center_details' clinic.get_clinic_facility_short %}">{{clinic.get_clinic_facility_long}}</a>
                 </td>
-                <td>{{clinic.get_clinic_district_long}}</td>
-                <td>{{clinic.start_time| time:"g:i A"}}</td>
-                <td>{{clinic.end_time| time:"g:i A"}}</td>
+                <td class="flow-text">{{clinic.get_clinic_district_long}}</td>
+                <td class="flow-text">{{clinic.start_time| time:"g:i A"}}</td>
+                <td class="flow-text">{{clinic.end_time| time:"g:i A"}}</td>
             </tr>
 
             {% endfor %}
@@ -78,19 +84,22 @@
     {% endif %}
 </div>
 
-<div class="pagination center">
-    <span class="page-links">
-        {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-        <span class="page-current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+<div class="container">
+    <div class="pagination center">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
         </span>
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">next</a>
-        {% endif %}
-    </span>
+    </div>
 </div>
+
 
 
 {% endblock %}
