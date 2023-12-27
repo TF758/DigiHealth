@@ -43,7 +43,7 @@ class GetCentersByLetter(View):
         else:
             search_objects = Center.objects.all().order_by('name')
         page_num = request.GET.get("page",1)
-        center_paginator = Paginator(search_objects, 10)
+        center_paginator = Paginator(search_objects, 1)
         context = {'centers':center_paginator.page(page_num)}
         return render(request, "centers/center_list.html", context)
 
@@ -88,11 +88,11 @@ class DistrictCentersDirectory(View):
     def get(self, request):
         if 'q' in request.GET:
             search_text = request.GET['q']
-            search_objects = Center.objects.filter(district__abbreviation=search_text).order_by('district')    
+            search_objects = Center.objects.filter(district__abbreviation=search_text).order_by('district')  
         else:
             search_objects = Center.objects.all().order_by('district')
         page_num = request.GET.get("page",1)
-        center_paginator = Paginator(search_objects, 10)
+        center_paginator = Paginator(search_objects, 1)
         context = {'centers':center_paginator.page(page_num)}
 
         return render(request, 'centers/district_centers.html', context)

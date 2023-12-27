@@ -93,23 +93,50 @@
 
 
 <div class="container">
-    <div class="row center">
-        <ul class="pagination">
-            {% if centers.has_previous %}
-            <li class="waves-effect">
-                <a href="?page={{ centers.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
-                    class="prev red"><i class="large material-icons">chevron_left</i></a>
-            </li>
-            {% endif %}
-            {% if centers.has_next %}
-            <li class="waves-effect green">
-                <a href="?page={{ centers.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
-                    class="next"><i class="large material-icons">chevron_right</i></a>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
 
+    <ul class="pagination center">
+        {% if centers.has_previous %}
+        <!-- 'First' and 'Previous' Buttons -->
+        <li class="page-item">
+            <a class="page-link nav-btn" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">|&lt;
+                First</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link nav-btn"
+                href="?page={{ centers.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&lt;
+                Previous</a>
+        </li>
+        {% endif %}
+
+        <!-- Numbered Buttons -->
+        {% for page in paginator.page_range %}
+        {% if centers.number == page %}
+        <li class="page-item">
+            <a class="page-link "
+                href="?page={{ page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"><strong><u>{{ page
+                        }}</u></strong></a>
+        </li>
+        {% elif page > centers.number|add:'-3' and page < centers.number|add:'3' %} <li class="page-item">
+            <a class="page-link" href="?page={{ page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ page
+                }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            <!-- 'Next' and 'Last' Buttons -->
+            {% if centers.has_next %}
+            <li class="page-item">
+                <a class="page-link nav-btn"
+                    href="?page={{ centers.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next
+                    &gt;</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link  nav-btn"
+                    href="?page={{ centers.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Last
+                    &gt;|</a>
+            </li>
+            {% endif %}
+    </ul>
 </div>
 
 
