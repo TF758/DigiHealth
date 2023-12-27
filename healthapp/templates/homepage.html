@@ -180,7 +180,8 @@
                     <i class="material-icons">info</i></a></h4>
             <div class="row">
                 <div class="col s12 m12 l4 center">
-                    <p><a href="" class="nav-btn">Active Clinics</a></p>
+                    <p><a href="{% url 'active_clinics_near_me' request.user.email %}" class="nav-btn">Active
+                            Clinics</a></p>
                 </div>
                 <div class="col s12 m12 l4 center">
                     <p><a href="{% url 'centers_near_me' request.user.email %}" class="nav-btn ">Medical facilitites</a>

@@ -1,0 +1,91 @@
+{% extends 'includes/base.html' %}
+{% block title %}Active Clinics{% endblock %}
+
+{% block content %}
+
+<div class="banner-container">
+    <img class="hero-banner"
+        src="https://rater8.com/wp-content/uploads/2022/10/Managing-Patient-Expectations-in-the-Waiting-Room-rater8.png"
+        alt="">
+</div>
+
+<div class="container">
+    <p class="flow-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur ad facilis maxime
+        repudiandae, ullam
+        animi iste dolor, enim reprehenderit quam, error nulla voluptatem quisquam non quas explicabo consectetur ab.
+    </p>
+</div>
+
+
+
+<h2 class="header center section-title">Active Medical Clinics In My Area</h2>
+<div class="container">
+    {%if active_clinics %}
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th class="flow-text">Clinic</th>
+                <th class="flow-text">Facility</th>
+                <th class="flow-text">Start Time</th>
+                <th class="flow-text">End Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for clinic in active_clinics %}
+            <tr class="row-highlight">
+                <td class="flow-text">{{clinic.event_name}}</td>
+                <td class="flow-text"> <a
+                        href="{% url 'center_details' clinic.get_clinic_facility_short %}">{{clinic.get_clinic_facility_long}}</a>
+                </td>
+                <td class="flow-text">{{clinic.start_time| time:"g:i A"}}</td>
+                <td class="flow-text">{{clinic.end_time| time:"g:i A"}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {%else %}
+    <div class="">
+        <p>Sorry but your search found nohing that matched your query. Adjust your search parameters and try again. <a
+                class="" href="{% url 'active_clinics' %}">Clear</a> </p>
+    </div>
+    {%endif%}
+</div>
+
+
+
+<ul class="pagination center">
+    {% if page_obj.has_previous %}
+    <!-- 'First' and 'Previous' Buttons -->
+    <li class="page-item">
+        <a class="page-link  nav-btn" href="?page=1">|&lt; First</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link  nav-btn" href="?page={{ current_page.previous_page_number }}">&lt; Previous</a>
+    </li>
+    {% endif %}
+
+    <!-- Numbered Buttons -->
+    {% for page in paginator.page_range %}
+    {% if page_obj.number == page %}
+    <li class="page-item">
+        <a class="page-link  nav-btn" href="?page={{ page }}"><strong><u>{{ page }}</u></strong></a>
+    </li>
+    {% elif page > page_obj.number|add:'-3' and page < page_obj.number|add:'3' %} <li class="page-item">
+        <a class="page-link  nav-btn" href="?page={{ page }}">{{ page }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        <!-- 'Next' and 'Last' Buttons -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link  nav-btn" href="?page={{ page_obj.next_page_number }}">Next &gt;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link  nav-btn" href="?page={{ page_obj.paginator.num_pages }}">Last &gt;|</a>
+        </li>
+        {% endif %}
+</ul>
+
+{% endblock %}

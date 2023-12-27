@@ -56,6 +56,8 @@ urlpatterns = [
          
     path('near-me/centers/<str:email>',
          FacilitiesNearMe.as_view(), name='centers_near_me'),
+    path('near-me/clinics/active/<str:email>',
+         ActiveClinicsNearMe.as_view(), name='active_clinics_near_me'),
     
          
 

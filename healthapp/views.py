@@ -14,11 +14,10 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .serializers import *
 from django.http import Http404
-from django.utils.dateparse import parse_date
-from django.core.paginator import Paginator
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from datetime import datetime, timedelta, time
+from django.core.paginator import Paginator
 
 
 
@@ -64,12 +63,6 @@ class HomePage(ListView):
     def get_context_data(self, **kwargs):
         context = super(HomePage, self).get_context_data(**kwargs)
 
-        try:
-            profile = UserProfile.objects.get(user = self.request.user.id)
-            context['nearby_centers'] = Center.objects.filter(district__name = profile.address.district)[:3]
-            context['nearby_active_clinics'] = ClinicEvent.objects.filter(facility__district__name = profile.address.district,is_active = True )[:3]
-        except(UserProfile.DoesNotExist):
-            context['nearby_centers'] = False
         context['centers'] = Center.objects.all().order_by('name')[:3]
         context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date').reverse()[:5]
         context['articles'] = Article.objects.filter(is_global = True).order_by('date')[:5]
@@ -238,3 +231,28 @@ class CenterArticleList(ListView):
         context['center'] = Center.objects.get(center_abbreviation =self.kwargs['center_abbreviation'] )
         context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"], center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
         return context
+
+class FacilitiesNearMe (LoginRequiredMixin,ListView):
+
+    template_name = 'my_centers.html'         
+    context_object_name = "centers"
+    paginate_by = 1
+
+    def get_queryset(self):
+
+        profile_add = Address.objects.get(user=self.request.user)
+        queryset = Center.objects.filter(district__name =profile_add.district ).order_by('name')
+        return queryset
+    
+class ActiveClinicsNearMe (LoginRequiredMixin,ListView):
+
+    template_name = 'my_active_clinics.html'         
+    context_object_name = "active_clinics"
+    paginate_by = 2
+
+    def get_queryset(self):
+
+        profile_add = Address.objects.get(user=self.request.user)
+        queryset = ClinicEvent.objects.filter(facility__district__name =profile_add.district ).order_by('start_date').reverse()
+        print(queryset)
+        return queryset
