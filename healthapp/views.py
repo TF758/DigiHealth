@@ -222,7 +222,6 @@ class CenterArticleList(ListView):
 
     def get_queryset(self):
         center_abbreviation = self.kwargs['center_abbreviation']
-        print(center_abbreviation)
         return Article.objects.filter(center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
     
     def get_template_names(self, *args, **kwargs):

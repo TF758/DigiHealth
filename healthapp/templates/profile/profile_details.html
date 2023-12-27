@@ -1,25 +1,83 @@
 {% extends 'includes/base.html' %}
-{% block title %}Register Account{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
-<h1>Profile</h1>
-<h2>This is {{request.user.email}}</h2>
+<section>
+    <h1 class="section-title center">My Information</h1>
+    <div class="container">
+        <h2 class="center section-title">Personal Information</h2>
+        {% if profile_data %}
+        <div class="center">
+            <a href="{% url 'update_user_profile' request.user.email %}" class="btn center"> Update </a>
+        </div>
 
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4 offset-m4 offset-s3 ">
+                <p class="flow-text">First Name</p>
+            </div>
+            <div class="col s4 m4 l4">
+                <p class="flow-text">John Doe</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4 offset-m4 offset-s3 ">
+                <p class="flow-text">Surname</p>
+            </div>
+            <div class="col s4 m4 l4 ">
+                <p class="flow-text">John Doe</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4 offset-m4 offset-s3 ">
+                <p class="flow-text">Gender</p>
+            </div>
+            <div class="col s4 m4 l4 ">
+                <p class="flow-text">John Doe</p>
+            </div>
+        </div>
+        {% else %}
+        <p class="center flow-text">Please add profile data.</p>
+        <div class="center">
 
-{% if profile_data %}
-<h3>Display name: {{profile_data}}</h3>
-<p><a href="{% url 'update_user_profile' request.user.email %}">Update</a></p>
-{% else %}
-<h3>set up profile</h3>
-<p><a href="{% url 'create_user_profile' request.user.email %}">Create</a></p>
-{% endif %}
-
-{% if user_address %}
-<p><a href="{% url 'update_user_address' request.user.email %}">Update address</a></p>
-{% else %}
-<h3>set up address</h3>
-<p><a href="{% url 'create_user_address' request.user.email %}">Create address</a></p>
-{% endif %}
-
+            <a href="{% url 'create_user_profile' request.user.email %}" class="btn center"> Update </a>
+        </div>
+        {% endif %}
+        <h2 class="center section-title">User Address</h2>
+        {% if user_address %}
+        <div class="center">
+            <a href="{% url 'update_user_address' request.user.email %}" class="btn center"> Update </a>
+        </div>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4 offset-m4 offset-s3 ">
+                <p class="flow-text">Address 1</p>
+            </div>
+            <div class="col s4 m4 l4 ">
+                <p class="flow-text">John Doe</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4 offset-m4 offset-s3 ">
+                <p class="flow-text">Address 2</p>
+            </div>
+            <div class="col s4 m4 l4 ">
+                <p class="flow-text">John Doe</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4 offset-m4 offset-s3 ">
+                <p class="flow-text">District</p>
+            </div>
+            <div class="col s4 m4 l4 ">
+                <p class="flow-text">John Doe</p>
+            </div>
+        </div>
+        {% else %}
+        <p class="center flow-text">Please add address.</p>
+        <div class="center">
+            <a href="{% url 'create_user_address' request.user.email %}" class="btn center"> Update </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
 
 {% endblock %}

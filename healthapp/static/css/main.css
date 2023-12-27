@@ -350,3 +350,8 @@ nav ul.popup-list li a:hover {
 .space-from-top {
   padding-top: 2rem;
 }
+
+::placeholder {
+  color: var(--dark-grey);
+  opacity: 1; /* Firefox */
+}
