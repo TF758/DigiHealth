@@ -16,7 +16,7 @@
                 <p class="flow-text">First Name</p>
             </div>
             <div class="col s4 m4 l4">
-                <p class="flow-text">John Doe</p>
+                <p class="flow-text">{{profile_data.first_name}}</p>
             </div>
         </div>
         <div class="row">
@@ -24,7 +24,7 @@
                 <p class="flow-text">Surname</p>
             </div>
             <div class="col s4 m4 l4 ">
-                <p class="flow-text">John Doe</p>
+                <p class="flow-text">{{profile_data.last_name}}</p>
             </div>
         </div>
         <div class="row">
@@ -32,14 +32,14 @@
                 <p class="flow-text">Gender</p>
             </div>
             <div class="col s4 m4 l4 ">
-                <p class="flow-text">John Doe</p>
+                <p class="flow-text">{{profile_data.gender}}</p>
             </div>
         </div>
         {% else %}
         <p class="center flow-text">Please add profile data.</p>
         <div class="center">
 
-            <a href="{% url 'create_user_profile' request.user.email %}" class="btn center"> Update </a>
+            <a href="{% url 'create_user_profile' request.user.email %}" class="btn center"> Create </a>
         </div>
         {% endif %}
         <h2 class="center section-title">User Address</h2>
@@ -52,7 +52,7 @@
                 <p class="flow-text">Address 1</p>
             </div>
             <div class="col s4 m4 l4 ">
-                <p class="flow-text">John Doe</p>
+                <p class="flow-text">{{user_address.address1}}</p>
             </div>
         </div>
         <div class="row">
@@ -60,7 +60,7 @@
                 <p class="flow-text">Address 2</p>
             </div>
             <div class="col s4 m4 l4 ">
-                <p class="flow-text">John Doe</p>
+                <p class="flow-text">{{user_address.address2}}</p>
             </div>
         </div>
         <div class="row">
@@ -68,13 +68,13 @@
                 <p class="flow-text">District</p>
             </div>
             <div class="col s4 m4 l4 ">
-                <p class="flow-text">John Doe</p>
+                <p class="flow-text">{{user_address.district }}</p>
             </div>
         </div>
         {% else %}
         <p class="center flow-text">Please add address.</p>
         <div class="center">
-            <a href="{% url 'create_user_address' request.user.email %}" class="btn center"> Update </a>
+            <a href="{% url 'create_user_address' request.user.email %}" class="btn center"> Create </a>
         </div>
         {% endif %}
     </div>
