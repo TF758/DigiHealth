@@ -58,7 +58,8 @@ urlpatterns = [
          FacilitiesNearMe.as_view(), name='centers_near_me'),
     path('near-me/clinics/active/<str:email>',
          ActiveClinicsNearMe.as_view(), name='active_clinics_near_me'),
-    
+    path('near-me/clinics/upcoming/<str:email>',
+         UpcomingClinicsNearMe.as_view(), name='upcoming_clinics_near_me'),
          
 
 ]

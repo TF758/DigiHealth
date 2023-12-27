@@ -188,7 +188,8 @@
                     </p>
                 </div>
                 <div class="col s12 m12 l4 center">
-                    <p><a href="" class="nav-btn">Upcoming Clinics</a></p>
+                    <p><a href="{% url 'upcoming_clinics_near_me' request.user.email %}" class="nav-btn">Upcoming
+                            Clinics</a></p>
                 </div>
 
             </div>

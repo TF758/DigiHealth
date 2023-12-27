@@ -253,6 +253,20 @@ class ActiveClinicsNearMe (LoginRequiredMixin,ListView):
     def get_queryset(self):
 
         profile_add = Address.objects.get(user=self.request.user)
-        queryset = ClinicEvent.objects.filter(facility__district__name =profile_add.district ).order_by('start_date').reverse()
+        queryset = ClinicEvent.objects.filter(facility__district__name =profile_add.district, is_active=True ).order_by('start_date').reverse()
+        print(queryset)
+        return queryset
+    
+
+class UpcomingClinicsNearMe (LoginRequiredMixin,ListView):
+
+    template_name = 'my_upcoming_clinics.html'         
+    context_object_name = "upcoming_clinics"
+    paginate_by = 1
+
+    def get_queryset(self):
+
+        profile_add = Address.objects.get(user=self.request.user)
+        queryset = ClinicEvent.objects.filter(facility__district__name =profile_add.district,is_active=False ).order_by('start_date').reverse()
         print(queryset)
         return queryset
