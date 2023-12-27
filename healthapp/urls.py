@@ -54,5 +54,9 @@ urlpatterns = [
      path('article/<int:pk>',
          ViewArticle.as_view(), name='article_details'),
          
+    path('near-me/centers/<str:email>',
+         FacilitiesNearMe.as_view(), name='centers_near_me'),
+    
+         
 
 ]

@@ -1,0 +1,76 @@
+{% extends 'includes/base.html' %}
+{% block title %}Medical Facilities Near Me{% endblock %}
+{% block content %}
+
+{% if centers %}
+<h1 class="center section-title">Medical Facilities In your Area</h1>
+{% else %}
+<h4>Nada</h4>
+{% endif %}
+
+<div class="container">
+    {% for center in centers %}
+    <div class="row">
+        <div class="col s12 m6 l4">
+            <div class="card no-shadows">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator center-thumbnail" src="{{center.center_image.url}}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator emphasis">{{center.name}}<i
+                            class="material-icons right">more_vert</i></span>
+                    <p><a class="nav-btn" href="{% url 'center_details' center.center_abbreviation %}">Learn More</a>
+                    </p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title emphasis">{{center.name}}<i class="material-icons right">close</i></span>
+                    <ul>
+                        <li>Contact - {{center.contact}}</li>
+                        <li>Located - {{center.address}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-msg">
+            No Centers
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<ul class="pagination center">
+    {% if page_obj.has_previous %}
+    <!-- 'First' and 'Previous' Buttons -->
+    <li class="page-item">
+        <a class="page-link  nav-btn" href="?page=1">|&lt; First</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link  nav-btn" href="?page={{ current_page.previous_page_number }}">&lt; Previous</a>
+    </li>
+    {% endif %}
+
+    <!-- Numbered Buttons -->
+    {% for page in paginator.page_range %}
+    {% if page_obj.number == page %}
+    <li class="page-item">
+        <a class="page-link  nav-btn" href="?page={{ page }}"><strong><u>{{ page }}</u></strong></a>
+    </li>
+    {% elif page > page_obj.number|add:'-3' and page < page_obj.number|add:'3' %} <li class="page-item">
+        <a class="page-link  nav-btn" href="?page={{ page }}">{{ page }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        <!-- 'Next' and 'Last' Buttons -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link  nav-btn" href="?page={{ page_obj.next_page_number }}">Next &gt;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link  nav-btn" href="?page={{ page_obj.paginator.num_pages }}">Last &gt;|</a>
+        </li>
+        {% endif %}
+</ul>
+
+{% endblock %}
