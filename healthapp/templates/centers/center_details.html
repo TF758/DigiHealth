@@ -17,29 +17,24 @@
 
 
 <div class="row">
+    {% if center_details.center_image %}
+    <div class="banner-container">
+        <img class="hero-banner" src="{{center_details.center_image.url}}" alt="">
+    </div>
+    {% else %}
     <div class="banner-container">
         <img class="hero-banner"
             src="https://www.mountsinai.org/files/MSHealth/Assets/Media/final/HS/Care/PrimaryCare.jpg" alt="">
     </div>
-
+    {% endif %}
     <div class="container">
-        <h1 class=" section-title">{{center_details.name}}</h1>
-        <p class="flow-text">Primary care is the first point of contact between a patient and the healthcare system, and
-            it gives
-            patients access to the knowledge and facilities they need to achieve their health goals. Primary care
-            providers usually deal with various patients and have a proper knowledge of the many physical,
-            psychological, and social factors that affect their patients.
-            <br>
-            Primary care practitioners are responsible for the ongoing health of their patients by preventing,
-            diagnosing early and managing common health conditions. An important aspect of their work is making
-            referrals to specialists as and when needed.
-            <br>
-            <br>
-            They are also in a unique position to understand and study the natural course of disease, the family setting
-            in which the patient is placed, and to treat and follow up chronic or recurrent health conditions.
-            <br>
-            <br>
-            <a class="waves-effect waves-light modal-trigger" href="#modal1">Open Map</a>
+        <div class="">
+            <a class="waves-effect waves-light modal-trigger right" href="#modal1"> <i
+                    class="material-icons right">map</i>View</a>
+            <h1 class=" section-title">{{center_details.name}}</h1>
+        </div>
+
+        <p class="flow-text">{{center_details.center_description|linebreaksbr}}
         </p>
 
     </div>
@@ -155,7 +150,7 @@
                     </a>
                     <br>
                     <div class="center">
-                        <a href="{% url 'urgent_care_global' %}" class="nav-btn">Read More</a>
+                        <a href="{% url 'article_details' article.id %}" class="nav-btn">Read More</a>
                     </div>
                 </div>
             </div>

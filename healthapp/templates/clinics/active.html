@@ -51,6 +51,7 @@
             <tr>
                 <th class="flow-text">Clinic</th>
                 <th class="flow-text">Facility</th>
+                <th class="flow-text">Location</th>
                 <th class="flow-text">Start Time</th>
                 <th class="flow-text">End Time</th>
             </tr>
@@ -63,6 +64,7 @@
                 <td class="flow-text"> <a
                         href="{% url 'center_details' clinic.get_clinic_facility_short %}">{{clinic.get_clinic_facility_long}}</a>
                 </td>
+                <td class="flow-text">{{clinic.get_clinic_district_long}}</td>
                 <td class="flow-text">{{clinic.start_time| time:"g:i A"}}</td>
                 <td class="flow-text">{{clinic.end_time| time:"g:i A"}}</td>
             </tr>

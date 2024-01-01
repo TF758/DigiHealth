@@ -34,11 +34,6 @@
                     <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
                                 class="material-icons right">arrow_drop_down</i></a>
                     </li>
-                    {% if request.user|has_group:"auth-user" %}
-                    <li><a href="/auth">Manage</a>
-                    </li>
-                    {% endif %}
-
                     {% if user.is_authenticated %}
                     <li><a href="/profile/{{user}}">Profile</a></li>
                     <li><a href="{% url 'account_logout' %}">Logout</a></li>
