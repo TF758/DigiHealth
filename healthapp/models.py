@@ -111,8 +111,9 @@ class Center (models.Model):
     center_abbreviation = models.CharField(max_length=20, null=True)
     district = models.ForeignKey(District, null=True, on_delete=models.DO_NOTHING)
     contact = models.CharField(max_length=150, null=True, blank=True)
-    center_image = models.ImageField(upload_to='center_images')
+    center_image = models.ImageField(upload_to='center_images',default="medical_center_default.jpg")
     address =  models.CharField(null=True, max_length=200)
+    center_description = models.TextField(max_length=10000, null=True, blank=True)
     
     tags = TaggableManager(blank=True)
 
@@ -130,19 +131,13 @@ class ClinicType (models.Model):
 
 
 class ClinicEvent(models.Model):
-    STATUS = [
-        ("urgent", "Urgent Care"),
-        ("phc", "Primary Health Care"),
-        ("other", "Other"),
-    ]
+
     event_name = models.CharField(max_length=255, null=False)
     creation_date = models.DateTimeField(auto_now_add=True)
     start_date = models.DateField(default=datetime.date.today, null=True)
     end_date = models.DateField(default=datetime.date.today, null=True)
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
-    clinic_status = models.CharField(
-        choices=STATUS, max_length=125, null=True)
     is_active = models.BooleanField(default=False, null=True)
     facility = models.ForeignKey(
         Center, null=True, on_delete=models.DO_NOTHING)
@@ -166,7 +161,7 @@ class ClinicEvent(models.Model):
     
 
 class Article(models.Model):
-        dummy_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec massa enim, ultrices ac quam in, semper aliquam sem. Sed ante ex, interdum lacinia urna at, faucibus hendrerit enim. Morbi varius porta neque, quis viverra ex posuere sit amet. Nam quis arcu eget dui vestibulum mollis"
+        dummy_text = "This is a placeholder subtitle"
         title  = models.CharField(max_length=100, null=False)
         subtitle  = models.CharField(max_length=200, null=True,blank=True, default=dummy_text)
         date = models.DateTimeField(auto_now_add=True)
@@ -174,7 +169,7 @@ class Article(models.Model):
         is_global = models.BooleanField(default=False, null=True)
         center_id = models.ForeignKey(
         Center, null=True,blank=True, on_delete=models.DO_NOTHING)
-        article_image = models.ImageField(upload_to='article_images', null=True, blank=True)
+        article_image = models.ImageField(upload_to='article_images', null=True, blank=True, default="annoucement.png")
 
         tags = TaggableManager(blank=True)
 
