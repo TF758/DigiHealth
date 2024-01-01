@@ -158,9 +158,10 @@
                             <span>{{clinic.start_date|date:"d"}}</span>
                         </div>
                         <div class="homepage-clinic-text ">
-                            <p>{{clinic.get_clinic_facility_long}}- {{clinic.event_name}}</p>
-                            <span>{{clinic.start_date|date:"l"}} {{clinic.start_time| time:"g:i A" }} -
-                                {{clinic.end_time| time:"g:i A" }}</span>
+                            <p> <strong>{{clinic.event_name}}</strong> </p>
+                            {{clinic.get_clinic_facility_long}}
+                            <p><span>{{clinic.start_date|date:"l"}} {{clinic.start_time| time:"g:i A" }} -
+                                    {{clinic.end_time| time:"g:i A" }}</span></p>
                         </div>
                     </div>
                 </div>
@@ -179,6 +180,7 @@
                     data-tooltip="These are medical services and facilities that are located in your district. This settings can be changed in your settings.">
                     <i class="material-icons">info</i></a></h4>
             <div class="row">
+                {% if has_address %}
                 <div class="col s12 m12 l4 center">
                     <p><a href="{% url 'active_clinics_near_me' request.user.email %}" class="nav-btn">Active
                             Clinics</a></p>
@@ -188,10 +190,25 @@
                     </p>
                 </div>
                 <div class="col s12 m12 l4 center">
-                    <p><a href="{% url 'upcoming_clinics_near_me' request.user.email %}" class="nav-btn">Upcoming
+                    <p><a href="{% url 'upcoming_clinics_near_me' request.user.email %}"
+                            class="nav-btn disabled">Upcoming
                             Clinics</a></p>
                 </div>
-
+                {% else %}
+                <div class="col s12 m12 l4 center">
+                    <p><a href="#!" class="btn disabled">Active
+                            Clinics</a></p>
+                </div>
+                <div class="col s12 m12 l4 center">
+                    <p><a href="#!" class="btn disabled">Medical
+                            facilitites</a>
+                    </p>
+                </div>
+                <div class="col s12 m12 l4 center">
+                    <p><a href="#!" class="btn disabled">Upcoming
+                            Clinics</a></p>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
