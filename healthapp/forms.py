@@ -1,9 +1,5 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import get_user_model
 from .models import *
 from django import forms
-from collections import OrderedDict
-from betterforms import multiform
 from django.forms import ModelForm
 
 class AddressForm(forms.ModelForm):

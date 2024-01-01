@@ -44,14 +44,15 @@ INSTALLED_APPS = [
     'materializecssform',
     'django_filters',
     'easy_maps',
-    'betterforms',  #uninstall this
     'taggit',
 
     'allauth', 
     'allauth.account', 
     'allauth.socialaccount', 
     'allauth.socialaccount.providers.github', 
+    # FOR DEVLEOPMENT
     "django_browser_reload",
+    # FOR INFINITE SCROLLING
     "django_htmx",
 
 ]

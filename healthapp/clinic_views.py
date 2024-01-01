@@ -1,24 +1,8 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.views.generic import CreateView, FormView, ListView, DeleteView, UpdateView, DetailView
-from django.contrib.auth.views import redirect_to_login
+from django.views.generic import ListView
 from django.views.generic.list import ListView
-from django.urls import reverse_lazy
-from django.views import View
 from .forms import *
-from django.contrib.auth.mixins import LoginRequiredMixin
-from datetime import date, timedelta
-from .filters import CenterFilter, EventFilter
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from .serializers import *
-from django.http import Http404
-from django.utils.dateparse import parse_date
-from django.core.paginator import Paginator
-from django.urls import reverse
-from django.shortcuts import get_object_or_404
-from datetime import datetime, timedelta, time
+from .filters import  EventFilter
+
 
 class ActiveClinics(ListView):    
     template_name = 'clinics/active.html'  
