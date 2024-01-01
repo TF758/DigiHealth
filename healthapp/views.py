@@ -64,9 +64,13 @@ class HomePage(ListView):
         context = super(HomePage, self).get_context_data(**kwargs)
 
         context['centers'] = Center.objects.all().order_by('name')[:3]
-        context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date').reverse()[:5]
+        context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date')[:5]
         context['articles'] = Article.objects.filter(is_global = True).order_by('date')[:5]
         context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
+
+        if self.request.user.is_authenticated:
+            context['has_address'] = Address.objects.filter(user = self.request.user).exists()
+
         return context
 
 
