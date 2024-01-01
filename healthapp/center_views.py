@@ -43,7 +43,7 @@ class GetCentersByLetter(View):
         else:
             search_objects = Center.objects.all().order_by('name')
         page_num = request.GET.get("page",1)
-        center_paginator = Paginator(search_objects, 1)
+        center_paginator = Paginator(search_objects, 3)
         context = {'centers':center_paginator.page(page_num)}
         return render(request, "centers/center_list.html", context)
 
@@ -86,13 +86,16 @@ class CenterDetails(ListView):
     
 class DistrictCentersDirectory(View):
     def get(self, request):
+        # check for query pramater in url link
         if 'q' in request.GET:
             search_text = request.GET['q']
+            # filter medical facilities by query parameter
             search_objects = Center.objects.filter(district__abbreviation=search_text).order_by('district')  
         else:
             search_objects = Center.objects.all().order_by('district')
         page_num = request.GET.get("page",1)
-        center_paginator = Paginator(search_objects, 1)
+        # paginate results
+        center_paginator = Paginator(search_objects, 3)
+        # return updated list of medical facilitie
         context = {'centers':center_paginator.page(page_num)}
-
         return render(request, 'centers/district_centers.html', context)
