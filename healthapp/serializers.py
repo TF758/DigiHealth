@@ -16,3 +16,37 @@ class HealthCenterSerializer(serializers.ModelSerializer):
         model = Center
         fields = ['name', 'center_abbreviation', 'district',
                   'contact']
+
+class CentersDataSerializer(serializers.ModelSerializer):
+
+    """Used to return data about a group of facilities"""
+
+    google_location = serializers.CharField(source='address')
+    district = serializers.CharField(source ='district.name')
+
+    class Meta:
+        model = Center
+        fields = ['id','name', 'center_abbreviation', 'district',
+                  'contact', 'google_location']
+
+
+class CenterDataSerializer(serializers.ModelSerializer):
+
+    """Used to return data about a specific Medical Facility"""
+
+    google_location = serializers.CharField(source='address')
+    district = serializers.CharField(source ='district.name')
+
+    class Meta:
+        model = Center
+        fields = ['id','name', 'center_abbreviation', 'district',
+                  'contact', 'google_location','center_description']
+
+
+class DistrictDataSerializer(serializers.ModelSerializer):
+
+    """Returns all the districts of Saint Lucia"""
+
+    class Meta:
+        model = District
+        fields = ['id','name', 'abbreviation']
