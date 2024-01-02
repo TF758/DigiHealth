@@ -139,6 +139,7 @@ class ClinicEvent(models.Model):
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
     is_active = models.BooleanField(default=False, null=True)
+    is_expired = models.BooleanField(default=False, null=True)
     facility = models.ForeignKey(
         Center, null=True, on_delete=models.DO_NOTHING)
     clinic_type = models.ForeignKey(
