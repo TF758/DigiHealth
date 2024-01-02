@@ -36,7 +36,7 @@ class DistrictCenters(generics.ListAPIView):
 
     def get_queryset(self):
         district_Id = self.kwargs['district']
-        return Center.objects.filter(district__id = district_Id)
+        return Center.objects.filter(district__abbreviation = district_Id)
 
 
 class CentersList(generics.ListAPIView):
@@ -50,8 +50,12 @@ class CentersList(generics.ListAPIView):
 class CenterDetails(generics.RetrieveAPIView):
 
     """Returns data about a specific medical facility"""
+
     queryset = Center.objects.all()
     serializer_class = CenterDataSerializer
+    lookup_field = 'center_abbreviation'
+
+
 
 
 class ClinicList(generics.ListAPIView):
@@ -77,8 +81,8 @@ class DistrictClinics(APIView):
 
     def get(self, request, district):
 
-            qs = ClinicEvent.objects.filter(facility__district__id = district)
-            district = District.objects.get(id =district)
+            qs = ClinicEvent.objects.filter(facility__district__abbreviation = district)
+            district = District.objects.get(abbreviation =district)
 
             district_name = DistrictNameSerializer(district)
             clinic_list = ClinicDataSerializer(qs, many = True)
@@ -106,9 +110,9 @@ class CenterActiveClinics(APIView):
 
     """returns list of all active clinics for medical center"""
 
-    def get(self, request, pk):
+    def get(self, request, center_abbreviation):
 
-        qs = ClinicEvent.objects.filter(facility__id = pk,is_active = True, is_expired = False)
+        qs = ClinicEvent.objects.filter(facility__center_abbreviation = center_abbreviation,is_active = True, is_expired = False)
         clinic_list = ClinicDataSerializer(qs, many = True).data
         return Response(clinic_list)
 
@@ -117,8 +121,8 @@ class CenterUpcomingClinics(APIView):
 
     """returns list of all scheduled clincis for medical center"""
 
-    def get(self, request, pk):
+    def get(self, request, center_abbreviation):
 
-        qs = ClinicEvent.objects.filter(facility__id = pk,is_active = False, is_expired = False)
+        qs = ClinicEvent.objects.filter(facility__center_abbreviation = center_abbreviation,is_active = False, is_expired = False)
         clinic_list = ClinicDataSerializer(qs, many = True).data
         return Response(clinic_list)
