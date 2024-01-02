@@ -61,15 +61,4 @@ urlpatterns = [
          ActiveClinicsNearMe.as_view(), name='active_clinics_near_me'),
     path('near-me/clinics/upcoming/<str:email>',
          UpcomingClinicsNearMe.as_view(), name='upcoming_clinics_near_me'),
-
-     
-     # API CALLS - FOR CENTER DATA
-     path('api/districts', CountryDistricts.as_view(), name='api_all_districts'),
-     path('api/centers', CentersList.as_view(), name='api_all_centers'),
-     path('api/centers/district/<int:district>', DistrictCenters.as_view(), name='api_district_centers'),
-     path('api/center/<int:pk>', CenterDetails.as_view(), name='api_center_details'),
-
-     
-         
-
 ]
