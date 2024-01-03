@@ -27,21 +27,27 @@
                 <a href="#" data-target="mobile-side-nav" class="sidenav-trigger right"><i
                         class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Medical
-                            Facilities <i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="{% url 'news' %}">News</a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
-                                class="material-icons right">arrow_drop_down</i></a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li><a href="/profile/{{user}}">Profile</a></li>
-                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
-                    {% else %}
                     <li>
-                        <a href="{% url 'account_signup' %}">Register</a>
+                        <a href="/"> <i class="material-icons right">home</i>Home</a>
                     </li>
-                    <li><a href="{% url 'account_login' %}">Login</a></li>
+                    <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Medical
+                            Facilities <i class="material-icons right">local_hospital</i></a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
+                                class="material-icons right">local_activity</i></a>
+                    </li>
+                    <li><a href="{% url 'news' %}">News<i class="material-icons right">announcement</i></a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/profile/{{user}}">Profile <i class="material-icons right">assignment_ind</i></a></li>
+                    <li><a href="{% url 'account_logout' %}">Logout<i class="material-icons right">exit_to_app</i></a>
+                    </li>
+                    {% else %}
+
+                    <li>
+                        <a href="{% url 'account_signup' %}">Register <i
+                                class="material-icons right">recent_actors</i></a>
+                    </li>
+                    <li><a href="{% url 'account_login' %}">Login<i class="material-icons right">verified_user</i></a>
+                    </li>
                     {% endif %}
                 </ul>
 
@@ -77,21 +83,26 @@
     <!-- mobile side nav -->
 
     <ul id="mobile-side-nav" class="sidenav side-navbar blue">
-        <li><a href="/" class="white-text">Home</a></li>
+        <li><a href="/" class="white-text"> <i class="material-icons left white-text">home</i>Home</a></li>
         <li><a href="#" class="dropdown-trigger white-text" data-target="center-dropdown-options-mobile">Medical
-                Facilities <i class="material-icons right white-text">arrow_drop_down</i></a></li>
-        <li><a href="{% url 'news' %}" class=" white-text">News</a></li>
+                Facilities <i class="material-icons left white-text">local_hospital</i></a></li>
+        <li><a href="{% url 'news' %}" class=" white-text"> <i
+                    class="material-icons left white-text">announcement</i>News</a></li>
         <li><a class="dropdown-trigger white-text" href="#!" data-target="clinic-dropdown-mobile">Clinics<i
-                    class="material-icons right white-text">arrow_drop_down</i></a>
+                    class="material-icons left white-text">local_activity</i></a>
         </li>
         {% if user.is_authenticated %}
-        <li><a href="/profile/{{user}}" class="white-text">Profile</a></li>
-        <li><a href="{% url 'account_logout' %}" class="white-text">Logout</a></li>
+        <li><a href="/profile/{{user}}" class="white-text"> <i
+                    class="material-icons left white-text">assignment_ind</i>Profile</a></li>
+        <li><a href="{% url 'account_logout' %}" class="white-text"> <i
+                    class="material-icons left white-text">exit_to_app</i>Logout</a></li>
         {% else %}
         <li>
-            <a href="{% url 'account_signup' %}" class="white-text">Register</a>
+            <a href="{% url 'account_signup' %}" class="white-text"> <i
+                    class="material-icons left white-text">recent_actors</i>Register</a>
         </li>
-        <li><a href="{% url 'account_login' %}" class="white-text">Login</a></li>
+        <li><a href="{% url 'account_login' %}" class="white-text"> <i
+                    class="material-icons left white-text">verified_user</i>Login</a></li>
         {% endif %}
 
     </ul>
