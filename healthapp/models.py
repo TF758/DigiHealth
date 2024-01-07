@@ -94,7 +94,7 @@ class UserProfile(models.Model):
         ("updated", "Updated"),
     ]
 
-    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, related_name="user_profiles")
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, related_name="user_profiles")
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255 ,null=True)
     address = models.ForeignKey(Address, null=True, on_delete=models.DO_NOTHING)
