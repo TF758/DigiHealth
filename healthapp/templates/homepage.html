@@ -21,9 +21,7 @@
                 </div>
                 <div class="card-content">
                     <h3 class="card-title emphasis">Urgent Cares</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat nihil beatae temporibus, id
-                        unde est asperiores iure, perspiciatis quae autem omnis deleniti ipsam totam minima officia quam
-                        dolore modi ad?</p>
+                    <p>Seeking critical medical attention? Find your nearest Urgent care faciliy in your area.</p>
                     <br>
                     <div class="center">
                         <a href="{% url 'urgent_care_global' %}" class="nav-btn homepage-action "> View Urgent
@@ -41,9 +39,8 @@
                 </div>
                 <div class="card-content">
                     <h3 class="card-title emphasis">Primary Care</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci iusto velit, error quas eum
-                        qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
-                        accusantium blanditiis, assumenda inventore?</p>
+                    <p>From prescription renewals, annual checkups vaccine drives and more; primary care s dedicated to
+                        keeping you up and running for many years</p>
                     <br>
                     <div class="center">
                         <a href="{% url 'phc_centers_global' %}" class="nav-btn homepage-action">View Primary Care
@@ -60,9 +57,8 @@
                 </div>
                 <div class="card-content">
                     <h3 class="card-title emphasis">Clinics</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci iusto velit, error quas eum
-                        qui amet quisquam magnam recusandae voluptatibus nulla cumque vel nostrum numquam quo
-                        accusantium blanditiis, assumenda inventore?</p>
+                    <p>Curious as to what's going on in your area? View the active medicial clincis going on right now!
+                    </p>
                     <br>
                     <div class="center">
                         <a href="{% url 'active_clinics' %}" class="nav-btn homepage-action">See All Active Clinics</a>
@@ -73,145 +69,145 @@
     </div>
 </section>
 
-<section class="row">
-    <h2 class="center section-title">Annoucments</h2>
-    <div class="col s12 m8 l8 offset-l2 offset-m2 ">
-        <div class="carousel carousel-slider center ">
-            {% for article in pinned_articles %}
-
-            <div class="carousel-item blue " href="">
-                <span class="white-text card-title emphasis">{{article.title}}</span>
-                <p class="white-text card-subtitle">{{article.subtitle}} Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit.
-                    Laborum at cum animi voluptas, fugiat rerum distinctio explicabo inventore aspernatur repellendus
-                    laboriosam quia dolorum ut! Modi repudiandae quia expedita neque similique.
-                    <a href="{% url 'article_details' article.id %}" class="read-btn">Read more</a>
+{% if user.is_authenticated %}
+<div class="divider"></div>
+<div class="row">
+    <div class="container">
+        <h4 class="center">Medical services In your area <a href="#!" class=" disabled tooltipped" data-position="top"
+                data-html="true"
+                data-tooltip="These are medical services and facilities that are located in your district. This settings can be changed in your settings.">
+                <i class="material-icons">info</i></a></h4>
+        <div class="row">
+            {% if has_address %}
+            <div class="col s12 m12 l4 center">
+                <p><a href="{% url 'active_clinics_near_me' request.user.email %}" class="nav-btn">Active
+                        Clinics</a></p>
+            </div>
+            <div class="col s12 m12 l4 center">
+                <p><a href="{% url 'centers_near_me' request.user.email %}" class="nav-btn ">Medical facilitites</a>
                 </p>
-                {% if article.article_image %}
-                <a href="{% url 'article_details' article.id %}" class="red-text"><img
-                        src="{{article.article_image.url}}" alt=""></a>
-                {% else %}
-                <a href="{% url 'article_details' article.id %}" class="red-text"><img
-                        src="https://i.fbcd.co/products/original/s2303-important-an-mainpreview-3298ae1bcde81ea0024e1dbc56a39ad5c5debcb8816fe0813f827920fdc02cbf.jpg"
-                        alt=""></a>
-                {% endif %}
             </div>
-            {%endfor%}
-        </div>
-        <br>
-        <div class="center-align">
-            <div class="btn  prev waves-effect">Prev</div>
-            <div class="btn  next waves-effect">Next</div>
+            <div class="col s12 m12 l4 center">
+                <p><a href="{% url 'upcoming_clinics_near_me' request.user.email %}" class="nav-btn disabled">Upcoming
+                        Clinics</a></p>
+            </div>
+            {% else %}
+            <div class="col s12 m12 l4 center">
+                <p><a href="#!" class="btn disabled">Active
+                        Clinics</a></p>
+            </div>
+            <div class="col s12 m12 l4 center">
+                <p><a href="#!" class="btn disabled">Medical
+                        facilitites</a>
+                </p>
+            </div>
+            <div class="col s12 m12 l4 center">
+                <p><a href="#!" class="btn disabled">Upcoming
+                        Clinics</a></p>
+            </div>
+            {% endif %}
         </div>
     </div>
-</section>
+</div>
+<div class="divider"></div>
+<div class="row">
+    {% endif %}
 
-<section class="container">
-    <h2 class="center section-title">Further Information</h2>
-    <div class="divider"></div>
-    <div class="row">
-        <div class="col s12 m6 l4">
-            <div class="row">
-                <a class="nav-btn right" href="{% url 'news' %}">See all<i
-                        class=" material-icons right">arrow_forward</i></a>
-                <h3 class="">Updates</h3>
-                {% for article in articles %}
+    <section class="row">
+        <h2 class="center section-title">Annoucments</h2>
+        <div class="col s12 m8 l8 offset-l2 offset-m2 ">
+            <div class="carousel carousel-slider center ">
+                {% for article in pinned_articles %}
+
+                <div class="carousel-item blue " href="">
+                    <span class="white-text card-title emphasis">{{article.title}}</span>
+                    <p class="white-text card-subtitle">{{article.subtitle}}
+                        <a href="{% url 'article_details' article.id %}" class="read-btn">Read more</a>
+                    </p>
+                    {% if article.article_image %}
+                    <a href="{% url 'article_details' article.id %}" class="red-text"><img
+                            src="{{article.article_image.url}}" alt=""></a>
+                    {% else %}
+                    <a href="{% url 'article_details' article.id %}" class="red-text"><img
+                            src="https://i.fbcd.co/products/original/s2303-important-an-mainpreview-3298ae1bcde81ea0024e1dbc56a39ad5c5debcb8816fe0813f827920fdc02cbf.jpg"
+                            alt=""></a>
+                    {% endif %}
+                </div>
+                {%endfor%}
+            </div>
+            <br>
+            <div class="center-align">
+                <div class="btn  prev waves-effect">Prev</div>
+                <div class="btn  next waves-effect">Next</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="center section-title">Further Information</h2>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s12 m6 l4">
                 <div class="row">
-                    <div class="col s12 m12 l12 homepage-updates ">
-                        {%if article.article_image%}
-                        <div class="homepage-article-img">
-                            <a href="{%url 'article_details' article.id %}"> <img src="{{article.article_image.url}}"
-                                    alt="" class="article-thumbnail"></a>
-                        </div>
-                        {% else %}
-                        <div class="homepage-article-img">
-                            <a href="{%url 'article_details' article.id %}"> <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png"
-                                    alt="" class="article-thumbnail"></a>
-                        </div>
-                        {% endif %}
-                        <div class="homepage-article-text">
-                            <a class=" article-thumbnail-text card-subtitle"
-                                href="{%url 'article_details' article.id %}">
-                                {{article.title}}
-                            </a>
+                    <a class="nav-btn right" href="{% url 'news' %}">See all<i
+                            class=" material-icons right">arrow_forward</i></a>
+                    <h3 class="">Updates</h3>
+                    {% for article in articles %}
+                    <div class="row">
+                        <div class="col s12 m12 l12 homepage-updates ">
+                            {%if article.article_image%}
+                            <div class="homepage-article-img">
+                                <a href="{%url 'article_details' article.id %}"> <img
+                                        src="{{article.article_image.url}}" alt="" class="article-thumbnail"></a>
+                            </div>
+                            {% else %}
+                            <div class="homepage-article-img">
+                                <a href="{%url 'article_details' article.id %}"> <img
+                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png"
+                                        alt="" class="article-thumbnail"></a>
+                            </div>
+                            {% endif %}
+                            <div class="homepage-article-text">
+                                <a class=" article-thumbnail-text card-subtitle"
+                                    href="{%url 'article_details' article.id %}">
+                                    {{article.title}}
+                                </a>
 
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {% empty %}
-                <h5>No updates available.</h5>
-                {% endfor %}
+                    {% empty %}
+                    <h5>No updates available.</h5>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        <div class="col s12 m6 l4 offset-l2">
-            <div class="row">
-                <a class="nav-btn right" href="{% url 'upcoming_clinics' %}">See all<i
-                        class="material-icons right">arrow_forward</i></a>
-                <h3 class="">Clinics</h3>
-                {% for clinic in upcoming_clinics %}
+            <div class="col s12 m6 l4 offset-l2">
                 <div class="row">
-                    <div class="clinic-container">
-                        <div class="date-container">
-                            <span>{{clinic.start_date|date:"M"}}</span>
-                            <span>{{clinic.start_date|date:"d"}}</span>
-                        </div>
-                        <div class="homepage-clinic-text ">
-                            <p> <strong>{{clinic.event_name}}</strong> </p>
-                            {{clinic.get_clinic_facility_long}}
-                            <p><span>{{clinic.start_date|date:"l"}} {{clinic.start_time| time:"g:i A" }} -
-                                    {{clinic.end_time| time:"g:i A" }}</span></p>
+                    <a class="nav-btn right" href="{% url 'upcoming_clinics' %}">See all<i
+                            class="material-icons right">arrow_forward</i></a>
+                    <h3 class="">Clinics</h3>
+                    {% for clinic in upcoming_clinics %}
+                    <div class="row">
+                        <div class="clinic-container">
+                            <div class="date-container">
+                                <span>{{clinic.start_date|date:"M"}}</span>
+                                <span>{{clinic.start_date|date:"d"}}</span>
+                            </div>
+                            <div class="homepage-clinic-text ">
+                                <p> <strong>{{clinic.event_name}}</strong> </p>
+                                {{clinic.get_clinic_facility_long}}
+                                <p><span>{{clinic.start_date|date:"l"}} {{clinic.start_time| time:"g:i A" }} -
+                                        {{clinic.end_time| time:"g:i A" }}</span></p>
+                            </div>
                         </div>
                     </div>
+                    {% empty %}
+                    <h5>No Clinics Available</h5>
+                    {% endfor %}
                 </div>
-                {% empty %}
-                <h5>No Clinics Available</h5>
-                {% endfor %}
             </div>
         </div>
-    </div>
-    {% if user.is_authenticated %}
-    <div class="divider"></div>
-    <div class="row">
-        <div class="container">
-            <h4 class="center">Medical services In your area <a href="#!" class=" disabled tooltipped"
-                    data-position="top" data-html="true"
-                    data-tooltip="These are medical services and facilities that are located in your district. This settings can be changed in your settings.">
-                    <i class="material-icons">info</i></a></h4>
-            <div class="row">
-                {% if has_address %}
-                <div class="col s12 m12 l4 center">
-                    <p><a href="{% url 'active_clinics_near_me' request.user.email %}" class="nav-btn">Active
-                            Clinics</a></p>
-                </div>
-                <div class="col s12 m12 l4 center">
-                    <p><a href="{% url 'centers_near_me' request.user.email %}" class="nav-btn ">Medical facilitites</a>
-                    </p>
-                </div>
-                <div class="col s12 m12 l4 center">
-                    <p><a href="{% url 'upcoming_clinics_near_me' request.user.email %}"
-                            class="nav-btn disabled">Upcoming
-                            Clinics</a></p>
-                </div>
-                {% else %}
-                <div class="col s12 m12 l4 center">
-                    <p><a href="#!" class="btn disabled">Active
-                            Clinics</a></p>
-                </div>
-                <div class="col s12 m12 l4 center">
-                    <p><a href="#!" class="btn disabled">Medical
-                            facilitites</a>
-                    </p>
-                </div>
-                <div class="col s12 m12 l4 center">
-                    <p><a href="#!" class="btn disabled">Upcoming
-                            Clinics</a></p>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</section>
-{% endif %}
-{% endblock %}
+
+    </section>
+    {% endblock %}

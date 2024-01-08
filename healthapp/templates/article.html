@@ -6,11 +6,11 @@
 <div class="row">
     <main>
 
-        <div class=" card-panel col s12 m8 offset-m2">
+        <div class="  col s12 m8 offset-m2">
 
-            <h3>{{article_data.title}}</h3>
+            <h1>{{article_data.title}}</h1>
             {% if article_data.article_image %}
-            <img src="{{article_data.article_image.url}}" style="float:left;width:70%; max-width: 500px;" />
+            <img src="{{article_data.article_image.url}}" style="float:left;width:100%;" />
             {% endif %}
             <div class="article-data right-align">{{article_data.date|date:"D d M Y"}}</div>
             <p class="flow-text">{{article_data.body|linebreaksbr}}</p>

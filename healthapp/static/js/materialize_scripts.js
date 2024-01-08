@@ -5,7 +5,7 @@ $(document).ready(function () {
   $(".carousel").carousel({
     fullWidth: true,
     indicators: true,
-    duration: 200,
+    duration: 2000,
   });
   // function for next slide
   $(".next").click(function () {
