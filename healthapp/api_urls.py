@@ -1,6 +1,6 @@
 
 from django.urls import path
-from healthapp.views import *
+from healthapp.appviews import *
 from healthapp.api import *
 
 

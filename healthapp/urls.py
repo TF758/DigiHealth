@@ -1,20 +1,14 @@
 
-from django.urls import path, include, register_converter
-from allauth.account.views import login
-from django.views.generic import TemplateView
-from healthapp.views import *
-from django.contrib.auth.views import LoginView
-# from .api import *
+from django.urls import path, include
+from healthapp.appviews import *
 
-from . import views
-from . import center_views
-from . import clinic_views
-from . import profile_views
 from healthapp.api import *
+
+from .appviews import center_views, profile_views, clinic_views, views
 
 
 urlpatterns = [
-    path('', HomePage.as_view(), name="home"),
+    path('', views.HomePage.as_view(), name="home"),
     path('accounts/', include('allauth.urls')), # new
 
      path('urgent-care',
@@ -44,21 +38,21 @@ urlpatterns = [
     path('profile/<str:email>/update',
          profile_views.UpdateUserProfile.as_view(), name='update_user_profile'),
     path('profile/<str:email>/address/create',
-         CreateUserAddress.as_view(), name='create_user_address'),
+         views.CreateUserAddress.as_view(), name='create_user_address'),
     path('profile/<str:email>/address/update',
-         UpdateUserAddress.as_view(), name='update_user_address'),
+         views.UpdateUserAddress.as_view(), name='update_user_address'),
          
     path('news/',
-         ArticleList.as_view(), name='news'),
+         views.ArticleList.as_view(), name='news'),
      path('news/<str:center_abbreviation>/',
-         CenterArticleList.as_view(), name='center_news'),
+         views.CenterArticleList.as_view(), name='center_news'),
      path('article/<int:pk>',
-         ViewArticle.as_view(), name='article_details'),
+         views.ViewArticle.as_view(), name='article_details'),
          
     path('near-me/centers/<str:email>',
-         FacilitiesNearMe.as_view(), name='centers_near_me'),
+         views.FacilitiesNearMe.as_view(), name='centers_near_me'),
     path('near-me/clinics/active/<str:email>',
-         ActiveClinicsNearMe.as_view(), name='active_clinics_near_me'),
+         views.ActiveClinicsNearMe.as_view(), name='active_clinics_near_me'),
     path('near-me/clinics/upcoming/<str:email>',
-         UpcomingClinicsNearMe.as_view(), name='upcoming_clinics_near_me'),
+         views.UpcomingClinicsNearMe.as_view(), name='upcoming_clinics_near_me'),
 ]

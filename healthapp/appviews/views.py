@@ -3,12 +3,12 @@ from django.contrib.auth.views import redirect_to_login
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from django.views import View
-from .forms import *
+from ..forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .filters import CenterFilter, EventFilter
+from ..filters import CenterFilter, EventFilter
 from django.shortcuts import render
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from .serializers import *
+from ..serializers import *
 from django.http import Http404
 from django.urls import reverse
 

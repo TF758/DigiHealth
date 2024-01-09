@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from django.views.generic.list import ListView
-from .forms import *
-from .filters import  EventFilter
+from ..forms import *
+from ..filters import  EventFilter
 
 
 class ActiveClinics(ListView):    

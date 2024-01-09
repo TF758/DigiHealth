@@ -3,11 +3,11 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic.list import ListView
 from django.views import View
-from .forms import *
+from ..forms import *
 from datetime import timedelta
 from django.http import JsonResponse
 from django.shortcuts import render
-from .serializers import *
+from ..serializers import *
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 
