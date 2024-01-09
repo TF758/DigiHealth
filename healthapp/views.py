@@ -56,8 +56,8 @@ class HomePage(ListView):
 
         context['centers'] = Center.objects.all().order_by('name')[:3]
         context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date')[:5]
-        context['articles'] = Article.objects.filter(is_global = True).order_by('date')[:5]
-        context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
+        context['articles'] = NewsArticle.objects.filter(is_global = True).order_by('date')[:5]
+        context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
 
         if self.request.user.is_authenticated:
             context['has_address'] = Address.objects.filter(user = self.request.user).exists()
@@ -178,7 +178,7 @@ class UpdateUserAddress( LoginRequiredMixin,UpdateView):
         return obj
 
 class ViewArticle( DetailView):
-    model = Article
+    model = NewsArticle
     context_object_name = "article_data"
     template_name="article.html"
 
@@ -187,7 +187,7 @@ class ViewArticle( DetailView):
     slug_field = 'email'
     
 class ArticleList(ListView):
-    queryset = Article.objects.all().order_by('id')
+    queryset = NewsArticle.objects.all().order_by('id')
     template_name = 'news_list.html'
     context_object_name = 'articles'
     paginate_by = 1
@@ -200,7 +200,7 @@ class ArticleList(ListView):
         
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
-        context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
+        context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
         return context
 
 class CenterArticleList(ListView):
@@ -210,7 +210,7 @@ class CenterArticleList(ListView):
 
     def get_queryset(self):
         center_abbreviation = self.kwargs['center_abbreviation']
-        return Article.objects.filter(center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
+        return NewsArticle.objects.filter(center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
     
     def get_template_names(self, *args, **kwargs):
         if self.request.htmx:
@@ -224,7 +224,7 @@ class CenterArticleList(ListView):
         center_abbreviation = self.kwargs['center_abbreviation']
 
         context['center'] = Center.objects.get(center_abbreviation =self.kwargs['center_abbreviation'] )
-        context['pinned_articles'] = Article.objects.filter(tags__name__in=["pinned"], center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
+        context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"], center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
         return context
 
 class FacilitiesNearMe (LoginRequiredMixin,ListView):

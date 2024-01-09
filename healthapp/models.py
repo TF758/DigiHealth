@@ -160,23 +160,23 @@ class ClinicEvent(models.Model):
     def get_clinic_district_long(self):
          return str(self.facility.district.name)
     
-
-class Article(models.Model):
+    
+class NewsArticle(models.Model):
         dummy_text = "This is a placeholder subtitle"
+
         title  = models.CharField(max_length=100, null=False)
         subtitle  = models.CharField(max_length=200, null=True,blank=True, default=dummy_text)
         date = models.DateTimeField(auto_now_add=True)
         body = models.TextField(max_length=10000, null=False)
         is_global = models.BooleanField(default=False, null=True)
-        center_id = models.ForeignKey(
-        Center, null=True,blank=True, on_delete=models.DO_NOTHING)
+        centers =  models.ManyToManyField(Center, blank=True)
         article_image = models.ImageField(upload_to='article_images', null=True, blank=True, default="annoucement.png")
 
         tags = TaggableManager(blank=True)
 
         def __str__(self):
             return str(self.title)
-        
+
 
 class OpeningHours(models.Model):
     WEEKDAYS = [

@@ -36,12 +36,11 @@ class OpeningHoursAdmin(admin.ModelAdmin):
     list_display = ('center','weekday',)
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class NewsArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'tag_list']
 
     def tag_list(self, obj):
         return u", ".join(o.name for o in obj.tags.all())
-
 
 class ClinicEventAdmin(admin.ModelAdmin):
     pass
@@ -60,5 +59,5 @@ admin.site.register(ClinicEvent, ClinicEventAdmin)
 admin.site.register(ClinicType, ClinicTypeAdmin)
 admin.site.register(Center, WellnessCenterAdmin)
 admin.site.register(OpeningHours, OpeningHoursAdmin)
-admin.site.register( Article, ArticleAdmin)
+admin.site.register( NewsArticle, NewsArticleAdmin)
 admin.site.register( District, DistrictAdmin)

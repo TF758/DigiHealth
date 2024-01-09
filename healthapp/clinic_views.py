@@ -8,7 +8,7 @@ class ActiveClinics(ListView):
     template_name = 'clinics/active.html'  
     context_object_name = "active_clinics"
     model = ClinicEvent    
-    paginate_by = 10 
+    paginate_by = 1 
     
     def get_queryset(self):
         events = ClinicEvent.objects.filter(is_active=True).order_by('id')
