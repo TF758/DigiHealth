@@ -41,6 +41,16 @@ nav ul a {
 .page-footer {
   background-color: var(--primary-color) !important;
 }
+/* too keep footer at bottom of page */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
 
 /* filter links */
 

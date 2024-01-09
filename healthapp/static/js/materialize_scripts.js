@@ -5,7 +5,7 @@ $(document).ready(function () {
   $(".carousel").carousel({
     fullWidth: true,
     indicators: true,
-    duration: 2000,
+    duration: 100,
   });
   // function for next slide
   $(".next").click(function () {
@@ -63,4 +63,4 @@ function scrollSmoothTo(elementId) {
 }
 setInterval(function () {
   $(".carousel").carousel("next");
-}, 8000); // every 8 seconds
+}, 12000); // every 12 seconds
