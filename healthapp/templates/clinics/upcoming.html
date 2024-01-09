@@ -77,29 +77,29 @@
         </tbody>
     </table>
     {%else %}
-    <div class="">
-        <p>Sorry but your search found nohing that matched your query. Adjust your search parameters and try again. <a
-                class="" href="{% url 'upcoming_clinics' %}">Clear</a> </p>
+    <div class="center-align flow-text">
+        <p>No clinic information available.</p>
     </div>
     {% endif %}
 </div>
 
+<br>
 <div class="container">
     <div class="pagination center">
         <span class="page-links">
             {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a class="page-link nav-btn" href="?page={{ page_obj.previous_page_number }}">previous</a>
             {% endif %}
-            <span class="page-current">
+            <span class="page-current flow-text">
                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
             </span>
             {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="page-link nav-btn" href="?page={{ page_obj.next_page_number }}">next</a>
             {% endif %}
         </span>
     </div>
-</div>
 
+</div>
 
 
 {% endblock %}

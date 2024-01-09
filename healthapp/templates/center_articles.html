@@ -12,8 +12,10 @@
 <div class="container">
     <a class="nav-btn left" href="{% url 'center_details' center.center_abbreviation %}">{{center.name}}<i
             class="material-icons left">arrow_back</i></a>
-
-    <h1 class="center section-title">{{center.name}} Notices</h1>
+</div>
+<div class="container">
+    {% if pinned_articles %}
+    <h1 class="center section-title">{{center.name}} News</h1>
     <div class="divider"></div>
     <br>
     <div class="row">
@@ -49,14 +51,18 @@
         </div>
         {% endfor %}
     </div>
+    {% endif %}
 
+    {% if articles1 %}
     <h2 class="center section-title">{{center.name}} Updates</h2>
-    <div class="divider"></div>
     <br>
 
     <div>
         {% include 'includes/center-article-list.html' %}
     </div>
+    {%else%}
+    <div class="flow-text">No updates.</div>
+    {% endif %}
 </div>
 </div>
 

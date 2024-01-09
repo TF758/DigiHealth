@@ -33,9 +33,10 @@
                     class="material-icons right">map</i>View</a>
             <h1 class=" section-title">{{center_details.name}}</h1>
         </div>
-
+        {% if center_details.center_description%}
         <p class="flow-text">{{center_details.center_description|linebreaksbr}}
         </p>
+        {% endif %}
 
     </div>
 </div>
@@ -45,8 +46,13 @@
     <div class="row">
         <div class="col s12 m6 l4 ">
             <div>
+                {% if active_clinics%}
                 <a class="nav-btn right" href="{%url 'center_active_clinics' center_details.center_abbreviation%}">See
                     all<i class="material-icons right">arrow_forward</i></a>
+                {% else %}
+                <a class="btn right disabled" href="#!">See
+                    all<i class="material-icons right">arrow_forward</i></a>
+                {% endif %}
                 <h3 class="center">Active Clinics</h3>
             </div>
 
@@ -85,9 +91,14 @@
         </div>
         <div class="col s12 m6 l5 offset-l3">
             <div>
+                {% if upcoming_clinics%}
                 <a class="nav-btn right" href="{%url 'center_upcoming_clinics' center_details.center_abbreviation%}">See
                     all<i class="material-icons right">arrow_forward</i></a>
-                <h3 class="center">Upcoming Clinics <span></span></h3>
+                {%else%}
+                <a class="btn right disabled" href="#!">See
+                    all<i class="material-icons right">arrow_forward</i></a>
+                {% endif %}
+                <h3 class="center">Upcoming Clinics</h3>
             </div>
 
             {% if upcoming_clinics%}
@@ -112,7 +123,7 @@
                 </tbody>
             </table>
             {% else %}
-            <h4 class="center">No Clinics Scheduled for this facility.</h4>
+            <p class="center flow-text">No Clinics Scheduled for this facility.</p>
             {% endif %}
         </div>
     </div>
@@ -120,9 +131,15 @@
 
 
 <div class="container">
+    {% if center_articles %}
     <a class="" href="{% url 'center_news' center_details.center_abbreviation %}">
         <h2 class="section-title center ">Clinic Updates</h2>
     </a>
+    {% else %}
+
+    <h2 class="section-title center ">Clinic Updates</h2>
+
+    {% endif %}
     {% if center_articles %}
     <div class="row">
         {% for article in center_articles %}
