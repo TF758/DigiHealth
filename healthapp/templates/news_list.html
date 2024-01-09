@@ -32,12 +32,11 @@
                 {% endif %}
                 <div class="card-content">
                     <a href="{% url 'article_details' article.id %}">
-                        <p class="card-title emphasis"> {{article.title}} In one sentence to test length with abit more
-                            text to make sure</p>
+                        <p class="card-title emphasis"> {{article.title}} </p>
                     </a>
                     <br>
                     <div class="center">
-                        <a href="{% url 'urgent_care_global' %}" class="nav-btn">Read More</a>
+                        <a href="{% url 'article_details' article.id %}" class="nav-btn">Read More</a>
                     </div>
                 </div>
             </div>
