@@ -210,7 +210,7 @@ class CenterArticleList(ListView):
 
     def get_queryset(self):
         center_abbreviation = self.kwargs['center_abbreviation']
-        return NewsArticle.objects.filter(center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
+        return NewsArticle.objects.filter(centers__center_abbreviation=center_abbreviation).order_by('date').reverse()
     
     def get_template_names(self, *args, **kwargs):
         if self.request.htmx:
@@ -224,7 +224,7 @@ class CenterArticleList(ListView):
         center_abbreviation = self.kwargs['center_abbreviation']
 
         context['center'] = Center.objects.get(center_abbreviation =self.kwargs['center_abbreviation'] )
-        context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"], center_id__center_abbreviation=center_abbreviation).order_by('date').reverse()
+        context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"], centers__center_abbreviation=center_abbreviation).order_by('date').reverse()
         return context
 
 class FacilitiesNearMe (LoginRequiredMixin,ListView):
