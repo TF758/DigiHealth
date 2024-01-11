@@ -113,6 +113,7 @@ class Center (models.Model):
     contact = models.CharField(max_length=150, null=True, blank=True)
     center_image = models.ImageField(upload_to='center_images',default="medical_center_default.jpg")
     address =  models.CharField(null=True, max_length=200)
+    local_address =  models.CharField(null=True, max_length=200)
     center_description = models.TextField(max_length=10000, null=True, blank=True)
     
     tags = TaggableManager(blank=True)
