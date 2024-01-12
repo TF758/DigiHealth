@@ -182,25 +182,29 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col s12 m6 l4 offset-l2">
+            <div class="col s12 m6 l6 offset-l2">
                 <div class="row">
                     <a class="nav-btn right" href="{% url 'upcoming_clinics' %}">See all<i
                             class="material-icons right">arrow_forward</i></a>
-                    <h3 class="">Clinics</h3>
+                    <h3 class="">Scheduled Clinics</h3>
                     {% for clinic in upcoming_clinics %}
                     <div class="row">
-                        <div class="clinic-container">
-                            <div class="date-container">
-                                <span>{{clinic.start_date|date:"M"}}</span>
-                                <span>{{clinic.start_date|date:"d"}}</span>
-                            </div>
-                            <div class="homepage-clinic-text ">
-                                <p> <strong>{{clinic.event_name}}</strong> </p>
-                                {{clinic.get_clinic_facility_long}}
-                                <p><span>{{clinic.start_date|date:"l"}} {{clinic.start_time| time:"g:i A" }} -
-                                        {{clinic.end_time| time:"g:i A" }}</span></p>
+                        <div class="col s12">
+                            <div class="clinic-container">
+                                <div class="date-container">
+                                    <span>{{clinic.start_date|date:"M"}}</span>
+
+                                    <span>{{clinic.start_date|date:"d"}}</span>
+                                </div>
+                                <div class="homepage-clinic-text ">
+                                    <p> <strong>{{clinic.event_name}}</strong> </p>
+                                    {{clinic.get_clinic_facility_long}}
+                                    <p><span> {{clinic.start_time| time:"g:i A" }} -
+                                            {{clinic.end_time| time:"g:i A" }}</span></p>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                     {% empty %}
                     <h5>No Clinics Available</h5>

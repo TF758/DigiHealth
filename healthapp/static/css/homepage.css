@@ -1,13 +1,3 @@
-:root {
-  --primary-color: #0486cc;
-  --primary-color-light: #41a3d8;
-  --primary-color-dark: #026194;
-  --primary-color-transparent: #0486cc3f;
-  --secondary-color: #f3f3f3;
-  --accent-color: #59d359;
-  --black: #00171f;
-  --dark-grey: #414141ab;
-}
 .homepage-action {
   margin-top: 1rem;
 }

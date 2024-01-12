@@ -7,7 +7,7 @@ class EventFilter(django_filters.FilterSet):
     event_name = CharFilter(
         field_name='event_name',
         lookup_expr='icontains',
-        label="Search By Clinic"
+        label="Search By Clinic Name"
     )
     start_date = DateFilter(
         field_name='start_date',

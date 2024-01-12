@@ -53,15 +53,13 @@
     </div>
     {% endif %}
 
-    {% if articles1 %}
+    {% if articles %}
     <h2 class="center section-title">{{center.name}} Updates</h2>
     <br>
 
     <div>
         {% include 'includes/center-article-list.html' %}
     </div>
-    {%else%}
-    <div class="flow-text">No updates.</div>
     {% endif %}
 </div>
 </div>

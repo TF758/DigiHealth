@@ -33,6 +33,10 @@
                     class="material-icons right">map</i>View</a>
             <h1 class=" section-title">{{center_details.name}}</h1>
         </div>
+        <div class="">
+            Contact:
+            <a href="tel:1{{center_details.contact}}">{{center_details.contact}}</a>
+        </div>
         {% if center_details.center_description%}
         <p class="flow-text">{{center_details.center_description|linebreaksbr}}
         </p>
@@ -67,16 +71,6 @@
                 </thead>
                 <tbody>
                     {% for clinic in active_clinics %}
-                    <tr class="row-highlight">
-                        <td> {{ clinic.event_name }}</td>
-                        <td> {{ clinic.start_time | time:"g : i A" }}</td>
-                        <td> {{ clinic.end_time | time:"g : i A" }}</td>
-                    </tr>
-                    <tr class="row-highlight">
-                        <td> {{ clinic.event_name }}</td>
-                        <td> {{ clinic.start_time | time:"g : i A" }}</td>
-                        <td> {{ clinic.end_time | time:"g : i A" }}</td>
-                    </tr>
                     <tr class="row-highlight">
                         <td> {{ clinic.event_name }}</td>
                         <td> {{ clinic.start_time | time:"g : i A" }}</td>
@@ -200,8 +194,8 @@
                     {% else %}
                     <tr class="row-highlight">
                         <td> {{ hours.get_weekday_display }}</td>
-                        <td> {{ hours.from_hour|time:"g : i a " }}</td>
-                        <td> {{ hours.to_hour|time:"g : i a " }}</td>
+                        <td> {{ hours.from_hour|time:"g:i a " }}</td>
+                        <td> {{ hours.to_hour|time:"g:i a " }}</td>
                     </tr>
                     {% endif %}
                     {% endfor %}
