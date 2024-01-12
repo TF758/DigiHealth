@@ -28,25 +28,30 @@
                         class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a href="/"> <i class="material-icons right">home</i>Home</a>
+                        <a href="/" aria-label="homepage"> <i class="material-icons right">home</i>Home</a>
                     </li>
-                    <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop">Medical
+                    <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop"
+                            aria-label="Medical Centers">Medical
                             Facilities <i class="material-icons right">local_hospital</i></a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop">Clinics<i
-                                class="material-icons right">local_activity</i></a>
+                    <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop"
+                            aria-label="Medical Clinics">Clinics<i class="material-icons right">local_activity</i></a>
                     </li>
-                    <li><a href="{% url 'news' %}">News<i class="material-icons right">announcement</i></a></li>
+                    <li><a href="{% url 'news' %}" aria-label="News">News<i
+                                class="material-icons right">announcement</i></a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="/profile/{{user}}">Profile <i class="material-icons right">assignment_ind</i></a></li>
-                    <li><a href="{% url 'account_logout' %}">Logout<i class="material-icons right">exit_to_app</i></a>
+                    <li><a href="/profile/{{user}}" aria-label="User Profile">Profile <i
+                                class="material-icons right">assignment_ind</i></a></li>
+                    <li><a href="{% url 'account_logout' %}" aria-label="Logout">Logout<i
+                                class="material-icons right">exit_to_app</i></a>
                     </li>
                     {% else %}
 
                     <li>
-                        <a href="{% url 'account_signup' %}">Register <i
+                        <a href="{% url 'account_signup' %}" aria-label="Register Account">Register <i
                                 class="material-icons right">recent_actors</i></a>
                     </li>
-                    <li><a href="{% url 'account_login' %}">Login<i class="material-icons right">verified_user</i></a>
+                    <li><a href="{% url 'account_login' %}" aria-label="Login">Login<i
+                                class="material-icons right">verified_user</i></a>
                     </li>
                     {% endif %}
                 </ul>
@@ -59,15 +64,17 @@
     <ul id="center-dropdown-options-desktop" class="dropdown-content">
         <li><a href="{% url 'centers_all_districts' %}">
                 By District</a></li>
-        <li><a class="waves-effect" href="{% url 'centers' %}">A-Z</a></li>
-        <li><a href="{% url 'urgent_care_global' %}">
+        <li><a class="waves-effect" href="{% url 'centers' %}" aria-label="Find Facilities alphabetically">By Name</a>
+        </li>
+        <li><a href="{% url 'urgent_care_global' %}" aria-label="Urgent Care Facilities">
                 Urgent Care</a></li>
-        <li><a class="waves-effect" href="{% url 'phc_centers_global' %}">Primary Care</a></li>
+        <li><a class="waves-effect" href="{% url 'phc_centers_global' %}" aria-label="Primary Care facilities">Primary
+                Care</a></li>
     </ul>
 
     <ul id="clinic-dropdown-dekstop" class="dropdown-content">
-        <li><a href="{% url 'active_clinics' %}">Active</a></li>
-        <li><a href="{% url 'upcoming_clinics' %}">Upcoming</a></li>
+        <li><a href="{% url 'active_clinics' %}" aria-label="Active Medical clinics">Active Clinics</a></li>
+        <li><a href="{% url 'upcoming_clinics' %}" aria-label="scheduled medical clinics">Upcoming Clinics</a></li>
     </ul>
 
     <ul id="auth-dropdown-options-desktop" class="dropdown-content">
@@ -83,25 +90,27 @@
     <!-- mobile side nav -->
 
     <ul id="mobile-side-nav" class="sidenav side-navbar blue">
-        <li><a href="/" class="white-text"> <i class="material-icons left white-text">home</i>Home</a></li>
-        <li><a href="#" class="dropdown-trigger white-text" data-target="center-dropdown-options-mobile">Medical
+        <li><a href="/" aria-label="homepage" class="white-text"> <i
+                    class="material-icons left white-text">home</i>Home</a></li>
+        <li><a href="#" class="dropdown-trigger white-text" data-target="center-dropdown-options-mobile"
+                aria-label="medical facilities">Medical
                 Facilities <i class="material-icons left white-text">local_hospital</i></a></li>
-        <li><a href="{% url 'news' %}" class=" white-text"> <i
-                    class="material-icons left white-text">announcement</i>News</a></li>
+        <li><a href="{% url 'news' %}" class=" white-text"> <i class="material-icons left white-text"
+                    aria-label="News">announcement</i>News</a></li>
         <li><a class="dropdown-trigger white-text" href="#!" data-target="clinic-dropdown-mobile">Clinics<i
-                    class="material-icons left white-text">local_activity</i></a>
+                    class="material-icons left white-text" aria-label="medical clinics">local_activity</i></a>
         </li>
         {% if user.is_authenticated %}
-        <li><a href="/profile/{{user}}" class="white-text"> <i
-                    class="material-icons left white-text">assignment_ind</i>Profile</a></li>
-        <li><a href="{% url 'account_logout' %}" class="white-text"> <i
-                    class="material-icons left white-text">exit_to_app</i>Logout</a></li>
+        <li><a href="/profile/{{user}}" class="white-text"> <i class="material-icons left white-text"
+                    aria-label="user profile">assignment_ind</i>Profile</a></li>
+        <li><a href="{% url 'account_logout' %}" class="white-text"> <i class="material-icons left white-text"
+                    aria-label="logout">exit_to_app</i>Logout</a></li>
         {% else %}
         <li>
-            <a href="{% url 'account_signup' %}" class="white-text"> <i
+            <a href="{% url 'account_signup' %}" class="white-text" aria-label="register account"> <i
                     class="material-icons left white-text">recent_actors</i>Register</a>
         </li>
-        <li><a href="{% url 'account_login' %}" class="white-text"> <i
+        <li><a href="{% url 'account_login' %}" class="white-text" aria-label="login"> <i
                     class="material-icons left white-text">verified_user</i>Login</a></li>
         {% endif %}
 
@@ -110,15 +119,17 @@
     <ul id="center-dropdown-options-mobile" class="dropdown-content">
         <li><a href="{% url 'centers_all_districts' %}">
                 By District</a></li>
-        <li><a class="waves-effect" href="{% url 'centers' %}">A-Z</a></li>
-        <li><a href="{% url 'urgent_care_global' %}">
+        <li><a class="waves-effect" href="{% url 'centers' %}" aria-label="Find Facilities alphabetically">By Name</a>
+        </li>
+        <li><a href="{% url 'urgent_care_global' %}" aria-label="Urgent Care Facilities">
                 Urgent Care</a></li>
-        <li><a class="waves-effect" href="{% url 'phc_centers_global' %}">Primary Care</a></li>
+        <li><a class="waves-effect" href="{% url 'phc_centers_global' %}" aria-label="Primary Care facilities">Primary
+                Care</a></li>
     </ul>
 
     <ul id="clinic-dropdown-mobile" class="dropdown-content">
-        <li><a href="{% url 'active_clinics' %}">Active</a></li>
-        <li><a href="{% url 'upcoming_clinics' %}">Upcoming</a></li>
+        <li><a href="{% url 'active_clinics' %}" aria-label="Active Medical clinics">Active Clinics</a></li>
+        <li><a href="{% url 'upcoming_clinics' %}" aria-label="scheduled medical clinics">Upcoming Clinics</a></li>
     </ul>
     {% if messages %}
     <div>
