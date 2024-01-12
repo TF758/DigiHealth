@@ -10,6 +10,7 @@ from django.shortcuts import render
 from ..serializers import *
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
+import string 
 
 
 class UrgentCareGlobal(ListView):
@@ -35,7 +36,8 @@ class GetCentersByLetter(View):
             search_objects = Center.objects.all().order_by('name')
         page_num = request.GET.get("page",1)
         center_paginator = Paginator(search_objects, 3)
-        context = {'centers':center_paginator.page(page_num)}
+        letters = string.ascii_lowercase
+        context = {'centers':center_paginator.page(page_num), 'letters': letters}
         return render(request, "centers/center_list.html", context)
 
     def post(self, request, *args, **kwargs):
@@ -87,6 +89,8 @@ class DistrictCentersDirectory(View):
         page_num = request.GET.get("page",1)
         # paginate results
         center_paginator = Paginator(search_objects, 3)
+        districts = District.objects.all()
         # return updated list of medical facilitie
-        context = {'centers':center_paginator.page(page_num)}
+        context = {'centers':center_paginator.page(page_num), 'districts':districts }
+        print(districts)
         return render(request, 'centers/district_centers.html', context)

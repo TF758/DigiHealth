@@ -23,17 +23,13 @@
 </div>
 <div class="row center">
     <ul class="pagination justify-content-center nav-filters">
-        <li class="page-item"><a class="page-link white-text " href="{% url 'centers_all_districts' %}">All</a></li>
-        <li class="page-item"><a id="query_GI" class="page-link white-text " href='?q=GI'>Gros-Islet</a></li>
-        <li class="page-item"><a id="query_CAS" class="page-link white-text " href="?q=CAS">Castries</a></li>
-        <li class="page-item"><a id="query_ALR" class="page-link white-text " href="?q=ALR">Anse La Raye</a></li>
-        <li class="page-item"><a id="query_LAB" class="page-link white-text " href='?q=LAB'>Laborie</a></li>
-        <li class="page-item"><a id="query_CAN" class="page-link white-text " href="?q=CAN">Canaries</a></li>
-        <li class="page-item"><a id="query_CHO" class="page-link white-text " href="?q=CHO">Choiseul</a></li>
-        <li class="page-item"><a id="query_DEN" class="page-link white-text " href='?q=DEN'>Dennery</a></li>
-        <li class="page-item"><a id="query_MIC" class="page-link white-text " href="?q=MIC">Micoud</a></li>
-        <li class="page-item"><a id="query_VF" class="page-link white-text " href="?q=VF">Vieux-Fort</a></li>
-        <li class="page-item"><a id="query_SOU" class="page-link white-text " href="?q=SOU">Soufriere</a></li>
+        <li class="page-item"><a class="page-link white-text" aria-label="Show  medical facilities in all districts"
+                href="{% url 'centers_all_districts' %}">All</a></li>
+        {% for district in districts %}
+        <li class="page-item"><a aria-label="Filter medical facilities for {{district.name}} only"
+                id="query_{{district.abbreviation}}" class="page-link white-text "
+                href='?q={{district.abbreviation}}'>{{district.name}}</a></li>
+        {% endfor %}
     </ul>
 </div>
 
@@ -43,12 +39,14 @@
         <div class="col s12 m6 l4">
             <div class="card no-shadows">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator center-thumbnail" src="{{center.center_image.url}}">
+                    <img class="activator center-thumbnail" src="{{center.center_image.url}}"
+                        alt="image of {{center.name}}">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator emphasis">{{center.name}}<i
                             class="material-icons right">more_vert</i></span>
-                    <p><a class="nav-btn" href="{% url 'center_details' center.center_abbreviation %}">Learn More</a>
+                    <p><a class="nav-btn" aria-label="View page for {{center.name}}"
+                            href="{% url 'center_details' center.center_abbreviation %}">Learn More</a>
                     </p>
                 </div>
                 <div class="card-reveal">
@@ -64,8 +62,6 @@
         <div class="empty-msg">
             No Centers
         </div>
-
-
         {% endfor %}
     </div>
 </div>
@@ -76,11 +72,12 @@
         {% if centers.has_previous %}
         <!-- 'First' and 'Previous' Buttons -->
         <li class="page-item">
-            <a class="page-link nav-btn" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">|&lt;
+            <a aria-label="First page of medical facilities" class="page-link nav-btn"
+                href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">|&lt;
                 First</a>
         </li>
         <li class="page-item">
-            <a class="page-link nav-btn"
+            <a aria-label="Previous page of medical facilities" class="page-link nav-btn"
                 href="?page={{ centers.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&lt;
                 Previous</a>
         </li>
@@ -104,12 +101,12 @@
             <!-- 'Next' and 'Last' Buttons -->
             {% if centers.has_next %}
             <li class="page-item">
-                <a class="page-link nav-btn"
+                <a aria-label="Next page of medical facilities" class="page-link nav-btn"
                     href="?page={{ centers.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next
                     &gt;</a>
             </li>
             <li class="page-item">
-                <a class="page-link  nav-btn"
+                <a aria-label="Last page of medical facilities" class="page-link  nav-btn"
                     href="?page={{ centers.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Last
                     &gt;|</a>
             </li>

@@ -26,36 +26,14 @@
     </div>
     <div class=" center">
         <ul class="pagination justify-content-center teal nav-filters">
-            <li class="page-item"><a class="page-link white-text" href="{% url 'centers' %}">All</a></li>
-            <li class="page-item"><a id="query_a" class="page-link white-text" href='?q=a'>A</a></li>
-            <li class="page-item"><a id="query_b" class="page-link white-text" href="?q=b">B</a></li>
-            <li class="page-item"><a id="query_c" class="page-link white-text" href="?q=c">C</a></li>
-            <li class="page-item"><a id="query_d" class="page-link white-text" href="?q=d">D</a></li>
-            <li class="page-item"><a id="query_e" class="page-link white-text" href="?q=e">E</a></li>
-            <li class="page-item"><a id="query_f" class="page-link white-text" href="?q=f">F</a></li>
-            <li class="page-item"><a id="query_g" class="page-link white-text" href="?q=g">G</a></li>
-            <li class="page-item"><a id="query_h" class="page-link white-text" href="?q=h">H</a></li>
-            <li class="page-item"><a id="query_i" class="page-link white-text" href="?q=i">I</a></li>
-            <li class="page-item"><a id="query_j" class="page-link white-text" href="?q=j">J</a></li>
-            <li class="page-item"><a id="query_k" class="page-link white-text" href="?q=k">K</a></li>
-            <li class="page-item"><a id="query_l" class="page-link white-text" href="?q=l">L</a></li>
-            <li class="page-item"><a id="query_m" class="page-link white-text" href="?q=m">M</a></li>
-            <li class="page-item"><a id="query_n" class="page-link white-text" href="?q=n">N</a></li>
-            <li class="page-item"><a id="query_o" class="page-link white-text" href="?q=o">O</a></li>
-            <li class="page-item"><a id="query_p" class="page-link white-text" href="?q=p">P</a></li>
-            <li class="page-item"><a id="query_q" class="page-link white-text" href="?q=q">Q</a></li>
-            <li class="page-item"><a id="query_r" class="page-link white-text" href="?q=r">R</a></li>
-            <li class="page-item"><a id="query_s" class="page-link white-text" href="?q=s">S</a></li>
-            <li class="page-item"><a id="query_t" class="page-link white-text" href="?q=t">T</a></li>
-            <li class="page-item"><a id="query_u" class="page-link white-text" href="?q=u">U</a></li>
-            <li class="page-item"><a id="query_v" class="page-link white-text" href="?q=v">V</a></li>
-            <li class="page-item"><a id="query_w" class="page-link white-text" href="?q=w">W</a></li>
-            <li class="page-item"><a id="query_x" class="page-link white-text" href="?q=x">X</a></li>
-            <li class="page-item"><a id="query_y" class="page-link white-text" href="?q=y">Y</a></li>
-            <li class="page-item"><a id="query_z" class="page-link white-text" href="?q=z">Z</a></li>
+            <li class="page-item"><a aria-label="Show all medical facilities" class="page-link white-text"
+                    href="{% url 'centers' %}">All</a></li>
+            {% for letter in letters %}
+            <li class="page-item"><a aria-label="Show medical facilities that start with the letter {{letter}}"
+                    id="query_{{letter}}" class="page-link white-text" href='?q={{letter}}'>{{letter}}</a></li>
+            {% endfor %}
         </ul>
     </div>
-
 </div>
 
 <div class="container">
@@ -64,7 +42,8 @@
         <div class="col s12 m6 l4">
             <div class="card no-shadows">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator center-thumbnail" src="{{center.center_image.url}}">
+                    <img class="activator center-thumbnail" src="{{center.center_image.url}}"
+                        alt="image of {{center.name}}">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator emphasis">{{center.name}}<i
@@ -98,11 +77,12 @@
         {% if centers.has_previous %}
         <!-- 'First' and 'Previous' Buttons -->
         <li class="page-item">
-            <a class="page-link nav-btn" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">|&lt;
+            <a aria-label="First page of medical facilities" class="page-link nav-btn"
+                href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">|&lt;
                 First</a>
         </li>
         <li class="page-item">
-            <a class="page-link nav-btn"
+            <a aria-label="Previous page of medical facilities" class="page-link nav-btn"
                 href="?page={{ centers.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&lt;
                 Previous</a>
         </li>
@@ -126,19 +106,18 @@
             <!-- 'Next' and 'Last' Buttons -->
             {% if centers.has_next %}
             <li class="page-item">
-                <a class="page-link nav-btn"
+                <a aria-label="Next page of medical facilities" class="page-link nav-btn"
                     href="?page={{ centers.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next
                     &gt;</a>
             </li>
             <li class="page-item">
-                <a class="page-link  nav-btn"
+                <a aria-label="Last page of medical facilities" class="page-link  nav-btn"
                     href="?page={{ centers.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Last
                     &gt;|</a>
             </li>
             {% endif %}
     </ul>
 </div>
-
 
 <script>
     var query_paramter = getUrlVars()["q"];
