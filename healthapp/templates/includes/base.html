@@ -28,29 +28,31 @@
                         class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a href="/" aria-label="homepage"> <i class="material-icons right">home</i>Home</a>
+                        <a href="/" aria-label="homepage"> <i class="material-icons right"
+                                aria-hidden="true">home</i>Home</a>
                     </li>
                     <li><a href="#" class="dropdown-trigger" data-target="center-dropdown-options-desktop"
                             aria-label="Medical Centers">Medical
-                            Facilities <i class="material-icons right">local_hospital</i></a></li>
+                            Facilities <i aria-hidden="true" class="material-icons right">local_hospital</i></a></li>
                     <li><a class="dropdown-trigger" href="#!" data-target="clinic-dropdown-dekstop"
-                            aria-label="Medical Clinics">Clinics<i class="material-icons right">local_activity</i></a>
+                            aria-label="Medical Clinics">Clinics<i aria-hidden="true"
+                                class="material-icons right">local_activity</i></a>
                     </li>
-                    <li><a href="{% url 'news' %}" aria-label="News">News<i
+                    <li><a href="{% url 'news' %}" aria-label="News">News<i aria-hidden="true"
                                 class="material-icons right">announcement</i></a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="/profile/{{user}}" aria-label="User Profile">Profile <i
+                    <li><a href="/profile/{{user}}" aria-label="User Profile">Profile <i aria-hidden="true"
                                 class="material-icons right">assignment_ind</i></a></li>
-                    <li><a href="{% url 'account_logout' %}" aria-label="Logout">Logout<i
+                    <li><a href="{% url 'account_logout' %}" aria-label="Logout">Logout<i aria-hidden="true"
                                 class="material-icons right">exit_to_app</i></a>
                     </li>
                     {% else %}
 
                     <li>
                         <a href="{% url 'account_signup' %}" aria-label="Register Account">Register <i
-                                class="material-icons right">recent_actors</i></a>
+                                aria-hidden="true" class="material-icons right">recent_actors</i></a>
                     </li>
-                    <li><a href="{% url 'account_login' %}" aria-label="Login">Login<i
+                    <li><a href="{% url 'account_login' %}" aria-label="Login">Login<i aria-hidden="true"
                                 class="material-icons right">verified_user</i></a>
                     </li>
                     {% endif %}
@@ -90,46 +92,55 @@
     <!-- mobile side nav -->
 
     <ul id="mobile-side-nav" class="sidenav side-navbar blue">
-        <li><a href="/" aria-label="homepage" class="white-text"> <i
-                    class="material-icons left white-text">home</i>Home</a></li>
-        <li><a href="#" class="dropdown-trigger white-text" data-target="center-dropdown-options-mobile"
-                aria-label="medical facilities">Medical
-                Facilities <i class="material-icons left white-text">local_hospital</i></a></li>
-        <li><a href="{% url 'news' %}" class=" white-text"> <i class="material-icons left white-text"
-                    aria-label="News">announcement</i>News</a></li>
-        <li><a class="dropdown-trigger white-text" href="#!" data-target="clinic-dropdown-mobile">Clinics<i
-                    class="material-icons left white-text" aria-label="medical clinics">local_activity</i></a>
-        </li>
-        {% if user.is_authenticated %}
-        <li><a href="/profile/{{user}}" class="white-text"> <i class="material-icons left white-text"
-                    aria-label="user profile">assignment_ind</i>Profile</a></li>
-        <li><a href="{% url 'account_logout' %}" class="white-text"> <i class="material-icons left white-text"
-                    aria-label="logout">exit_to_app</i>Logout</a></li>
-        {% else %}
         <li>
-            <a href="{% url 'account_signup' %}" class="white-text" aria-label="register account"> <i
-                    class="material-icons left white-text">recent_actors</i>Register</a>
+            <a href="/" aria-label="homepage mobile link"> <i class=" material-icons right white-text"
+                    aria-hidden="true">home</i>Home</a>
         </li>
-        <li><a href="{% url 'account_login' %}" class="white-text" aria-label="login"> <i
-                    class="material-icons left white-text">verified_user</i>Login</a></li>
-        {% endif %}
+        <li><a href="#" class="dropdown-trigger white-text" data-target="center-dropdown-options-desktop"
+                aria-label="Medical Centers mobile link">Medical
+                Facilities <i aria-hidden="true" class=" material-icons right white-text">local_hospital</i></a></li>
+        <li><a class="dropdown-trigger  white-text" href="#!" data-target="clinic-dropdown-dekstop"
+                aria-label="Medical Clinics mobile link">Clinics<i aria-hidden="true"
+                    class=" material-icons right white-text">local_activity</i></a>
+        </li>
+        <li><a class=" white-text" href="{% url 'news' %}" aria-label="News mobile link">News<i aria-hidden="true"
+                    class=" material-icons right white-text">announcement</i></a></li>
+        {% if user.is_authenticated %}
+        <li><a class=" white-text" href="/profile/{{user}}" aria-label="User Profile mobile link">Profile <i
+                    aria-hidden="true" class=" material-icons right white-text">assignment_ind</i></a></li>
+        <li><a class="white-text" href="{% url 'account_logout' %}" aria-label="Logout mobile link">Logout<i
+                    aria-hidden="true" class=" material-icons right white-text">exit_to_app</i></a>
+        </li>
+        {% else %}
 
+        <li>
+            <a class=" white-text" href="{% url 'account_signup' %}" aria-label="Register Account mobile link">Register
+                <i aria-hidden="true" class=" material-icons right white-text">recent_actors</i></a>
+        </li>
+        <li><a class="white-text" href="{% url 'account_login' %}" aria-label="Login mobile link">Login<i
+                    aria-hidden="true" class=" material-icons right white-text">verified_user</i></a>
+        </li>
+        {% endif %}
     </ul>
 
     <ul id="center-dropdown-options-mobile" class="dropdown-content">
         <li><a href="{% url 'centers_all_districts' %}">
                 By District</a></li>
-        <li><a class="waves-effect" href="{% url 'centers' %}" aria-label="Find Facilities alphabetically">By Name</a>
+        <li><a class="waves-effect" href="{% url 'centers' %}"
+                aria-label="Find Facilities alphabetically mobile link">By Name</a>
         </li>
-        <li><a href="{% url 'urgent_care_global' %}" aria-label="Urgent Care Facilities">
+        <li><a href="{% url 'urgent_care_global' %}" aria-label="Urgent Care Facilities mobile link">
                 Urgent Care</a></li>
-        <li><a class="waves-effect" href="{% url 'phc_centers_global' %}" aria-label="Primary Care facilities">Primary
+        <li><a class="waves-effect" href="{% url 'phc_centers_global' %}"
+                aria-label="Primary Care facilities mobile link">Primary
                 Care</a></li>
     </ul>
 
     <ul id="clinic-dropdown-mobile" class="dropdown-content">
-        <li><a href="{% url 'active_clinics' %}" aria-label="Active Medical clinics">Active Clinics</a></li>
-        <li><a href="{% url 'upcoming_clinics' %}" aria-label="scheduled medical clinics">Upcoming Clinics</a></li>
+        <li><a href="{% url 'active_clinics' %}" aria-label="Active Medical clinics mobile link">Active Clinics</a>
+        </li>
+        <li><a href="{% url 'upcoming_clinics' %}" aria-label="scheduled medical clinics  mobile link">Upcoming
+                Clinics</a></li>
     </ul>
     {% if messages %}
     <div>

@@ -19,7 +19,7 @@
                 {% if article.article_image %}
                 <a href="{% url 'article_details' article.id %}">
                     <div class="card-image">
-                        <img src="{{article.article_image.url}}" alt="">
+                        <img src="{{article.article_image.url}}" alt="{{article.title}}" aria-label="{{article.title}}">
                     </div>
                 </a>
                 {% else %}
@@ -36,7 +36,8 @@
                     </a>
                     <br>
                     <div class="center">
-                        <a href="{% url 'article_details' article.id %}" class="nav-btn">Read More</a>
+                        <a aria-label="Read article {{article.title}} " href="{% url 'article_details' article.id %}"
+                            class="nav-btn">Read More</a>
                     </div>
                 </div>
             </div>

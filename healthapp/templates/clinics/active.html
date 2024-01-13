@@ -6,7 +6,7 @@
 <div class="banner-container">
     <img class="hero-banner"
         src="https://rater8.com/wp-content/uploads/2022/10/Managing-Patient-Expectations-in-the-Waiting-Room-rater8.png"
-        alt="">
+        alt="image of people sitting down in medical clinic">
 </div>
 
 <div class="container">
@@ -60,7 +60,7 @@
             {% for clinic in active_clinics %}
             <tr class="row-highlight">
                 <td class="flow-text">{{clinic.event_name}}</td>
-                <td class="flow-text"> <a
+                <td class="flow-text"> <a aria-label="{{clinic.event_name}} at {{clinic.get_clinic_district_long}}"
                         href="{% url 'center_details' clinic.get_clinic_facility_short %}">{{clinic.get_clinic_facility_long}}</a>
                 </td>
                 <td class="flow-text">{{clinic.get_clinic_district_long}}</td>
