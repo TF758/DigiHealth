@@ -128,7 +128,7 @@
                         <a href="{% url 'article_details' article.id %}" class="read-btn">Read more</a>
                     </p>
                     {% if article.article_image %}
-                    <a href="{% url 'article_details' article.id %}" class="red-text"><img
+                    <a href="{% url 'article_details' article.id %}" class="red-text"><img class="carousel-img"
                             src="{{article.article_image.url}}" alt="{{article.title}}"></a>
                     {% else %}
                     <a href="{% url 'article_details' article.id %}" class="red-text"><img
@@ -195,8 +195,8 @@
                     <div class="row" tabindex="0">
                         <div class="col s12">
                             <div class="clinic-container">
-                                <div class="date-container" aria-label="test doc">
-                                    <span>{{clinic.start_date|date:"M"}}</span>
+                                <div class="date-container"">
+                                    <span>{{clinic.start_date|date:" M"}}</span>
 
                                     <span>{{clinic.start_date|date:"d"}}</span>
                                 </div>

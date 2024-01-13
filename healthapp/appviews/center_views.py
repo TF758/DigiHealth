@@ -92,5 +92,4 @@ class DistrictCentersDirectory(View):
         districts = District.objects.all()
         # return updated list of medical facilitie
         context = {'centers':center_paginator.page(page_num), 'districts':districts }
-        print(districts)
         return render(request, 'centers/district_centers.html', context)

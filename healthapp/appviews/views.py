@@ -249,7 +249,6 @@ class ActiveClinicsNearMe (LoginRequiredMixin,ListView):
 
         profile_add = Address.objects.get(user=self.request.user)
         queryset = ClinicEvent.objects.filter(facility__district__name =profile_add.district, is_active=True ).order_by('start_date').reverse()
-        print(queryset)
         return queryset
     
 
@@ -263,5 +262,4 @@ class UpcomingClinicsNearMe (LoginRequiredMixin,ListView):
 
         profile_add = Address.objects.get(user=self.request.user)
         queryset = ClinicEvent.objects.filter(facility__district__name =profile_add.district,is_active=False ).order_by('start_date').reverse()
-        print(queryset)
         return queryset
