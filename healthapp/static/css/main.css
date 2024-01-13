@@ -30,8 +30,8 @@ main {
   left: 50%;
   color: #000000;
   background: var(--secondary-color);
-  transition: 0.5s;
-  z-index: 100;
+  transition: 0.05s;
+  z-index: 5;
 }
 #skipper:focus {
   top: 0px;
