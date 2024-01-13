@@ -47,12 +47,3 @@ class TestLoginView(TestCase):
     
         
 
-
-
-#   def setUp(self): 
-#         self.user = CustomUser.objects.create( email='test@email.com', password='')
-#         self.user.set_password('secret')
-#         self.user.save()
-#         ...
-#         self.client = Client()
-#         self.client.login(username='testUser', password='secret')
