@@ -102,3 +102,22 @@ function getPageName(url) {
   var filename = filenameWithExtension.split(".")[0]; // <-- added this line
   return filename; // <-- added this line
 }
+
+$(document).ready(function () {
+  var target = $("#user-message");
+  $("#close-message").click(function () {
+    removeElement(target);
+  });
+});
+
+function removeElement(target) {
+  target.animate(
+    {
+      opacity: "-=1",
+    },
+    100,
+    function () {
+      target.remove();
+    }
+  );
+}

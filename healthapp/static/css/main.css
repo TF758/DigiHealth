@@ -365,3 +365,9 @@ nav ul.popup-list li a:hover {
   color: var(--dark-grey);
   opacity: 1; /* Firefox */
 }
+
+#close-message {
+  cursor: pointer;
+  margin-right: 0.5rem;
+  margin-top: 0.3rem;
+}
