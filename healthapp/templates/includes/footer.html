@@ -6,24 +6,28 @@
             <div class="col l4  m4 l3">
                 <h5 class="white-text">Medical Centers</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Urgent Care Centers</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Primary Care Centers</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">District Centers</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">A-Z listing of Centers</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{% url 'urgent_care_global' %}">Urgent Care
+                            Centers</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{% url 'phc_centers_global' %}">Primary Care
+                            Centers</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{% url 'centers_all_districts' %}">District
+                            Centers</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{% url 'centers' %}">A-Z listing of Centers</a></li>
                 </ul>
             </div>
             <div class="col l4  m4 l3">
                 <h5 class="white-text">Clinics </h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Active Medical Clinics</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Upcoming Medical Clinics</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{% url 'active_clinics' %}">Active Medical Clinics</a>
+                    </li>
+                    <li><a class="grey-text text-lighten-3" href="{% url 'upcoming_clinics' %}">Upcoming Medical
+                            Clinics</a></li>
                 </ul>
             </div>
             <div class="col l4  m4 l3">
                 <h5 class="white-text">More Information</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">News</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{% url 'news' %}">News</a></li>
                 </ul>
             </div>
         </div>
@@ -31,7 +35,7 @@
     <div class="footer-copyright">
         <div class="container">
             © 2018 Copyright - All Rights Reserved
-            <a class="grey-text text-lighten-4 right" href="#!">Terms of Service</a>
+            <a class="grey-text text-lighten-4 right" href="">Terms of Service</a>
         </div>
     </div>
 </footer>

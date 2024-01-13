@@ -20,6 +20,22 @@
   top: 0;
   width: 100%;
 }
+main {
+  min-width: 320px;
+}
+
+#skipper {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  color: #000000;
+  background: var(--secondary-color);
+  transition: 0.5s;
+  z-index: 100;
+}
+#skipper:focus {
+  top: 0px;
+}
 
 /* navigation styling START */
 .nav-wrapper {
