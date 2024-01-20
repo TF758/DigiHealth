@@ -25,5 +25,12 @@ urlpatterns = [
      path('clinics/upcoming', UpcomingClinics.as_view(), name='api_upcoming_clinics'),  
      path('clinic/<int:pk>', ClinicDetails.as_view(), name='api_clinic_details'),
      path('clinics/district/<str:district>', DistrictClinics.as_view(), name='api_district_clinics'),
+
+     # API CALLS FOR ARTICLE DATA
+
+     path('articles', GlobalArticleList.as_view(), name='api_all_articles'),
+     path('articles/center/<str:center>', CenterArticleList.as_view(), name='api_center_articles'),
+     path('article/<int:pk>', ArticleDetails.as_view(), name='api_article_details'),
+
       
 ]

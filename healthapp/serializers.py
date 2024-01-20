@@ -68,3 +68,28 @@ class ClinicDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicEvent
         fields = ['id','event_name', 'start_date','end_date','start_time', 'end_time', 'facility']
+
+class NewsArticleSerializer(serializers.ModelSerializer):
+
+    """Returns data about a news article"""
+    date =  serializers.DateTimeField(format='%H:%M %Y-%m-%d')
+
+    article_image =  serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
+
+    centers =CenterNameSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = NewsArticle
+        fields = ['id','title','subtitle', 'date','body','centers', 'article_image']
+
+class NewsArticleSerializer2(serializers.ModelSerializer):
+
+    """Returns data about a news article"""
+    date =  serializers.DateTimeField(format='%H:%M %Y-%m-%d')
+
+    article_image =  serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
+
+    class Meta:
+        model = NewsArticle
+        fields = ['id','title','subtitle', 'date','body', 'article_image']   
+

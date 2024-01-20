@@ -126,3 +126,29 @@ class CenterUpcomingClinics(APIView):
         qs = ClinicEvent.objects.filter(facility__center_abbreviation = center_abbreviation,is_active = False, is_expired = False)
         clinic_list = ClinicDataSerializer(qs, many = True).data
         return Response(clinic_list)
+
+class ArticleDetails(generics.RetrieveAPIView):
+
+    """Returns data about a news article"""
+
+    queryset = NewsArticle.objects.all()
+    serializer_class = NewsArticleSerializer
+
+
+class GlobalArticleList(generics.ListAPIView):
+
+    """Returns all articles ordered by most recent"""
+
+    queryset = NewsArticle.objects.all().order_by('date').reverse()
+    serializer_class = NewsArticleSerializer
+
+
+class CenterArticleList(generics.ListAPIView):
+
+    """Returns articles associated to a specific center- ordered by most recent"""
+
+    serializer_class = NewsArticleSerializer2
+
+    def get_queryset(self):
+        events = NewsArticle.objects.filter(centers__center_abbreviation =self.kwargs['center']).order_by('date').reverse() 
+        return events
