@@ -40,12 +40,13 @@ class GetCentersByLetter(View):
         context = {'centers':center_paginator.page(page_num), 'letters': letters}
         return render(request, "centers/center_list.html", context)
 
+    # poat request for ajax calls
     def post(self, request, *args, **kwargs):
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
         if is_ajax:
             query = request.POST['query']
             centers_filtered = Center.objects.filter(
-                name__icontains=query).order_by('name')
+                name__istartswith=query).order_by('name')
             info = HealthCenterSerializer(centers_filtered, many=True)
             center_data = info.data
             # print(center_data)
@@ -70,7 +71,7 @@ class CenterDetails(ListView):
 
         
         context['center_articles'] =  NewsArticle.objects.filter(centers__center_abbreviation=center_abbreviation)[:4]
-        context['operating_hours'] = OpeningHours.objects.filter(center__center_abbreviation=center_abbreviation)
+        context['operating_hours'] = OpeningTimes.objects.filter(center__center_abbreviation=center_abbreviation)
         context['address'] = Center.objects.get(center_abbreviation=center_abbreviation).address
         context['active_clinics'] = ClinicEvent.objects.filter( facility__center_abbreviation =center_abbreviation, is_active=True)[:5]
         context['upcoming_clinics'] = ClinicEvent.objects.filter( facility__center_abbreviation =center_abbreviation, is_active=False).order_by('start_date')[:5]

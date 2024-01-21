@@ -178,36 +178,31 @@ class NewsArticle(models.Model):
         def __str__(self):
             return str(self.title)
 
-
-class OpeningHours(models.Model):
+    
+class OpeningTimes(models.Model):
     WEEKDAYS = [
-    (1, ("Monday")),
-    (2, ("Tuesday")),
-    (3, ("Wednesday")),
-    (4, ("Thursday")),
-    (5, ("Friday")),
-    (6, ("Saturday")),
-    (7, ("Sunday")),
-    (8, ("Holidays")),
+    (0, ("Monday")),
+    (1, ("Tuesday")),
+    (2, ("Wednesday")),
+    (3, ("Thursday")),
+    (4, ("Friday")),
+    (5, ("Saturday")),
+    (6, ("Sunday")),
+    (7, ("Holidays")),
     ]
-    center = models.ForeignKey(
-        Center, on_delete=models.DO_NOTHING
-    )
     weekday = models.IntegerField(
-        choices=WEEKDAYS,
-        unique=True
+        choices=WEEKDAYS
     )
     is_closed = models.BooleanField(default=False,null=True,blank=True,)
     from_hour = models.TimeField( null=True,blank=True,)
     to_hour = models.TimeField(null=True,blank=True,)
+    center =  models.ManyToManyField(Center, blank=True)
 
     class Meta:
-        verbose_name = 'Opening Hours'
-        verbose_name_plural = 'Opening Hours'
-        
-        constraints = [
-            models.UniqueConstraint(fields=['center', 'weekday'], name='center operating days')
-        ]
+        verbose_name = 'Opening Time'
+        verbose_name_plural = 'Opening Times'
+        ordering = ["weekday"]
 
     def __str__(self):
-            return str(str(self.center) + " " + str(self.weekday))
+            return str(str(self.get_weekday_display()) + " " + str(self.is_closed) + " " + str(self.from_hour) + " " + str(self.to_hour))
+    
