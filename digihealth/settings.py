@@ -46,10 +46,12 @@ INSTALLED_APPS = [
     'easy_maps',
     'taggit',
 
+    # USED FOR EMAIL VERIFICATION OF ACCOUNTS
     'allauth', 
     'allauth.account', 
     'allauth.socialaccount', 
     'allauth.socialaccount.providers.github', 
+    
     # FOR DEVLEOPMENT
     "django_browser_reload",
     # FOR INFINITE SCROLLING
@@ -179,12 +181,13 @@ MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #new
-EMAIL_HOST = 'smtp.gmail.com' #new
-EMAIL_PORT = 587 #new
-EMAIL_HOST_USER = 'teryllfelix@gmail.com'  #new
-EMAIL_HOST_PASSWORD = "rtwd efxa jwjp iemm" #new
-EMAIL_USE_TLS = True #new
+# USED FOR ALLAUTH
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_PORT = 587 
+EMAIL_HOST_USER = 'teryllfelix@gmail.com'  
+EMAIL_HOST_PASSWORD = "rtwd efxa jwjp iemm" 
+EMAIL_USE_TLS = True 
 
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_UNIQUE = True

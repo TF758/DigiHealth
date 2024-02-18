@@ -4,11 +4,14 @@ from ..forms import *
 from ..filters import  EventFilter
 
 
-class ActiveClinics(ListView):    
+class ActiveClinics(ListView): 
+    
+    """Page for all active clinics"""
+   
     template_name = 'clinics/active.html'  
     context_object_name = "active_clinics"
     model = ClinicEvent    
-    paginate_by = 1 
+    paginate_by = 3 
     
     def get_queryset(self):
         events = ClinicEvent.objects.filter(is_active=True).order_by('id')
@@ -17,12 +20,10 @@ class ActiveClinics(ListView):
         return events
     
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         context['event_filter'] = EventFilter()
         return context
     
-
 class UpcomingClinics(ListView):
     queryset  = ClinicEvent.objects.filter(is_active=False).order_by('start_date')  
     template_name = 'clinics/upcoming.html'
@@ -36,7 +37,6 @@ class UpcomingClinics(ListView):
         return events
     
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         context['event_filter'] = EventFilter()
         return context

@@ -11,6 +11,9 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from ..serializers import *
 from django.http import Http404
 from django.urls import reverse
+import googlemaps
+from datetime import datetime
+from decouple import config
 
 class UserAccessMixin(PermissionRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
@@ -29,20 +32,6 @@ class SetUserMixin(LoginRequiredMixin):
         setattr(form.instance, self.user_field, self.request.user)
         return super().form_valid(form)
    
-# # Create your views here.
-
-class AdminDashBoard(View):
-    def get(self, request):
-        context = {}
-        return render(request, "auth/dashboard.html", context)
-    
-
-# class CreateNewArticle(LoginRequiredMixin, CreateView):
-#     template_name = 'new_article.html'
-#     form_class = NewArticleForm
-#     model = Article
-#     success_url = reverse_lazy("home")
-
 
 class HomePage(ListView):
     template_name = 'homepage.html'
@@ -59,98 +48,11 @@ class HomePage(ListView):
         context['articles'] = NewsArticle.objects.filter(is_global = True).order_by('date')[:5]
         context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
 
+      
         if self.request.user.is_authenticated:
             context['has_address'] = Address.objects.filter(user = self.request.user).exists()
 
         return context
-
-
-def auth_index(request):
-    if request.method == 'GET':
-        context = {}
-        return render(request, "manage.html", context)
-
-# CENTER MANAGEMENT
-   
-class CreateNewCenter(UserAccessMixin,CreateView):
-    permission_denied_message=""
-    permission_required = ("healthapp.add_center")
-    redirect_field_name = 'next'
-    login_url = '/login/'
-    
-    model = Center
-    success_url = reverse_lazy("manage-centers")
-    template_name = 'auth/add-center.html'
-    form_class = AddCenterForm
-
-class ManageCenters(UserAccessMixin, View):
-    permission_denied_message=""
-    permission_required = ("healthapp.add_center",)
-    redirect_field_name = 'next'
-    login_url = '/login/'
-
-    def get(self, request):
-        centers = Center.objects.all()
-        center_filter = CenterFilter(request.GET, queryset=centers)
-        centers = center_filter.qs
-        context = {'center_list': centers, 'center_filter': center_filter}
-        return render(request, 'auth/manage-centers.html', context)
-
-class DeleteCenter(UserAccessMixin, DeleteView):
-    permission_denied_message=""
-    permission_required = ("healthapp.delete_center")
-    redirect_field_name = 'next'
-    login_url = '/login/'
-
-    model = Center
-    success_url = reverse_lazy("manage-centers")
-    template_name = "auth/manage-centers.html"
-
-
-class UpdateCenter(UserAccessMixin, UpdateView):
-    permission_denied_message=""
-    permission_required = ("healthapp.edit_center")
-    redirect_field_name = 'next'
-    login_url = '/login/'
-
-    model = Center
-    fields = "__all__"
-    success_url = reverse_lazy("manage-centers")
-    template_name = 'auth/add-center.html'
-
-
-# CLINIC MANAGEMENT
-class ManageClinics(LoginRequiredMixin, View):
-    def get(self, request):
-        events = ClinicEvent.objects.all()
-        event_filter = EventFilter(request.GET, queryset=events)
-        events = event_filter.qs
-        context = {'clinic_list': events, 'event_filter': event_filter}
-        return render(request, 'auth/manage-clinics.html', context)
-
-
-class CreateNewClinicEvent(LoginRequiredMixin, CreateView):
-    template_name = 'auth/add-clinic.html'
-    form_class = NewClinicalEventForm
-    model = ClinicEvent
-    success_url = reverse_lazy("manage-clinics")
-
-
-class DeleteClinic(LoginRequiredMixin, DeleteView):
-    model = ClinicEvent
-    success_url = reverse_lazy("manage-clinics")
-
-class UpdateClinic(LoginRequiredMixin, UpdateView):
-    model = ClinicEvent
-    fields = [
-        "clinic_type",
-        "facility",
-        "clinic_status",
-        "start_time",
-        "end_time",
-        "is_active",]
-    success_url = reverse_lazy("manage-clinics")
-    template_name = 'auth/add-clinic.html'
 
     
 class CreateUserAddress(SetUserMixin, LoginRequiredMixin, CreateView):

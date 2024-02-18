@@ -1,7 +1,0 @@
-This folder is used to hold templates related to site such as:
-
--create events
--managing clinics
--managing articles
-
-ects

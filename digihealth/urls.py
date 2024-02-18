@@ -22,6 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('healthapp.api_urls'),),
     path('', include('healthapp.urls'),),
-    path('auth/', include('healthapp.auth_urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
