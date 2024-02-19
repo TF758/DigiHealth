@@ -4,6 +4,8 @@ from .models import *
 
 
 class EventFilter(django_filters.FilterSet):
+
+    """ Filter to filter clinic events """
     event_name = CharFilter(
         field_name='event_name',
         lookup_expr='icontains',

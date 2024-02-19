@@ -63,7 +63,7 @@ class District(models.Model):
 
 class Address(models.Model):
 
-    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
 
     address1 = models.CharField(
         "Address line 1",
