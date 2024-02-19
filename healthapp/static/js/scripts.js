@@ -2,6 +2,7 @@
 var href = document.location.href;
 var lastPathSegment = href.lastIndexOf("/") + 1;
 
+// function used to retrieve center info from center query page
 const endpoint = "/centers/";
 function ajax_query() {
   $.ajax({
@@ -55,7 +56,6 @@ $(document).ready(function () {
     "keyup keypress",
     $.debounce(500, function () {
       if ($("#user-input").val() != 0) {
-        console.log("working debauncing");
         ajax_query();
       } else {
         return false;
@@ -81,27 +81,6 @@ $(document).ready(function () {
     e.preventDefault();
   });
 });
-
-// Read a page's GET URL variables and return them as an associative array.
-function getUrlVars() {
-  var vars = [],
-    hash;
-  var hashes = window.location.href
-    .slice(window.location.href.indexOf("?") + 1)
-    .split("&");
-  for (var i = 0; i < hashes.length; i++) {
-    hash = hashes[i].split("=");
-    vars.push(hash[0]);
-    vars[hash[0]] = hash[1];
-  }
-  return vars;
-}
-function getPageName(url) {
-  var index = url.lastIndexOf("/") + 1;
-  var filenameWithExtension = url.substr(index);
-  var filename = filenameWithExtension.split(".")[0]; // <-- added this line
-  return filename; // <-- added this line
-}
 
 $(document).ready(function () {
   var target = $("#user-message");

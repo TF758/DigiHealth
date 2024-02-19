@@ -51,16 +51,7 @@ $(document).ready(function () {
   $(".tooltipped").tooltip();
 });
 
-function scrollSmoothTo(elementId) {
-  yOffset = -10;
-  element = document.getElementById(elementId);
-  y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-  var element = document.getElementById(elementId);
-  element.scrollIntoView({
-    block: "center",
-    behavior: "smooth",
-  });
-}
+// interval for homepage carousel
 setInterval(function () {
   $(".carousel").carousel("next");
 }, 12000); // every 12 seconds
