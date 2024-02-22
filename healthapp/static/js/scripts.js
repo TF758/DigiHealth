@@ -13,7 +13,9 @@ function ajax_query() {
       query: $("#user-input").val().trim(),
     },
     success: function (data) {
+      // check page title
       var current_title = $(document).attr("title");
+      // if query returns no data
       if (data.centers.length == 0) {
         anchor = document.createElement("a");
         link = "#";
@@ -28,6 +30,7 @@ function ajax_query() {
           $.each(data.centers, function (k, v) {
             // create link
             anchor = document.createElement("a");
+            // check page title to  creat correct link
             if (current_title == "District Wellness Centers") {
               link = "/center/" + v.center_abbreviation + "/";
             } else {
@@ -51,10 +54,12 @@ function ajax_query() {
     },
   });
 }
+// function called as user types in search boxes of centers
 $(document).ready(function () {
   $("#user-input").on(
     "keyup keypress",
     $.debounce(500, function () {
+      // check that input field has valid characters
       if ($("#user-input").val() != 0) {
         ajax_query();
       } else {

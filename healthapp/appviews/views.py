@@ -95,7 +95,7 @@ class ArticleList(ListView):
         
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
-        context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
+        context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:4]
         return context
 
 class CenterArticleList(ListView):

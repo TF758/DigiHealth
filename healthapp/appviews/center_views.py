@@ -4,12 +4,10 @@ from django.views.generic import ListView
 from django.views.generic.list import ListView
 from django.views import View
 from ..forms import *
-from datetime import timedelta
 from django.http import JsonResponse
 from django.shortcuts import render
 from ..serializers import *
 from django.core.paginator import Paginator
-from datetime import datetime, timedelta
 import string 
 
 
@@ -59,7 +57,7 @@ class GetCentersByLetter(View):
             info = HealthCenterSerializer(centers_filtered, many=True)
             center_data = info.data
             return JsonResponse({'centers': list(center_data)})
-        return HttpResponse("TEST")
+        return HttpResponse("POST REQUEST MADE")
 
 
 class CenterDetails(ListView):
