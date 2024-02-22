@@ -148,7 +148,7 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Barbados'
 
 TIME_INPUT_FORMATS = ('%I:%M %p',)
 DATE_INPUT_FORMATS = ['%d/%m/%Y']
