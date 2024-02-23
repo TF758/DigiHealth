@@ -11,10 +11,10 @@ class ActiveClinics(ListView):
     template_name = 'clinics/active.html'  
     context_object_name = "active_clinics"
     model = ClinicEvent    
-    paginate_by = 3 
+    paginate_by = 5 
     
     def get_queryset(self):
-        events = ClinicEvent.objects.filter(is_active=True).order_by('id')
+        events = ClinicEvent.objects.filter(is_active=True).order_by('id').reverse()
         event_filter = EventFilter(self.request.GET, queryset=events)
         events = event_filter.qs
         return events
@@ -31,7 +31,7 @@ class UpcomingClinics(ListView):
     paginate_by = 2
     
     def get_queryset(self):
-        events = ClinicEvent.objects.filter(is_active=False).order_by('start_date')  
+        events = ClinicEvent.objects.filter(is_active=False).order_by('start_date').reverse()  
         event_filter = EventFilter(self.request.GET, queryset=events)
         events = event_filter.qs
         return events
@@ -48,7 +48,7 @@ class CenterActiveClinics(ListView):
     
     
     def get_queryset(self):
-        events = ClinicEvent.objects.filter(is_active=True,facility__center_abbreviation =self.kwargs['center']).order_by('start_date')  
+        events = ClinicEvent.objects.filter(is_active=True,facility__center_abbreviation =self.kwargs['center']).order_by('start_date').reverse()  
         event_filter = EventFilter(self.request.GET, queryset=events)
         events = event_filter.qs
         return events
@@ -65,7 +65,7 @@ class CenterUpcomingClinics(ListView):
     paginate_by = 1  
     
     def get_queryset(self):
-        events = ClinicEvent.objects.filter(is_active=False,facility__center_abbreviation =self.kwargs['center']).order_by('start_date')  
+        events = ClinicEvent.objects.filter(is_active=False,facility__center_abbreviation =self.kwargs['center']).order_by('start_date').reverse()  
         event_filter = EventFilter(self.request.GET, queryset=events)
         events = event_filter.qs
         return events

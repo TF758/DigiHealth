@@ -9,6 +9,7 @@
 
 {% block content %}
 
+<br>
 <div class="container">
     <a class="nav-btn left" href="{% url 'center_details' center.center_abbreviation %}">{{center.name}}<i
             class="material-icons left">arrow_back</i></a>
@@ -28,19 +29,11 @@
                         <img src="{{article.article_image.url}}" alt="">
                     </div>
                 </a>
-                {% else %}
-                <a href="{% url 'article_details' article.id %}">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
-                            alt="">
-                    </div>
-                </a>
                 {% endif %}
                 <div class="card-content">
                     <a href="{% url 'article_details' article.id %}">
                         <p>{{article.center_id}}</p>
-                        <p class="card-title emphasis"> {{article.title}} In one sentence to test length with abit more
-                            text to make sure</p>
+                        <p class="card-title emphasis"> {{article.title}}</p>
                     </a>
                     <br>
                     <div class="center">

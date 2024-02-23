@@ -13,11 +13,6 @@
                 <a href="{% url 'article_details' article.id %}">
                     <img src="{{article.article_image.url}}" alt="">
                 </a>
-                {% else %}
-                <a href="{% url 'article_details' article.id %}">
-                    <img src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWFuJTIwcmVhZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
-                        alt="">
-                </a>
                 {% endif %}
             </div>
             <div class="article-container col s12 m12 l8">

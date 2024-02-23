@@ -147,7 +147,7 @@ class ClinicEvent(models.Model):
         ClinicType, null=True, on_delete=models.DO_NOTHING, blank=True)
 
     def __str__(self):
-        return str(self.event_name)
+        return str(self.event_name) + " " + str(self.facility)
     
     def get_clinic_facility_long(self):
         return str(self.facility.name)
@@ -163,10 +163,8 @@ class ClinicEvent(models.Model):
     
     
 class NewsArticle(models.Model):
-        dummy_text = "This is a placeholder subtitle"
-
         title  = models.CharField(max_length=100, null=False)
-        subtitle  = models.CharField(max_length=200, null=True,blank=True, default=dummy_text)
+        subtitle  = models.CharField(max_length=200, null=True,blank=True)
         date = models.DateTimeField(auto_now_add=True)
         body = models.TextField(max_length=10000, null=False)
         is_global = models.BooleanField(default=False, null=True)

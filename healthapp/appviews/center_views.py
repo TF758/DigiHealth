@@ -76,7 +76,7 @@ class CenterDetails(ListView):
 
         center_abbreviation = self.kwargs['center_abbreviation']
 
-        context['center_articles'] =  NewsArticle.objects.filter(centers__center_abbreviation=center_abbreviation)[:4]
+        context['center_articles'] =  NewsArticle.objects.filter(centers__center_abbreviation=center_abbreviation).order_by('date').reverse()[:4]
         context['operating_hours'] = OpeningTimes.objects.filter(center__center_abbreviation=center_abbreviation)
         context['address'] = Center.objects.get(center_abbreviation=center_abbreviation).address
         context['active_clinics'] = ClinicEvent.objects.filter( facility__center_abbreviation =center_abbreviation, is_active=True)[:5]

@@ -30,13 +30,15 @@
     <div class="container">
         <div class="">
             <a class="waves-effect waves-light modal-trigger right" href="#modal1"> <i
-                    class="material-icons right">map</i>View</a>
+                    class="material-icons right">map</i>View Location</a>
             <h1 class=" section-title">{{center_details.name}}</h1>
         </div>
-        <div class="">
+        {% if center_details.contact %}
+        <div>
             Contact:
             <a href="tel:1{{center_details.contact}}">{{center_details.contact}}</a>
         </div>
+        {% endif %}
         {% if center_details.center_description%}
         <p class="flow-text">{{center_details.center_description|linebreaksbr}}
         </p>
