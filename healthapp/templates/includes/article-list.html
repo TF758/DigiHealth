@@ -26,9 +26,11 @@
 
                         {{article.title}}
                     </a>
+                    {% if article.subtitle %}
                     <a class="update-subtitle" href="{% url 'article_details' article.id %}">
                         {{article.subtitle}}
                     </a>
+                    {% endif %}
                     <p class="article-date">{{article.date| date:"d M Y"}}</p>
                 </div>
             </div>

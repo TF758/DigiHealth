@@ -38,7 +38,7 @@ class HomePage(ListView):
 
         context['centers'] = Center.objects.all().order_by('name')[:3]
         context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date')[:5]
-        context['articles'] = NewsArticle.objects.filter(is_global = True).order_by('date')[:5]
+        context['articles'] = NewsArticle.objects.filter(is_global = True).order_by('date').reverse()[:5]
         context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
 
       
@@ -82,7 +82,7 @@ class ViewArticle( DetailView):
     slug_field = 'email'
     
 class ArticleList(ListView):
-    queryset = NewsArticle.objects.all().order_by('id')
+    queryset = NewsArticle.objects.all().order_by('date').reverse()
     template_name = 'news_list.html'
     context_object_name = 'articles'
     paginate_by = 1

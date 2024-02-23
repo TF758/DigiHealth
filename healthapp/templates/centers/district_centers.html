@@ -52,9 +52,16 @@
                 <div class="card-reveal">
                     <span class="card-title emphasis">{{center.name}}<i class="material-icons right">close</i></span>
                     <ul>
+                        {% if center.contact %}
                         <li>Contact - {{center.contact}}</li>
+                        {% endif %}
+                        {% if center.local_address %}
                         <li>Located - {{center.local_address}}</li>
+                        {% endif %}
                     </ul>
+                    <br>
+                    <a class="nav-btn" aria-label="View page for {{center.name}}"
+                        href="{% url 'center_details' center.center_abbreviation %}">Learn More </a>
                 </div>
             </div>
         </div>
