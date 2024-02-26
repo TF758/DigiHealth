@@ -28,7 +28,7 @@ class UpcomingClinics(ListView):
     queryset  = ClinicEvent.objects.filter(is_active=False).order_by('start_date')  
     template_name = 'clinics/upcoming.html'
     context_object_name = 'upcoming_clinics'
-    paginate_by = 2
+    paginate_by = 5
     
     def get_queryset(self):
         events = ClinicEvent.objects.filter(is_active=False).order_by('start_date').reverse()  
@@ -44,7 +44,7 @@ class UpcomingClinics(ListView):
 class CenterActiveClinics(ListView):    
     template_name = 'clinics/center_active_clinics.html'  
     context_object_name = "active_clinics"    
-    paginate_by = 1  
+    paginate_by = 3  
     
     
     def get_queryset(self):
@@ -62,7 +62,7 @@ class CenterActiveClinics(ListView):
 class CenterUpcomingClinics(ListView):    
     template_name = 'clinics/center_upcoming_clinics.html'  
     context_object_name = "upcoming_clinics"    
-    paginate_by = 1  
+    paginate_by = 3  
     
     def get_queryset(self):
         events = ClinicEvent.objects.filter(is_active=False,facility__center_abbreviation =self.kwargs['center']).order_by('start_date').reverse()  
