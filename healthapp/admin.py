@@ -45,10 +45,6 @@ class NewsArticleAdmin(admin.ModelAdmin):
 class ClinicEventAdmin(admin.ModelAdmin):
     pass
 
-
-class ClinicTypeAdmin(admin.ModelAdmin):
-    pass
-
 class DistrictAdmin(admin.ModelAdmin):
     pass
 
@@ -56,7 +52,6 @@ admin.site.register(CustomUser, UserAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(ClinicEvent, ClinicEventAdmin)
-admin.site.register(ClinicType, ClinicTypeAdmin)
 admin.site.register(Center, WellnessCenterAdmin)
 admin.site.register(OpeningTimes, OpeningTimeAdmin)
 admin.site.register( NewsArticle, NewsArticleAdmin)

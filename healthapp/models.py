@@ -121,15 +121,6 @@ class Center (models.Model):
     def __str__(self):
         return self.center_abbreviation
 
-class ClinicType (models.Model):
-
-    type_name = models.CharField(max_length=150, null=True)
-    type_abbreviation = models.CharField(max_length=20, null=True)
-    description = models.CharField(max_length=500, null=True)
-
-    def __str__(self):
-        return self.type_abbreviation
-
 
 class ClinicEvent(models.Model):
 
@@ -142,9 +133,7 @@ class ClinicEvent(models.Model):
     is_active = models.BooleanField(default=False, null=True)
     is_expired = models.BooleanField(default=False, null=True)
     facility = models.ForeignKey(
-        Center, null=True, on_delete=models.DO_NOTHING)
-    clinic_type = models.ForeignKey(
-        ClinicType, null=True, on_delete=models.DO_NOTHING, blank=True)
+        Center, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.event_name) + " " + str(self.facility)
