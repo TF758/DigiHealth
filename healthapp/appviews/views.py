@@ -37,7 +37,7 @@ class HomePage(ListView):
         context = super(HomePage, self).get_context_data(**kwargs)
 
         context['centers'] = Center.objects.all().order_by('name')[:3]
-        context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date')[:5]
+        context['upcoming_clinics'] = ClinicEvent.objects.filter(is_active = False).order_by('start_date').reverse()[:5]
         context['articles'] = NewsArticle.objects.filter(is_global = True).order_by('date').reverse()[:5]
         context['pinned_articles'] = NewsArticle.objects.filter(tags__name__in=["pinned"]).order_by('date').reverse()[:6]
 
@@ -126,7 +126,7 @@ class FacilitiesNearMe (LoginRequiredMixin,ListView):
 
     template_name = 'my_centers.html'         
     context_object_name = "centers"
-    paginate_by = 1
+    paginate_by = 3
 
     def get_queryset(self):
 
@@ -138,7 +138,7 @@ class ActiveClinicsNearMe (LoginRequiredMixin,ListView):
 
     template_name = 'my_active_clinics.html'         
     context_object_name = "active_clinics"
-    paginate_by = 2
+    paginate_by = 3
 
     def get_queryset(self):
 
@@ -151,7 +151,7 @@ class UpcomingClinicsNearMe (LoginRequiredMixin,ListView):
 
     template_name = 'my_upcoming_clinics.html'         
     context_object_name = "upcoming_clinics"
-    paginate_by = 1
+    paginate_by = 3
 
     def get_queryset(self):
 
