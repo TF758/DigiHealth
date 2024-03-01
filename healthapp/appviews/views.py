@@ -85,7 +85,8 @@ class ArticleList(ListView):
     queryset = NewsArticle.objects.all().order_by('date').reverse()
     template_name = 'news_list.html'
     context_object_name = 'articles'
-    paginate_by = 1
+    # pagination for number of items return on initial page load. Scrolling with auto load more content based on value till page end
+    paginate_by = 5
     
     def get_template_names(self, *args, **kwargs):
         if self.request.htmx:
@@ -101,7 +102,8 @@ class ArticleList(ListView):
 class CenterArticleList(ListView):
     template_name = 'center_articles.html'
     context_object_name = 'articles'
-    paginate_by = 1
+     # pagination for number of items return on initial page load. Scrolling with auto load more content based on value till page end
+    paginate_by = 5
 
     def get_queryset(self):
         center_abbreviation = self.kwargs['center_abbreviation']
